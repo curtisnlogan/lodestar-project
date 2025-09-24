@@ -25,7 +25,7 @@
 
 **ERD:** `docs/diagrams/erd.png`
 
-**API/Routes (expand as you build):**
+**Public URL endpoints (expand as you build):**
 
 | Method | Route      | Purpose       | Auth             | Notes         |
 | ------ | ---------- | ------------- | ---------------- | ------------- |
