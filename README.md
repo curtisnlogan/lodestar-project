@@ -20,9 +20,20 @@ A minimalist web app, that allows users to log astronomical observations to a da
 
 Here’s a tightened, drop-in “Design” section you can paste into your README. I kept your choices, clarified intent, and filled gaps with practical guidance and copy-ready snippets.
 
----
+## Software Development Approach
 
-# Design
+*Methodology:* Agile
+*Specifics*: Focus on Epics and User Stories. Ignore slices/tasks to keep things simple, for a two project of relatively low scope. Avoids over-planning.
+*GitHub Projects board:* [Lodestar](https://github.com/users/curtisnlogan/projects/12/views/1)
+*Screenshots:*
+
+# Design Rationale
+
+**Major Plan Changes:**
+
+<!-- **Week:** change + reason + impact -->
+* **Week 1:** decided against having APIs in log as part of MVP, to ensure all essential project requirements are met. Impact: ?
+* **Week 1:** 
 
 ## UI / UX
 
@@ -82,8 +93,6 @@ Here’s a tightened, drop-in “Design” section you can paste into your READM
 * — Accessibility First**
   Ensured color choices meet contrast targets on dark surfaces; keyboard nav and focus styles are mandatory for observations.
 
----
-
 ## Setup
 
 **Prereqs:** <!-- Node/Python version --> · <!-- DB -->
@@ -111,48 +120,40 @@ npm run dev
 *Migrations:* <!-- TODO --> · *Monitoring/Logs:* <!-- TODO -->
 *Rollback plan:* <!-- TODO one line -->
 
-## Agile
+## Unit Tests (Django)
 
-*Methodology:* Agile
-*GitHub Projects board:* [Lodestar](https://github.com/users/curtisnlogan/projects/12/views/1)
-*Screenshots:*
+This project uses Django's built-in test runner.
 
-## Design Rationale & Plan Changes
+To run all tests:
 
-**Initial Rationale (why these choices):** <!-- framework, auth, db, hosting -->
-**Major Plan Changes (dated):**
+```bash
+python manage.py test
+```
 
-* **YYYY-MM-DD:** <!-- change + reason + impact + link to issue/PR -->
-* **YYYY-MM-DD:** <!-- … -->
+You can also run tests for a specific app:
+
+```bash
+python manage.py test myapp
+```
 
 ## AI Usage Report
 
 Tools: ChatGPT 5, Copilot  
 
-Core Policy: Always review any AI output
+Core Policy: Always manually review any AI output.
 
 ## AI Usage Log (Key Areas)
 
-Areas covered: code · tests · docs · bugs · perf · security · UI/UX · Agile
+Areas covered: code · tests · docs · bugs · perf · security · UI/UX · agile
 
-<!-- - Areas: code · tests · docs · bugs · perf · security · UX --> | <!-- what AI helped with (1 line) -->
-
-- Areas: docs | Using the assignment criteria for the readme section, I prompted AI to help me build a README.md skeleton.
-- Areas: UI/UX | Emphasing my readability first approach to fonts, I worked through possible selections with AI and tested them on Google Fonts.
-- Areas: UI/UX | Using my knowledge on space themed websites, I worked with AI to come up with a suitable colour pallete for my website. It emphasised the importance of a dark like mode for individuals using this web app, whilst carrying out observations.
-- Areas: Agile | Refreshed my knowledge on Agile approaches, which allowed me to streamline my implemntation of the epics/user stories etc. approach.
-
-## Testing (Django)
-
-```
-python manage.py test
-```
+- Area: docs | Passing in the assignment criteria for the README section, I prompted AI to help me build a skeleton.
+- Area: UI/UX | Using my knowledge on space themed websites, I worked with AI to come up with a suitable colour pallete for my website. It emphasised the importance of a dark mode centered pallete.
+- Area: agile | Refreshed my knowledge on Agile approaches, allowing me to streamline my implemntation of the epics/user stories etc. approach.
+- - Area: agile | Passing in my curated version of the assignment criteria and my epics, I iterated with AI over User Stories, ensuring a sensible approach was taken given small project scope/timeframe.
 
 ## Credits
 
 This project uses the following third-party resources:
-
-* <!-- Library/Repo/Article --> — **Author** — License: <!-- --> — Used for: <!-- -->\
 
 - **Fonts**  
   - [Inter](https://github.com/rsms/inter) — Copyright 2016 The Inter Project Authors. Licensed under the [SIL Open Font License, Version 1.1](https://openfontlicense.org/).  
