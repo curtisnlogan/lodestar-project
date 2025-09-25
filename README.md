@@ -1,15 +1,15 @@
-# Project Title
+# Lodestar
 
-*Short one-line value prop. Bootcamp Capstone (Cohort/Year).*
+A minimalist web app, that allows users to log personal astronomical observations to a database. Also includes a home page that surfaces selected space related news and information.
 
----
+Code Institute Bootcamp Capstone Project. 2025.
 
 ## Features
 
-* [ ] <!-- EPIC: Feature 1 -->
-* [ ] <!-- EPIC: Feature 2 -->
-* [ ] <!-- EPIC: Feature 3 -->
-  *Usage notes and screenshots.*
+- EPIC 1: User can utilize CRUD functionality on personal astromical observation logs.
+- EPIC 2: User can read up-to-date space/astronomy news, through NASA API integrations.
+- EPIC 3: Pull real astronomical data from an Astronomy API into the users astronmical log.
+*Usage notes and screenshots.*
 
 ---
 
