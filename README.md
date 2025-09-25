@@ -20,9 +20,17 @@ A minimalist web app, that allows users to log astronomical observations to a da
 
 ## Design
 
+**UI/UX:** 
+
+Body Font: Inter
+Heading font: Exo 2
+Primary Background: #000000, Cards/Panels: #001430, Primary Text: #F3F4F6, Secondary Text: #c3d1e3, Accents: #398f9f, Highlights: #FFD966
+Icons: https://tabler.io/icons
+Images: https://www.pexels.com/
+
 **ERDs:** *notes and screenshots*
 
-**Wireframes**: *notes and screenshots*
+**Wireframes:** *notes and screenshots*
 
 **Key Decisions:**
 
