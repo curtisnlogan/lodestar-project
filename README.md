@@ -1,16 +1,14 @@
 # Lodestar
 
-A minimalist web app, that allows users to log astronomical observations to a database. Also includes a home page that surfaces selected space related news and information.
-
-Target Users: Amatuer Astronomers that want a simple way to record their observations.
+A minimalist web app, that allows users to log astronomical observations to a database. Also includes a home page that surfaces selected astronomy related information.
 
 **Code Institute Bootcamp Capstone Project. 2025.**
 
 ## Features
 
-**Feature 1** A user can utilize CRUD functionality on their astronomical logs.
-**Feature 2** A user can read up-to-date space/astronomy news, through NASA API integrations.
-**Feature 3** (Stretch): Pull real astronomical data from an Astronomy API into the users astronomical logs.
+**Feature 1** - A user can utilize CRUD functionality for astronomical logs.
+**Feature 2** - A user can read up-to-date astronomy information, through API integrations.
+**Feature 3** - (Stretch): Pull real astronomical data from an Astronomy API into the users astronomical logs.
 
 *Usage notes and feature screenshots for each feature.*
 
@@ -22,20 +20,20 @@ Target Users: Amatuer Astronomers that want a simple way to record their observa
 
 ## Software Development Approach
 
-* *Methodology:* Agile adapted for this specific projects scope
+* *Methodology:* Agile approach, adapted for this specific projects scope and timeframe.
 * *GitHub Projects board:* [Lodestar](https://github.com/users/curtisnlogan/projects/12/views/1)
 * *Screenshots:*
 
-# Design Rationale
+## Design Rationale
 
-## UI / UX
+### UI / UX
 
 ### Typography
 
-* **Headings:** `Exo 2`, readability first with some sci-fi styling.
-* **Body:** `Inter`, readability above all else, modern styling.
+* **Headings:** `Exo 2`, readability first with subtle sci-fi styling.
+* **Body:** `Inter`, readability above all else for logging accuracy, modern styling.
 
-### Color System
+### Color System 
 
 | Role                   | Hex       | Notes                         |
 | ---------------------- | --------- | ----------------------------- |
@@ -43,72 +41,47 @@ Target Users: Amatuer Astronomers that want a simple way to record their observa
 | **Cards / Panels**     | `#001430` | Subtle nebula blue            |
 | **Primary Text**       | `#F3F4F6` | High-contrast on dark bg      |
 | **Secondary Text**     | `#C3D1E3` | Muted for helper text         |
-| **Accent**             | `#398F9F` | Buttons, links                |
-| **Highlight**          | `#FFD966` | Alerts, hover/focus           |
+| **Accents**            | `#398F9F` | Buttons, links                |
+| **Highlights**         | `#FFD966` | Alerts, hover/focus           |
 
 ### Iconography & Imagery
 
-* **Icons:** [Tabler Icons](https://tabler.io/icons) — thin, crisp outlines fit the theme and do not require intrusive attribution on page.
+* **Icons:** [Tabler Icons](https://tabler.io/icons) — thin, crisp outlines fit the theme and do not require intrusive attributions in page.
 * **Images:** Curated astronomy shots from [Pexels](https://www.pexels.com/).
 
 ### Motion
 
-* Subtle-interactions only for minimalism: modest ease-in-out for hover/focus/expand.
-* Respect `prefers-reduced-motion` as default. All users will benefit from this due to the nature of the web app.
+* Subtle-interactions only for comfort: modest ease-in-out for hover/focus/expand.
+* Respect `prefers-reduced-motion` accessibility feature as default. All users will benefit from this due to the nature of this web app.
 
-## ERDs
+### ERDs
 
-> *See: `/docs/erds/*` (notes & screenshots).*
+> *screenshots.*
 
-## Wireframes
+### Wireframes
 
-> *See: `/docs/wireframes/*` (notes & screenshots).*
+> *screenshots).*
 
-## Key Decisions and Major Plan Changes
+### Key Decisions and Plan Changes
 
-* — Theme: Astronomy**
-  Strong personal interest, good knowledge of the subject.
+* — **Theme**
+  Settled on Astonomy, srong personal interest, good knowledge of the subject.
 
-* — UI/UX foundations**
+* — **UI/UX foundations**
   Dark UI, star-field feel without literal backgrounds for use during astronomical observations.
 
-* — MVP Scope**
-  Focused on **Astronomical Log** to achieve CRUD functionality and **Space News/Info** with NASA API for UX. Everything else is backlog/stretch, including my more complex idea of integrating APIs with the log feature.
+* — **MVP Scope**
+  Focused on **Astronomical Log** to achieve CRUD functionality and **Astronomy Info** with APIs for UX. Everything else is backlog/stretch, including my more complex idea of integrating APIs with the log feature.
 
-* — Epics & User Stories**
-  Used assessment criteria as baseline. No slices per story due to small scope; instead, each epic ships once associsated User Stories are completed. User Stories and their corrosponding acceptance criteria are the smallest deliverables in this project.
+* — **Epics & User Stories**
+  Used assessment criteria integrated into User Stories. No slices per story due to small scope; instead, each epic ships once associsated User Stories are completed. User Stories and their corrosponding acceptance criteria are the smallest deliverables in this project. Story slices considered overboard for project scope.
 
-* — Accessibility First**
-  Ensured color choices meet contrast targets on dark surfaces, using AI to check against strict WSAG tests.
+* — **Accessibility First**
+  Ensured color choices meet contrast targets to strict WCAG standards.
 
-## Setup
+## Setup and Deployment
 
-**Prereqs:** <!-- Node/Python version --> · <!-- DB -->
-**Env:** copy `.env.example` → `.env` and fill:
-
-* `DATABASE_URL=` <!-- TODO -->
-* `JWT_SECRET=` <!-- TODO -->
-
-**Install & Run Locally:**
-
-```bash
-git clone <repo> && cd <dir>
-# install
-npm i
-# dev
-npm run dev
-# (optional) docker
-# docker compose up --build
-```
-
-## Deployment
-
-*Target (e.g., Render/Vercel/Netlify):* <!-- TODO -->
-*Build cmd:* <!-- TODO --> · *Env in prod:* <!-- TODO -->
-*Migrations:* <!-- TODO --> · *Monitoring/Logs:* <!-- TODO -->
-*Rollback plan:* <!-- TODO one line -->
-
-## Unit Tests (Django)
+## Unit Tests
 
 This project uses Django's built-in test runner.
 
@@ -134,10 +107,9 @@ Core Policy: Always manually review any AI output.
 
 Areas covered: code · tests · docs · bugs · perf · security · UI/UX · agile
 
-- Area: docs | Passing in the assignment criteria for the README section, I prompted AI to help me build a skeleton.
-- Area: UI/UX | Using my knowledge on space themed websites, I worked with AI to come up with a suitable colour pallete for my website. It emphasised the importance of a dark mode centered pallete.
-- Area: agile | Refreshed my knowledge on Agile approaches, allowing me to streamline my implemntation of the epics/user stories etc. approach.
-- - Area: agile | Passing in my curated version of the assignment criteria and my epics, I iterated with AI over User Stories, ensuring a sensible approach was taken given small project scope/timeframe.
+- Area: docs | Passing in the assignment criteria for the README section, I prompted AI to help me build a README skeleton.
+- Area: UI/UX | Using my knowledge of space themed websites, I worked with AI to generate a suitable colour pallete for my website. It emphasised the importance of a dark mode themed pallete, which has made my web app more practical in the field.
+- Area: agile | Passing in my curated version of the assignment criteria, I iterated Epics and User Stories with AI, ensuring a lean approach was taken given the small scope of this project.
 
 ## Credits
 
