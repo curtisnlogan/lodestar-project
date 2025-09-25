@@ -6,9 +6,9 @@ A minimalist web app, that allows users to log astronomical observations to a da
 
 ## Features
 
-**Epic 1** (MVP): A user can utilize CRUD functionality on their own astronomical logs.
-**Epic 2** (MVP): A user can read up-to-date space/astronomy news, through NASA API integrations.
-**Epic 3** (Stretch): Pull real astronomical data from an Astronomy API into the users astronomical log.
+**Feature 1** A user can utilize CRUD functionality on their astronomical logs.
+**Feature 2** A user can read up-to-date space/astronomy news, through NASA API integrations.
+**Feature 3** (Stretch): Pull real astronomical data from an Astronomy API into the users astronomical logs.
 
 *Usage notes and feature screenshots for each feature.*
 
@@ -18,50 +18,41 @@ A minimalist web app, that allows users to log astronomical observations to a da
   <img src="https://skillicons.dev/icons?i=html,css,js,django,postgres,heroku" />
 </p>
 
-Here’s a tightened, drop-in “Design” section you can paste into your README. I kept your choices, clarified intent, and filled gaps with practical guidance and copy-ready snippets.
-
 ## Software Development Approach
 
-*Methodology:* Agile
-*Specifics*: Focus on Epics and User Stories. Ignore slices/tasks to keep things simple, for a two project of relatively low scope. Avoids over-planning.
-*GitHub Projects board:* [Lodestar](https://github.com/users/curtisnlogan/projects/12/views/1)
-*Screenshots:*
+* *Methodology:* Agile adapted for this specific projects scope
+* *GitHub Projects board:* [Lodestar](https://github.com/users/curtisnlogan/projects/12/views/1)
+* *Screenshots:*
 
 # Design Rationale
-
-**Major Plan Changes:**
-
-<!-- **Week:** change + reason + impact -->
-* **Week 1:** decided against having APIs in log as part of MVP, to ensure all essential project requirements are met. Impact: ?
-* **Week 1:** 
 
 ## UI / UX
 
 ### Typography
 
-* **Headings:** `Exo 2`, fallback `system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif`
-* **Body:** `Inter`, same fallbacks as above
+* **Headings:** `Exo 2`, readability first with some sci-fi styling.
+* **Body:** `Inter`, readability above all else, modern styling.
 
 ### Color System
 
 | Role                   | Hex       | Notes                         |
 | ---------------------- | --------- | ----------------------------- |
-| **Primary Background** | `#000000` | Deep space backdrop           |
+| **Primary Background** | `#000000` | Deep space dark like mode     |
 | **Cards / Panels**     | `#001430` | Subtle nebula blue            |
-| **Primary Text**       | `#F3F4F6` | High-contrast on dark         |
+| **Primary Text**       | `#F3F4F6` | High-contrast on dark bg      |
 | **Secondary Text**     | `#C3D1E3` | Muted for helper text         |
-| **Accent**             | `#398F9F` | Buttons, links, active states |
-| **Highlight**          | `#FFD966` | Alerts                        |
+| **Accent**             | `#398F9F` | Buttons, links                |
+| **Highlight**          | `#FFD966` | Alerts, hover/focus           |
 
 ### Iconography & Imagery
 
-* **Icons:** [Tabler Icons](https://tabler.io/icons) — thin, crisp outlines fit the theme.
-* **Images:** Curated astronomy shots from [Pexels](https://www.pexels.com/). Favor wide crops with low visual noise behind text.
+* **Icons:** [Tabler Icons](https://tabler.io/icons) — thin, crisp outlines fit the theme and do not require intrusive attribution on page.
+* **Images:** Curated astronomy shots from [Pexels](https://www.pexels.com/).
 
 ### Motion
 
-* Micro-interactions only: 150–200ms ease-in-out for hover/focus/expand.
-* Respect `prefers-reduced-motion`.
+* Subtle-interactions only for minimalism: modest ease-in-out for hover/focus/expand.
+* Respect `prefers-reduced-motion` as default. All users will benefit from this due to the nature of the web app.
 
 ## ERDs
 
@@ -71,27 +62,22 @@ Here’s a tightened, drop-in “Design” section you can paste into your READM
 
 > *See: `/docs/wireframes/*` (notes & screenshots).*
 
-**Primary views**
-
-## Key Decisions
+## Key Decisions and Major Plan Changes
 
 * — Theme: Astronomy**
-  Strong personal interest, good knowledge of the subject. Dark UI, star-field feel without literal backgrounds for use during observations.
+  Strong personal interest, good knowledge of the subject.
+
+* — UI/UX foundations**
+  Dark UI, star-field feel without literal backgrounds for use during astronomical observations.
 
 * — MVP Scope**
-  Focused on **Astronomical Log** to achieve CRUD functionality and **Space News/Info** with NASA API for UX. Everything else is backlog/stretch.
+  Focused on **Astronomical Log** to achieve CRUD functionality and **Space News/Info** with NASA API for UX. Everything else is backlog/stretch, including my more complex idea of integrating APIs with the log feature.
 
 * — Epics & User Stories**
-  Used assessment criteria as baseline. No slices per story due to small scope; instead, each epic ships end-to-end:
-
-* — Non-Goals & Trade-offs (v1)**
-  No social features, comments, or real-time collaboration.
-
-* — Tech & Content Choices**
-  Tabler icons for consistency and license conditions; Pexels for royalty-free imagery.
+  Used assessment criteria as baseline. No slices per story due to small scope; instead, each epic ships once associsated User Stories are completed. User Stories and their corrosponding acceptance criteria are the smallest deliverables in this project.
 
 * — Accessibility First**
-  Ensured color choices meet contrast targets on dark surfaces; keyboard nav and focus styles are mandatory for observations.
+  Ensured color choices meet contrast targets on dark surfaces, using AI to check against strict WSAG tests.
 
 ## Setup
 
