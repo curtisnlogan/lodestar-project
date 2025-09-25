@@ -62,33 +62,17 @@ npm run dev
 *Migrations:* <!-- TODO --> · *Monitoring/Logs:* <!-- TODO -->
 *Rollback plan:* <!-- TODO one line -->
 
-## Troubleshooting
-
-| Symptom               | Likely Cause               | Fix                              |
-| --------------------- | -------------------------- | -------------------------------- |
-| DB connection refused | DB not running / URL wrong | Start DB / update `DATABASE_URL` |
-| CORS error            | Origin not allowed         | Update server CORS allowlist     |
-| <!-- add as found --> |                            |                                  |
-
----
-
 ## Wireframes
 
 Store images in `docs/wireframes/` and link:
 
 * `docs/wireframes/landing.png`
-* `docs/wireframes/core-flow.png`
-* Figma link: <!-- TODO -->
-
----
 
 ## Agile
 
-*Methodology:* <!-- Scrum/Kanban; sprint length -->
-*GitHub Projects board:* <!-- link -->
-*Screenshots:* `docs/agile/board-week-01.png`, `docs/agile/burndown-sprint-02.png`
-
----
+*Methodology:* Agile
+*GitHub Projects board:* [Lodestar](https://github.com/users/curtisnlogan/projects/12/views/1)
+*Screenshots:*
 
 ## Design Rationale & Plan Changes
 
@@ -106,14 +90,14 @@ Core Policy: Always review any AI output
 
 ## AI Usage Log (Key Areas)
 
-Areas: code · tests · docs · bugs · perf · security · UI/UX
+Areas covered: code · tests · docs · bugs · perf · security · UI/UX · Agile
 
-| Area   | Summary (1 line)                 | Link |
+<!-- - Areas: code · tests · docs · bugs · perf · security · UX --> | <!-- what AI helped with (1 line) -->
 
-| ------ | -------------------------------- | ---- |
-
-<!-- Areas: code · tests · docs · bugs · perf · security · UX --> | <!-- what AI helped with (1 line) --> |
-<!-- code/tests/docs/bugs/perf/security/UX --> | <!-- what AI helped with --> | ✅/❌  |
+- Areas: docs | Using the assignment criteria for the readme section, I prompted AI to help me build a README.md skeleton.
+- Areas: UI/UX | Emphasing my readability first approach to fonts, I worked through possible selections with AI and tested them on Google Fonts.
+- Areas: UI/UX | Using my knowledge on space themed websites, I worked with AI to come up with a suitable colour pallete for my website. It emphasised the importance of a dark like mode for individuals using this web app, whilst carrying out observations.
+- Areas: Agile | Refreshed my knowledge on Agile approaches, which allowed me to streamline my implemntation of the epics/user stories etc. approach.
 
 ## Testing (Django)
 
