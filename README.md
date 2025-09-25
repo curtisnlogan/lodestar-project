@@ -2,6 +2,8 @@
 
 A minimalist web app, that allows users to log astronomical observations to a database. Also includes a home page that surfaces selected space related news and information.
 
+Target Users: Amatuer Astronomers that want a simple way to record their observations.
+
 **Code Institute Bootcamp Capstone Project. 2025.**
 
 ## Features
