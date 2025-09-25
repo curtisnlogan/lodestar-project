@@ -1,21 +1,22 @@
 # Lodestar
 
-A minimalist web app, that allows users to log personal astronomical observations to a database. Also includes a home page that surfaces selected space related news and information.
+A minimalist web app, that allows users to log astronomical observations to a database. Also includes a home page that surfaces selected space related news and information.
 
-Code Institute Bootcamp Capstone Project. 2025.
+**Code Institute Bootcamp Capstone Project. 2025.**
 
 ## Features
 
-- EPIC 1: User can utilize CRUD functionality on personal astromical observation logs.
-- EPIC 2: User can read up-to-date space/astronomy news, through NASA API integrations.
-- EPIC 3: Pull real astronomical data from an Astronomy API into the users astronmical log.
-*Usage notes and screenshots.*
+- Epic 1: A user can utilize CRUD functionality on their own astromical observation logs.
+- Epic 2: A user can read up-to-date space/astronomy news, through NASA API integrations.
+- Epic 3 (Stretch): Pull real astronomical data from an Astronomy API into the users astronomical log.
 
-## Tech Stack
+*Usage notes and feature screenshots.*
 
-**Frontend:** HTML5, CSS3, JavaScript · **Backend:** Django Web Framework · **DB:** PostgresSQL· **Infra/CI:** Heroku
+## Tech Stack  
 
----
+<p align="left">
+  <img src="https://skillicons.dev/icons?i=html,css,js,django,postgres,heroku" />
+</p>
 
 ## System Design
 
