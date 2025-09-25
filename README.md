@@ -11,11 +11,9 @@ Code Institute Bootcamp Capstone Project. 2025.
 - EPIC 3: Pull real astronomical data from an Astronomy API into the users astronmical log.
 *Usage notes and screenshots.*
 
----
-
 ## Tech Stack
 
-**Frontend:** <!-- TODO --> · **Backend:** <!-- TODO --> · **DB:** <!-- TODO --> · **Infra/CI:** <!-- TODO -->
+**Frontend:** HTML5, CSS3, JavaScript · **Backend:** Django Web Framework · **DB:** PostgresSQL· **Infra/CI:** Heroku
 
 ---
 
@@ -23,13 +21,13 @@ Code Institute Bootcamp Capstone Project. 2025.
 
 > *Final implementation docs: ERD, routes/APIs, key decisions*
 
-**ERD:** `docs/diagrams/erd.png`
+**ERD:** *screenshots*
 
-**Public URL endpoints (expand as you build):**
+**Public URL endpoints:**
 
-| Method | Route      | Purpose       | Auth             | Notes         |
-| ------ | ---------- | ------------- | ---------------- | ------------- |
-| GET    | `/api/...` | <!-- TODO --> | Public/Protected | <!-- TODO --> |
+| Method | Route      | Purpose       | Auth             |
+| ------ | ---------- | ------------- | ---------------- |
+| GET    | `/api/...` | <!-- TODO --> | Public/Protected |
 
 **Key Decisions:**
 
@@ -100,42 +98,41 @@ Store images in `docs/wireframes/` and link:
 * **YYYY-MM-DD:** <!-- change + reason + impact + link to issue/PR -->
 * **YYYY-MM-DD:** <!-- … -->
 
----
-
 ## AI Usage Report
 
-**Tools:** <!-- ChatGPT, Copilot, etc. -->
-**Policy:** Human review; tests added; licenses respected; no secrets in prompts.
+Tools: ChatGPT 5, Copilot  
 
-**Log (add rows as used):**
+Core Policy: Always review any AI output
 
-| Date       | Tool     | Area (code/tests/bugs/perf/UX) | Prompt/Goal (short) | Used? | Link (PR/commit) | Impact (notes/metrics)                   |
-| ---------- | -------- | ------------------------------ | ------------------- | ----- | ---------------- | ---------------------------------------- |
-| YYYY-MM-DD | <!-- --> | <!-- -->                       | <!-- -->            | ✅/❌   | #123             | <!-- time saved, defects fixed, etc. --> |
+## AI Usage Log (Key Areas)
 
----
+Areas: code · tests · docs · bugs · perf · security · UI/UX
 
-## Proofreading Log
+| Area   | Summary (1 line)                 | Link |
 
-| Date       | Scope (README / repo / board) | Issues Found | Fixed? | Reviewer |
-| ---------- | ----------------------------- | ------------ | ------ | -------- |
-| YYYY-MM-DD | README                        | <!-- -->     | ✅/❌    | <!-- --> |
+| ------ | -------------------------------- | ---- |
 
----
+<!-- Areas: code · tests · docs · bugs · perf · security · UX --> | <!-- what AI helped with (1 line) --> |
+<!-- code/tests/docs/bugs/perf/security/UX --> | <!-- what AI helped with --> | ✅/❌  |
 
-## Testing (optional but recommended)
+## Testing (Django)
 
-```bash
-npm test        # unit
-# npm run test:e2e  # if applicable
 ```
-
-*Coverage report path:* `coverage/index.html` <!-- if applicable -->
-
----
+python manage.py test
+```
 
 ## Credits
 
-* <!-- Library/Repo/Article --> — **Author** — License: <!-- --> — Used for: <!-- -->
-* Assets/icons/fonts: <!-- source & license -->
-  *For substantial third-party code, include `THIRD_PARTY_NOTICES.md`.*
+This project uses the following third-party resources:
+
+* <!-- Library/Repo/Article --> — **Author** — License: <!-- --> — Used for: <!-- -->\
+
+- **Fonts**  
+  - [Inter](https://github.com/rsms/inter) — Copyright 2016 The Inter Project Authors. Licensed under the [SIL Open Font License, Version 1.1](https://openfontlicense.org/).  
+  - [Exo 2](https://fonts.google.com/specimen/Exo+2) — Copyright 2020 The Exo 2 Project Authors. Licensed under the [SIL Open Font License, Version 1.1](https://openfontlicense.org/).  
+
+- **Icons**  
+  - [Tabler Icons](https://tabler.io/icons) — Copyright 2020–present Paweł Kuna. Licensed under the [MIT License](https://github.com/tabler/tabler-icons/blob/master/LICENSE).  
+
+- **Images**  
+  - Images provided by [Pexels](https://www.pexels.com/) and used under the [Pexels License](https://www.pexels.com/license/).
