@@ -6,9 +6,9 @@ A minimalist web app, that allows users to log astronomical observations to a da
 
 ## Features
 
-- Epic 1: A user can utilize CRUD functionality on their own astromical observation logs.
-- Epic 2: A user can read up-to-date space/astronomy news, through NASA API integrations.
-- Epic 3 (Stretch): Pull real astronomical data from an Astronomy API into the users astronomical log.
+- **Epic 1** (MVP: A user can utilize CRUD functionality on their own astromical observation logs.
+- **Epic 2** (MVP): A user can read up-to-date space/astronomy news, through NASA API integrations.
+- **Epic 3** (Stretch): Pull real astronomical data from an Astronomy API into the users astronomical log.
 
 *Usage notes and feature screenshots.*
 
@@ -18,21 +18,18 @@ A minimalist web app, that allows users to log astronomical observations to a da
   <img src="https://skillicons.dev/icons?i=html,css,js,django,postgres,heroku" />
 </p>
 
-## System Design
+## Design
 
-> *Final implementation docs: ERD, routes/APIs, key decisions*
+**ERDs:** *notes and screenshots*
 
-**ERD:** *screenshots*
-
-**Public URL endpoints:**
-
-| Method | Route      | Purpose       | Auth             |
-| ------ | ---------- | ------------- | ---------------- |
-| GET    | `/api/...` | <!-- TODO --> | Public/Protected |
+**Wireframes**: *notes and screenshots*
 
 **Key Decisions:**
 
-* 001 — <!-- TODO short title -->
+* 001 — Theme: Astronomy. Strong personal interest, good knowledge of the subject.
+* 002 - MVP: Astronomical log and space news/information. Originally had the news/info already in mind, AI suggested the log which is perfect to build a database with.
+* 003 - Epics/User Stories: used assessment criteria as foundation. Decided against creating slices for User Stories due to small project scope.
+* 004 - 
 
 ---
 
@@ -62,12 +59,6 @@ npm run dev
 *Build cmd:* <!-- TODO --> · *Env in prod:* <!-- TODO -->
 *Migrations:* <!-- TODO --> · *Monitoring/Logs:* <!-- TODO -->
 *Rollback plan:* <!-- TODO one line -->
-
-## Wireframes
-
-Store images in `docs/wireframes/` and link:
-
-* `docs/wireframes/landing.png`
 
 ## Agile
 
