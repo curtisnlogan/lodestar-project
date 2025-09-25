@@ -6,38 +6,81 @@ A minimalist web app, that allows users to log astronomical observations to a da
 
 ## Features
 
-- **Epic 1** (MVP: A user can utilize CRUD functionality on their own astromical observation logs.
-- **Epic 2** (MVP): A user can read up-to-date space/astronomy news, through NASA API integrations.
-- **Epic 3** (Stretch): Pull real astronomical data from an Astronomy API into the users astronomical log.
+**Epic 1** (MVP): A user can utilize CRUD functionality on their own astronomical logs.
+**Epic 2** (MVP): A user can read up-to-date space/astronomy news, through NASA API integrations.
+**Epic 3** (Stretch): Pull real astronomical data from an Astronomy API into the users astronomical log.
 
-*Usage notes and feature screenshots.*
+*Usage notes and feature screenshots for each feature.*
 
-## Tech Stack  
+## Tech Stack
 
 <p align="left">
   <img src="https://skillicons.dev/icons?i=html,css,js,django,postgres,heroku" />
 </p>
 
-## Design
+Here’s a tightened, drop-in “Design” section you can paste into your README. I kept your choices, clarified intent, and filled gaps with practical guidance and copy-ready snippets.
 
-**UI/UX:** 
+---
 
-Body Font: Inter
-Heading font: Exo 2
-Primary Background: #000000, Cards/Panels: #001430, Primary Text: #F3F4F6, Secondary Text: #c3d1e3, Accents: #398f9f, Highlights: #FFD966
-Icons: https://tabler.io/icons
-Images: https://www.pexels.com/
+# Design
 
-**ERDs:** *notes and screenshots*
+## UI / UX
 
-**Wireframes:** *notes and screenshots*
+### Typography
 
-**Key Decisions:**
+* **Headings:** `Exo 2`, fallback `system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif`
+* **Body:** `Inter`, same fallbacks as above
 
-* 001 — Theme: Astronomy. Strong personal interest, good knowledge of the subject.
-* 002 - MVP: Astronomical log and space news/information. Originally had the news/info already in mind, AI suggested the log which is perfect to build a database with.
-* 003 - Epics/User Stories: used assessment criteria as foundation. Decided against creating slices for User Stories due to small project scope.
-* 004 - 
+### Color System
+
+| Role                   | Hex       | Notes                         |
+| ---------------------- | --------- | ----------------------------- |
+| **Primary Background** | `#000000` | Deep space backdrop           |
+| **Cards / Panels**     | `#001430` | Subtle nebula blue            |
+| **Primary Text**       | `#F3F4F6` | High-contrast on dark         |
+| **Secondary Text**     | `#C3D1E3` | Muted for helper text         |
+| **Accent**             | `#398F9F` | Buttons, links, active states |
+| **Highlight**          | `#FFD966` | Alerts                        |
+
+### Iconography & Imagery
+
+* **Icons:** [Tabler Icons](https://tabler.io/icons) — thin, crisp outlines fit the theme.
+* **Images:** Curated astronomy shots from [Pexels](https://www.pexels.com/). Favor wide crops with low visual noise behind text.
+
+### Motion
+
+* Micro-interactions only: 150–200ms ease-in-out for hover/focus/expand.
+* Respect `prefers-reduced-motion`.
+
+## ERDs
+
+> *See: `/docs/erds/*` (notes & screenshots).*
+
+## Wireframes
+
+> *See: `/docs/wireframes/*` (notes & screenshots).*
+
+**Primary views**
+
+## Key Decisions
+
+* — Theme: Astronomy**
+  Strong personal interest, good knowledge of the subject. Dark UI, star-field feel without literal backgrounds for use during observations.
+
+* — MVP Scope**
+  Focused on **Astronomical Log** to achieve CRUD functionality and **Space News/Info** with NASA API for UX. Everything else is backlog/stretch.
+
+* — Epics & User Stories**
+  Used assessment criteria as baseline. No slices per story due to small scope; instead, each epic ships end-to-end:
+
+* — Non-Goals & Trade-offs (v1)**
+  No social features, comments, or real-time collaboration.
+
+* — Tech & Content Choices**
+  Tabler icons for consistency and license conditions; Pexels for royalty-free imagery.
+
+* — Accessibility First**
+  Ensured color choices meet contrast targets on dark surfaces; keyboard nav and focus styles are mandatory for observations.
 
 ---
 
