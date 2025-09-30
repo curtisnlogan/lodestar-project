@@ -79,6 +79,9 @@ A minimalist web app, that allows users to log astronomical observations to a da
 * — **Accessibility First**
   Ensured color choices meet contrast targets to strict WCAG standards.
 
+* - **UX/Scope reduction**
+  The New Observation form was integrated into the homepage instead of a separate page. This reduces clicks for the user, keeps data entry centralised, and allows the assessor to see a streamlined flow in      limited project time.
+
 ## Setup and Deployment
 
 ## Unit Tests
