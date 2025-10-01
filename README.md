@@ -60,7 +60,12 @@ A minimalist web app, that allows users to log astronomical observations to a da
 
 ### Wireframes
 
-> *screenshots).*
+> [Home Page - Logged Out](https://share.balsamiq.com/c/7bNH8SRv4DGu45XFubGoEr.jpg)
+> [Home Page - Logged In](https://share.balsamiq.com/c/5W8FNdetQaXZaK1yHdnKoP.jpg)
+> [My Observations Page](https://share.balsamiq.com/c/e1tdS3XZPHJzkwwG5rTtyP.jpg)
+> [My Observations Page - Observation Form](https://share.balsamiq.com/c/wWf9BTFpRmpxfnmenumcJM.jpg)
+> [My Observations Page - Observation Details](https://share.balsamiq.com/c/6z2jMcSR4W3uyZqSnRwRZw.jpg)
+> [My Astronomy News](https://share.balsamiq.com/c/tPYprGczYJDAPKk2HX7RyM.jpg)
 
 ### Key Decisions and Plan Changes
 
