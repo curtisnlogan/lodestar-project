@@ -1,0 +1,18 @@
+# Environment
+.envrc
+.env
+.direnv
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Django
+staticfiles/
+
+# IDE
+.vscode/
+
+# OS
+.DS_Store
