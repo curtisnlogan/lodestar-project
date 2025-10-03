@@ -49,11 +49,16 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "cloudinary_storage",
+    "tailwind",
+    "tailwindcss",
     "core",
     "astronomy",
     "observations",
     "news",
 ]
+
+# django-tailwind now knows where to place its files
+TAILWIND_APP_NAME = "tailwindcss"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
