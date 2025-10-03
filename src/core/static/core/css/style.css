@@ -1,0 +1,110 @@
+/* Lodestar Project - Smoke Test CSS */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Arial", sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+header {
+    background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    font-style: italic;
+}
+
+main {
+    padding: 40px;
+}
+
+.welcome-section {
+    margin-bottom: 30px;
+}
+
+.welcome-section h2 {
+    color: #2a5298;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+.welcome-section p {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.welcome-section ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.welcome-section li {
+    padding: 8px 0;
+    font-size: 1.1rem;
+    color: #4a5568;
+}
+
+.status-check {
+    background: #f7fafc;
+    border-left: 4px solid #48bb78;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.status-check p {
+    font-weight: 500;
+    color: #2d3748;
+}
+
+footer {
+    background: #2d3748;
+    color: #cbd5e0;
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    main {
+        padding: 20px;
+    }
+}
