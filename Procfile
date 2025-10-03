@@ -1,2 +1,2 @@
-<!-- Heroku starts your web server software to handle requests -->
+release: cd src && python manage.py collectstatic --noinput
 web: cd src && gunicorn lodestar.wsgi
