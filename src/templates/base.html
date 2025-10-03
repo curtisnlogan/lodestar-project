@@ -6,37 +6,142 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Lodestar Project - Home</title>
         <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+        <!-- Tailwind CSS -->
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="{% static 'css/dist/styles.css' %}"
+        />
     </head>
-    <body>
-        <div class="container">
-            <header>
-                <h1>🌟 Lodestar Project</h1>
-                <p class="subtitle">Your astronomy and observations platform</p>
+    <body
+        class="bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 min-h-screen text-white"
+    >
+        <div class="container mx-auto px-4 py-8 max-w-4xl">
+            <header class="text-center mb-12">
+                <h1
+                    class="text-5xl font-bold mb-4 bg-gradient-to-r from-yellow-400 via-orange-500 to-pink-500 bg-clip-text text-transparent"
+                >
+                    🌟 Lodestar Project
+                </h1>
+                <p class="text-xl text-gray-300 font-light">
+                    Your astronomy and observations platform
+                </p>
             </header>
 
-            <main>
-                <div class="welcome-section">
-                    <h2>Welcome to Lodestar</h2>
-                    <p>This is a smoke test to verify that:</p>
-                    <ul>
-                        <li>✅ Django is serving templates correctly</li>
-                        <li>✅ WhiteNoise is serving static files (CSS)</li>
-                        <li>✅ URL routing is working properly</li>
-                        <li>✅ The full stack is operational</li>
+            <main class="space-y-8">
+                <div
+                    class="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
+                >
+                    <h2 class="text-3xl font-bold mb-4 text-yellow-400">
+                        Welcome to Lodestar
+                    </h2>
+                    <p class="text-gray-300 mb-4">
+                        This is a smoke test to verify that:
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-green-400">
+                            <span class="mr-2">✅</span>
+                            <span>Django is serving templates correctly</span>
+                        </li>
+                        <li class="flex items-center text-green-400">
+                            <span class="mr-2">✅</span>
+                            <span
+                                >WhiteNoise is serving static files (CSS)</span
+                            >
+                        </li>
+                        <li class="flex items-center text-green-400">
+                            <span class="mr-2">✅</span>
+                            <span>URL routing is working properly</span>
+                        </li>
+                        <li class="flex items-center text-green-400">
+                            <span class="mr-2">✅</span>
+                            <span>The full stack is operational</span>
+                        </li>
+                        <li class="flex items-center text-blue-400">
+                            <span class="mr-2">🎨</span>
+                            <span>Tailwind CSS is now working!</span>
+                        </li>
                     </ul>
                 </div>
 
-                <div class="status-check">
-                    <p>
-                        <strong>Static File Test:</strong> If this page has
-                        styling (colors, fonts, layout), then WhiteNoise is
-                        working correctly!
-                    </p>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div
+                        class="bg-blue-500/20 backdrop-blur-sm rounded-xl p-6 border border-blue-400/30"
+                    >
+                        <h3 class="text-xl font-bold mb-3 text-blue-400">
+                            Tailwind Test
+                        </h3>
+                        <p class="text-gray-300 mb-4">
+                            <strong>Static File Test:</strong> If this page has
+                            beautiful gradients, cards, and modern styling, then
+                            both WhiteNoise and Tailwind CSS are working
+                            correctly!
+                        </p>
+                        <button
+                            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-colors"
+                        >
+                            Tailwind Button
+                        </button>
+                    </div>
+
+                    <div
+                        class="bg-purple-500/20 backdrop-blur-sm rounded-xl p-6 border border-purple-400/30"
+                    >
+                        <h3 class="text-xl font-bold mb-3 text-purple-400">
+                            daisyUI Test
+                        </h3>
+                        <p class="text-gray-300 mb-4">
+                            Since we included daisyUI, you can also use
+                            pre-built components:
+                        </p>
+                        <div class="space-y-2">
+                            <button class="btn btn-primary">
+                                Primary Button
+                            </button>
+                            <button class="btn btn-secondary">
+                                Secondary Button
+                            </button>
+                            <div class="badge badge-success">Success Badge</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Responsive test -->
+                <div
+                    class="bg-gradient-to-r from-green-500/20 to-blue-500/20 backdrop-blur-sm rounded-xl p-6 border border-green-400/30"
+                >
+                    <h3 class="text-xl font-bold mb-3 text-green-400">
+                        Responsive Design Test
+                    </h3>
+                    <div
+                        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
+                    >
+                        <div class="bg-red-500/30 p-4 rounded-lg text-center">
+                            <div class="text-2xl mb-2">📱</div>
+                            <p class="text-sm">Mobile</p>
+                        </div>
+                        <div
+                            class="bg-yellow-500/30 p-4 rounded-lg text-center"
+                        >
+                            <div class="text-2xl mb-2">💻</div>
+                            <p class="text-sm">Tablet</p>
+                        </div>
+                        <div class="bg-green-500/30 p-4 rounded-lg text-center">
+                            <div class="text-2xl mb-2">🖥️</div>
+                            <p class="text-sm">Desktop</p>
+                        </div>
+                        <div class="bg-blue-500/30 p-4 rounded-lg text-center">
+                            <div class="text-2xl mb-2">📺</div>
+                            <p class="text-sm">Large</p>
+                        </div>
+                    </div>
                 </div>
             </main>
 
-            <footer>
-                <p>&copy; 2025 Lodestar Project</p>
+            <footer class="text-center mt-12 pt-8 border-t border-white/20">
+                <p class="text-gray-400">
+                    &copy; 2025 Lodestar Project - Now with Tailwind CSS! 🎨
+                </p>
             </footer>
         </div>
     </body>
