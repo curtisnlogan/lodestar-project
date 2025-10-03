@@ -32,7 +32,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # manage DEBUG at environment level to avoid potential security leak
 DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", ".herokuapp.com"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "lodestar-project-439dd73a5112.herokuapp.com"]
 
 # CSRF (Cross-Site Request Forgery) protection - prevents malicious sites from
 # making unauthorized requests on behalf of your users
