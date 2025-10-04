@@ -1,32 +1,57 @@
 # Lodestar
 
-A minimalist web app, that allows users to log astronomical observations to a database. Also includes a home page that surfaces selected astronomy related information.
+A minimalist web app that allows users to log astronomical observations to a database, where scientific data from SIMBAD and Aladin APIs will be added.
 
 **Code Institute Bootcamp Capstone Project. 2025.**
 
 ## Features
 
-**Feature 1** - A user can utilize CRUD functionality for astronomical logs.
-**Feature 2** - A user can read up-to-date astronomy information, through API integrations.
-**Feature 3** - (Stretch): Pull real astronomical data from an Astronomy API into the users astronomical logs.
+### Feature 1: Astronomical Log CRUD
 
-_Usage notes and feature screenshots for each feature._
+A comprehensive observation logging system allowing users to:
+
+-   **Create** new observation entries with date, time, location, and celestial object details
+-   **Read** observation history with search and filtering capabilities
+-   **Update** existing observations with additional notes, corrections, or enhanced data
+-   **Delete** unwanted or duplicate entries to maintain clean records
+
+### Feature 2: Scientific Data Integration
+
+Real-time integration with astronomical databases:
+
+-   Pull verified scientific data from **SIMBAD** (astronomical object database)
+-   Integrate **Aladin** sky atlas data for visual context
+-   Automatically enhance user observations with professional astronomical data
+-   Provide context and validation for user-logged observations
+
+### Feature 3: Astronomy News Hub (Stretch Goal)
+
+Stay current with astronomical developments:
+
+-   Curated astronomy news feed via RSS to JSON feature
+-   Real-time updates from trusted astronomical sources
+
+_Screenshots and detailed usage notes will be added as features are completed._
 
 ## Tech Stack
 
 <p align="left">
-  <img src="https://skillicons.dev/icons?i=html,css,js,django,postgres,heroku" />
+  <img src="https://skillicons.dev/icons?i=html,css,js,django,tailwind,postgres,heroku&perline=7" alt="HTML, CSS, JavaScript, Django, Tailwind CSS, PostgreSQL, Heroku" />
 </p>
 
 ## Software Development Approach
 
--   _Methodology:_ Agile approach, adapted for this specific projects scope and timeframe.
+-   _Methodology:_ Agile; suitably adapted for this specific project's scope and timeframe.
 -   _GitHub Projects board:_ [Lodestar](https://github.com/users/curtisnlogan/projects/12/views/1)
--   _Screenshots:_
+-   _Project Management:_ Daily Sprint-based development, focusing on MVP delivery first followed by stretch goals.
+-   _Version Control:_ Git workflow with feature branches and regular commits to document development progress.
 
 ## Design Rationale
 
 ### UI / UX
+
+-   **Minimalist:** Generous whitespace and clean layouts evoke the vastness of space while improving focus and readability during observation sessions
+-   **Tailwind CSS:** Utility-first framework enabling custom designs without the visual uniformity constraints of component-based frameworks like Bootstrap
 
 ### Typography
 
@@ -56,7 +81,7 @@ _Usage notes and feature screenshots for each feature._
 
 ### ERDs
 
-> _screenshots._
+Database schema diagrams will be added upon completion of the data model design phase.
 
 ### Wireframes
 
@@ -70,7 +95,7 @@ _Usage notes and feature screenshots for each feature._
 ### Key Decisions and Plan Changes
 
 -   — **Theme**
-    Settled on Astonomy, srong personal interest, good knowledge of the subject.
+    Settled on Astronomy, strong personal interest, good knowledge of the subject.
 
 -   — **UI/UX foundations**
     Dark UI, star-field feel without literal backgrounds for use during astronomical observations.
@@ -79,13 +104,30 @@ _Usage notes and feature screenshots for each feature._
     Focused on **Astronomical Log** to achieve CRUD functionality and **Astronomy Info** with APIs for UX. Everything else is backlog/stretch, including my more complex idea of integrating APIs with the log feature.
 
 -   — **Epics & User Stories**
-    Used assessment criteria integrated into User Stories. No slices per story due to small scope; instead, each epic ships once associsated User Stories are completed. User Stories and their corrosponding acceptance criteria are the smallest deliverables in this project. Story slices considered overboard for project scope.
+    Used assessment criteria integrated into User Stories. No slices per story due to small scope; instead, each epic ships once associated User Stories are completed. User Stories and their corresponding acceptance criteria are the smallest deliverables in this project. Story slices considered overboard for project scope.
 
 -   — **Accessibility First**
     Ensured color choices meet contrast targets to strict WCAG standards.
 
--   -   **UX/Scope reduction**
-        The New Observation form was integrated into the homepage instead of a separate page. This reduces clicks for the user, keeps data entry centralised, and allows the assessor to see a streamlined flow in limited project time.
+-   — **UX/Scope reduction**
+    The New Observation form was integrated into the homepage instead of a separate page. This reduces clicks for the user, keeps data entry centralized, and allows the assessor to see a streamlined flow in limited project time.
+
+## Known Issues & Limitations
+
+-   **Mobile Responsiveness:** Initial focus on desktop experience; mobile optimization scheduled for future iterations.
+-   **Offline Capability:** Current implementation requires internet connectivity for full functionality.
+
+## Future Enhancements
+
+-   **Advanced Search:** Implement complex filtering options for observation history.
+-   **Data Export:** Enable users to export their observation logs in various formats.
+-   **Social Features:** Allow users to share interesting observations with the astronomy community.
+-   **Advanced API Integration:** Deeper integration with professional astronomy databases for enhanced data validation.
+
+## Setup and Deployment
+
+-   — **Bootstrap vs. Tailwind CSS**
+    Settled on Tailwind CSS over Bootstrap despite the additional implementation time required. Early in the course, I noted my preference for Tailwind's utility-first approach over Bootstrap's overly constrained templating system. While this choice demanded more development time, I was confident it was feasible within the project timeframe and would deliver a more immersive, custom UI/UX that better serves the astronomy theme.
 
 ## Setup and Deployment
 
@@ -161,7 +203,7 @@ Core Policy: Always manually review any AI output.
 Areas covered: code · tests · docs · bugs · perf · security · UI/UX · agile
 
 -   Area: docs | Passing in the assignment criteria for the README section, I prompted AI to help me build a README skeleton.
--   Area: UI/UX | Using my knowledge of space themed websites, I worked with AI to generate a suitable colour pallete for my website. It emphasised the importance of a dark mode themed pallete, which has made my web app more practical in the field.
+-   Area: UI/UX | Using my knowledge of space themed websites, I worked with AI to generate a suitable color palette for my website. It emphasized the importance of a dark mode themed palette, which has made my web app more practical in the field.
 -   Area: agile | Passing in my curated version of the assignment criteria, I iterated Epics and User Stories with AI, ensuring a lean approach was taken given the small scope of this project.
 
 ## Credits
