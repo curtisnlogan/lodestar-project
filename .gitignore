@@ -14,5 +14,5 @@ staticfiles/
 # IDE
 .vscode/
 
-# OS
+# MacOS
 .DS_Store
