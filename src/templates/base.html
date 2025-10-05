@@ -4,9 +4,19 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Lodestar Project - Home</title>
-        <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-        <!-- Tailwind CSS -->
+        <!-- SEO optimization -->
+        <meta
+            name="description"
+            content="Track your astronomical observations and telescope sessions with Lodestar."
+        />
+        <meta
+            name="keywords"
+            content="astronomy, observation log, planet, star, deep sky, telescope, stargazing, sky tracking"
+        />
+        <meta name="author" content="Project Lodestar" />
+        <!-- Each template can provide its own tab title -->
+        <title>{% block title %}Lodestar {% endblock title %}</title>
+        <!-- built Tailwind CSS folder -->
         <link
             rel="stylesheet"
             type="text/css"
