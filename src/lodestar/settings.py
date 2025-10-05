@@ -110,6 +110,10 @@ DATABASES = {
 # Cloudinary configuration allows users to upload drawings of observations
 CLOUDINARY_URL = os.environ.get('CLOUDINARY_URL')
 
+# Required by django-allauth database to identify which site this Django instance represents, can be accessed through /admin/sites/site/
+# SITE_ID = 1 means this is the primary/default site
+SITE_ID = 1
+
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -162,3 +166,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Crispy Forms Configuration for Tailwind CSS
 CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 CRISPY_TEMPLATE_PACK = "tailwind"
+
+# Django AllAuth Configuration
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
