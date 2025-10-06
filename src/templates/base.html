@@ -35,9 +35,10 @@
             >
                 <div class="flex items-center">
                     <span class="mr-2">
-                        {% if message.tags == 'success' %}✅{% elif
-                        message.tags == 'error' %}❌{% elif message.tags ==
-                        'warning' %}⚠️{% else %}ℹ️{% endif %}
+                        {% if message.tags == 'success' %}✅
+                        {% elif message.tags == 'error' %}❌{% elif message.tags == 'warning' %}⚠️
+                        {% else %}ℹ️
+                        {% endif %}
                     </span>
                     <span>{{ message }}</span>
                 </div>
