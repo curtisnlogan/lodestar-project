@@ -8,12 +8,14 @@ A minimalist web app that allows users to log astronomical observations to a dat
 
 ### Feature 1: Astronomical Log CRUD
 
-A comprehensive observation logging system allowing users to:
+A comprehensive **secure** observation logging system allowing authenticated users to:
 
--   **Create** new observation entries with date, time, location, and celestial object details
--   **Read** observation history with search and filtering capabilities
--   **Update** existing observations with additional notes, corrections, or enhanced data
--   **Delete** unwanted or duplicate entries to maintain clean records
+-   **User Authentication**: Registration, login, logout with django-allauth
+-   **Secure Access Control**: Role-based permissions ensuring data privacy
+-   **Create** new observation entries with date, time, location, and celestial object details (In Development)
+-   **Read** observation history with search and filtering capabilities (In Development)
+-   **Update** existing observations with additional notes, corrections, or enhanced data (In Development)
+-   **Delete** unwanted or duplicate entries to maintain clean records (In Development)
 
 ### Feature 2: Scientific Data Integration
 
@@ -32,6 +34,15 @@ Stay current with astronomical developments:
 -   Real-time updates from trusted astronomical sources
 
 _Screenshots and detailed usage notes will be added as features are completed._
+
+## Authentication System
+
+**Status: In Progress**
+
+Lodestar uses **Django Allauth** for user authentication:
+
+-   Secure user registration and login
+-   Session management with clear status indicators
 
 ## Tech Stack
 
