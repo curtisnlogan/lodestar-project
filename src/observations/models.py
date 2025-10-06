@@ -1,21 +1,42 @@
+# allow for more accurate mathematical calculations
 from decimal import Decimal, InvalidOperation
 
 from django.conf import settings
+from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import IntegrityError, models
+from django.utils import timezone
 from django.utils.text import slugify
 
 from cloudinary.models import CloudinaryField
 
 
-class ObservingSession(models.Model):
+class TimestampMixin(models.Model):
+    """
+    Abstract base model that provides timestamp fields for tracking record lifecycle.
+    
+    Adds created_at and updated_at fields to any model that inherits from it.
+    """
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        help_text="Timestamp indicating when the record was created."
+    )
+    updated_at = models.DateTimeField(
+        auto_now=True,
+        help_text="Timestamp indicating when the record was last updated."
+    )
+
+    class Meta:
+        abstract = True
+
+
+class ObservingSession(TimestampMixin, models.Model):
     """
         Represents an astronomical observing session.
-    o
+
         A time-based and location-based container for an individual's
         astronomical observations. Each session can contain multiple
-        observations of objects from the solar system, stars, deep sky,
-        and special events.
+        observations of astronomical objects.
     """
 
     user = models.ForeignKey(
@@ -25,18 +46,37 @@ class ObservingSession(models.Model):
     )
     datetime_start_ut = models.DateTimeField(
         db_index=True,
-        help_text="Enter session start time in UTC.",
+        help_text="Enter observing session start time in UTC.",
     )
     datetime_end_ut = models.DateTimeField(
         null=True,
         blank=True,
-        help_text="Enter session end time in UTC (fill-in when session ends).",
+        help_text="Enter observing session end time in UTC (fill-in when session ends).",
     )
     site_name = models.CharField(max_length=50, blank=True)
-    slug = models.SlugField(max_length=255, unique=True)
+    slug = models.SlugField(blank=True, editable=False, max_length=255, unique=True)
 
     class Meta:
         ordering = ["-datetime_start_ut"]
+        verbose_name = "Observing Session"
+        verbose_name_plural = "Observing Sessions"
+
+    def clean(self):
+        """Custom validation for observing session."""
+        super().clean()
+        
+        # Validate that start time is not in the future
+        if self.datetime_start_ut and self.datetime_start_ut > timezone.now():
+            raise ValidationError(
+                {'datetime_start_ut': 'Start time cannot be in the future.'}
+            )
+        
+        # Validate that end time is after start time
+        if (self.datetime_start_ut and self.datetime_end_ut and 
+            self.datetime_end_ut <= self.datetime_start_ut):
+            raise ValidationError(
+                {'datetime_end_ut': 'End time must be after start time.'}
+            )
 
     def __str__(self):
         if self.datetime_end_ut:
@@ -51,21 +91,23 @@ class ObservingSession(models.Model):
         )
 
     def generate_slug(self):
-        """Build a unique slug from the username and session date."""
+        """Build a unique slug from the username PK and session date."""
         if self.slug:
             return None
 
         date_part = self.datetime_start_ut.strftime("%Y-%m-%d")
-        username = slugify(self.user.username)
-        base_slug = f"{username}-{date_part}"
+        user_pk = slugify(str(self.user.pk))
+        base_slug = f"{user_pk}-{date_part}"
 
         candidate = base_slug
+        # slug generation attempts
         suffix = 1
-
+        # grab all observing sessions so we know which slugs exist currently
         queryset = ObservingSession.objects.all()
+        # don't include the slug we are generating in the dataset that is to be checked
         if self.pk:
             queryset = queryset.exclude(pk=self.pk)
-
+        # handles edges cases were observing sessions get created at the same time, by looping through suffix candidates until one that doesn't exist
         while queryset.filter(slug=candidate).exists():
             candidate = f"{base_slug}-{suffix}"
             suffix += 1
@@ -77,20 +119,24 @@ class ObservingSession(models.Model):
         attempts_remaining = 5
 
         while attempts_remaining:
+             # 1. catch missing/invalid user-entered fields early, don't check for slug as it doesn't exist yet will throw error
+            self.full_clean(exclude=['slug'])
+            # 2. only build a slug when we have the key inputs
             self.generate_slug()
-            # Ensure custom validation runs
+            # ensure generated slug is validated
             self.full_clean()
-
+            # attempts to save slug, if unable due to edge cases, reduces attempts remaining. handles all but most extreme edge cases out of scope of this project.
             try:
                 return super().save(*args, **kwargs)
             except IntegrityError:
                 attempts_remaining -= 1
+                # checks for 0 attempts which is falsey
                 if not attempts_remaining:
                     raise
                 self.slug = None
 
 
-class ObservationMixin(models.Model):
+class ObservationMixin(TimestampMixin, models.Model):
     """
     Provides common astronomical observation fields and functionality.
 
@@ -111,14 +157,6 @@ class ObservationMixin(models.Model):
         on_delete=models.CASCADE,
         related_name="%(class)s_observations",
     )
-    datetime_ut = models.DateTimeField(
-        help_text="Enter observation start time in UTC."
-    )
-    datetime_end_ut = models.DateTimeField(
-        null=True,
-        blank=True,
-        help_text="Enter observation end time in UTC (fill-in when session ends)",
-    )
     antoniadi_scale = models.CharField(
         max_length=3,
         choices=ANTONIADI_CHOICES,
@@ -137,24 +175,18 @@ class ObservationMixin(models.Model):
     filters_used = models.CharField(
         max_length=25, blank=True, help_text='e.g., "Moon filter"'
     )
-    drawing = CloudinaryField(null=True, blank=True)
-    drawing_north_marked = models.CharField(
-        max_length=3,
-        choices=[("yes", "Yes"), ("no", "No")],
-        blank=True,
-        help_text="Is North marked on your drawing? Keeps your drawing scientifically useful!",
-    )
+    drawing = CloudinaryField(null=True, blank=True, help_text="Is North marked on your drawing? This keeps it scientifically useful!")
     additional_notes = models.TextField(blank=True)
 
     class Meta:
         abstract = True
 
-
-class ApiMixin(models.Model):
+# TODO
+class ApiMixin(TimestampMixin, models.Model):
     """
     Abstract mixin for SIMBAD/JPLHorizons API data storage and validation.
 
-    Simbad API used by Star and DeepSky models to store catalog data, validate
+    SIMBAD API used by Star and DeepSky models to store catalog data, validate
     coordinate fields for Aladin sky atlas display, and calculate stellar distances from parallax. JPLHorizons API used by Solar System object to store catalog data.
     """
 
@@ -230,8 +262,7 @@ class SolarSystem(ObservationMixin, ApiMixin):
         ("neptune", "Neptune"),
         ("other", "Other"),
     ]
-    distance_light_years = None
-    distance_miles = None
+    
     celestial_body = models.CharField(
         max_length=25,
         choices=SOLAR_SYSTEM_CHOICES,
@@ -244,8 +275,8 @@ class SolarSystem(ObservationMixin, ApiMixin):
         payload = self.api_payload
         if not payload:
             return None
-        ra = payload("ra")
-        dec = payload("dec")
+        ra = payload.get("ra")
+        dec = payload.get("dec")
         if ra is None or dec is None:
             return None
         return {"ra": ra, "dec": dec}
@@ -302,11 +333,16 @@ class SolarSystem(ObservationMixin, ApiMixin):
 
     class Meta(ObservationMixin.Meta, ApiMixin.Meta):
         abstract = False
+        verbose_name = "Solar System Observation"
+        verbose_name_plural = "Solar System Observations"
 
     def __str__(self):
         return (
             f"{self.celestial_body} observation on {self.datetime_ut.date()}"
         )
+    
+    def __repr__(self):
+        return f"<SolarSystem(id={self.pk}, body='{self.celestial_body}', date='{self.datetime_ut.date()}')>"
 
 
 class Star(ObservationMixin, ApiMixin):
@@ -328,8 +364,21 @@ class Star(ObservationMixin, ApiMixin):
         help_text='Finder chart details: e.g., "AAVSO chart 15424 ABC" (for variable stars, optional with other types of stars)',
     )
 
+    def clean(self):
+        """Custom validation for star observations."""
+        super().clean()
+        
+        # Validate magnitude estimate is within reasonable range
+        if (self.magnitude_estimate is not None and 
+            (self.magnitude_estimate < -30 or self.magnitude_estimate > 30)):
+            raise ValidationError(
+                {'magnitude_estimate': 'Magnitude must be between -30 and 30.'}
+            )
+
     class Meta(ObservationMixin.Meta, ApiMixin.Meta):
         abstract = False
+        verbose_name = "Star Observation"
+        verbose_name_plural = "Star Observations"
 
     def __str__(self):
         return f"{self.star_name} observation on {self.datetime_ut.date()}"
@@ -362,6 +411,8 @@ class DeepSky(ObservationMixin, ApiMixin):
 
     class Meta(ObservationMixin.Meta, ApiMixin.Meta):
         abstract = False
+        verbose_name = "Deep Sky Observation"
+        verbose_name_plural = "Deep Sky Observations"
 
     def __str__(self):
         if self.constellation:
@@ -394,6 +445,8 @@ class SpecialEvent(ObservationMixin):
 
     class Meta(ObservationMixin.Meta):
         abstract = False
+        verbose_name = "Special Event Observation"
+        verbose_name_plural = "Special Event Observations"
 
     def __str__(self):
         if self.event_name:
