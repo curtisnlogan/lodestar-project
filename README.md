@@ -92,7 +92,8 @@ Lodestar uses **Django Allauth** for user authentication:
 
 ### ERDs
 
-Database schema diagrams will be added upon completion of the data model design phase.
+**Complete ERD with Mixins:**
+![Complete ERD with Mixins](docs/images/observations_erd.png)
 
 ### Wireframes
 
