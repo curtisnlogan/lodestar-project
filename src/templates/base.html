@@ -24,7 +24,15 @@
         />
     </head>
     <body>
-        <nav></nav>
+        <nav>
+            {% if user.is_authenticated %}
+                <p>{{ user.username }} is logged in</p>
+                <a href="{% url 'account_logout' %}">Click to Sign Out</a>
+            {% else %}
+                <p>You are not signed in</p>
+                <a href="{% url 'account_login' %}">Click to Sign In</a>
+            {% endif %}
+        </nav>
 
         <!-- Messages Section -->
         {% if messages %}
