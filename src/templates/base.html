@@ -5,23 +5,21 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <!-- SEO optimization -->
-        <meta
-            name="description"
-            content="Track your astronomical observations and telescope sessions with Lodestar."
-        />
-        <meta
-            name="keywords"
-            content="astronomy, observation log, planet, star, deep sky, telescope, stargazing, sky tracking"
-        />
+        <meta name="description"
+              content="Track your astronomical observations and telescope sessions with Lodestar." />
+        <meta name="keywords"
+              content="astronomy, observation log, planet, star, deep sky, telescope, stargazing, sky tracking" />
         <meta name="author" content="Project Lodestar" />
         <!-- Each template can provide its own tab title -->
-        <title>{% block title %}Lodestar {% endblock title %}</title>
+        <title>
+            {% block title %}
+                Lodestar
+            {% endblock title %}
+        </title>
         <!-- built Tailwind CSS folder -->
-        <link
-            rel="stylesheet"
-            type="text/css"
-            href="{% static 'css/dist/styles.css' %}"
-        />
+        <link rel="stylesheet"
+              type="text/css"
+              href="{% static 'css/dist/styles.css' %}" />
     </head>
     <body>
         <nav>
@@ -33,33 +31,33 @@
                 <a href="{% url 'account_login' %}">Click to Sign In</a>
             {% endif %}
         </nav>
-
         <!-- Messages Section -->
         {% if messages %}
-        <div class="space-y-4 mb-8">
-            {% for message in messages %}
-            <div
-                class="{% if message.tags == 'success' %}bg-green-500/20 border-green-400/50 text-green-100{% elif message.tags == 'error' %}bg-red-500/20 border-red-400/50 text-red-100{% elif message.tags == 'warning' %}bg-yellow-500/20 border-yellow-400/50 text-yellow-100{% else %}bg-blue-500/20 border-blue-400/50 text-blue-100{% endif %} backdrop-blur-sm rounded-xl p-4 border"
-            >
-                <div class="flex items-center">
-                    <span class="mr-2">
-                        {% if message.tags == 'success' %}✅
-                        {% elif message.tags == 'error' %}❌{% elif message.tags == 'warning' %}⚠️
-                        {% else %}ℹ️
-                        {% endif %}
-                    </span>
-                    <span>{{ message }}</span>
-                </div>
-            </div>
-            {% endfor %}
-        {% endif %}
-
-        <!-- Content Block for Templates -->
-        {% block content %}
-        {% endblock content %}
-
-        <footer class="mt-auto">
-            <p class="">2025 Lodestar Project</p>
-        </footer>
-    </body>
-</html>
+            <div class="space-y-4 mb-8">
+                {% for message in messages %}
+                    <div class="{% if message.tags == 'success' %}bg-green-500/20 border-green-400/50 text-green-100{% elif message.tags == 'error' %}bg-red-500/20 border-red-400/50 text-red-100{% elif message.tags == 'warning' %}bg-yellow-500/20 border-yellow-400/50 text-yellow-100{% else %}bg-blue-500/20 border-blue-400/50 text-blue-100{% endif %} backdrop-blur-sm rounded-xl p-4 border">
+                        <div class="flex items-center">
+                            <span class="mr-2">
+                                {% if message.tags == 'success' %}
+                                    ✅
+                                {% elif message.tags == 'error' %}
+                                    ❌
+                                {% elif message.tags == 'warning' %}
+                                    ⚠️
+                                {% else %}
+                                    ℹ️
+                                {% endif %}
+                            </span>
+                            <span>{{ message }}</span>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <!-- Content Block for Templates -->
+            {% block content %}
+            {% endblock content %}
+            <footer class="mt-auto">
+                <p class="">2025 Lodestar Project</p>
+            </footer>
+        </body>
+    </html>
