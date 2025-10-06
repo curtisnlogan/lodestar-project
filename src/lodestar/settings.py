@@ -32,7 +32,11 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # manage DEBUG at environment level to avoid potential security leak
 DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", "lodestar-project-439dd73a5112.herokuapp.com"]
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
+    "lodestar-project-439dd73a5112.herokuapp.com",
+]
 
 # CSRF (Cross-Site Request Forgery) protection - prevents malicious sites from
 # making unauthorized requests on behalf of your users
@@ -103,12 +107,10 @@ WSGI_APPLICATION = "lodestar.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 # parses out a `DATABASE_URL`` from os level env file using 'dotenv', that django can understand
-DATABASES = {
-    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
-}
+DATABASES = {"default": dj_database_url.parse(os.environ.get("DATABASE_URL"))}
 
 # Cloudinary configuration allows users to upload drawings of observations
-CLOUDINARY_URL = os.environ.get('CLOUDINARY_URL')
+CLOUDINARY_URL = os.environ.get("CLOUDINARY_URL")
 
 # Required by django-allauth database to identify which site this Django instance represents, can be accessed through /admin/sites/site/
 # SITE_ID = 1 means this is the primary/default site
@@ -168,16 +170,17 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 CRISPY_TEMPLATE_PACK = "tailwind"
 
 # Django AllAuth Configuration
-ACCOUNT_EMAIL_VERIFICATION = 'none'
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
+ACCOUNT_EMAIL_VERIFICATION = "none"
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
 
 # Enable django messages functionality globally
 from django.contrib.messages import constants as messages
+
 MESSAGE_TAGS = {
-    messages.DEBUG: 'debug',
-    messages.INFO: 'info',
-    messages.SUCCESS: 'success',
-    messages.WARNING: 'warning',
-    messages.ERROR: 'error',
+    messages.DEBUG: "debug",
+    messages.INFO: "info",
+    messages.SUCCESS: "success",
+    messages.WARNING: "warning",
+    messages.ERROR: "error",
 }
