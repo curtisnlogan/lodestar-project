@@ -73,10 +73,13 @@ class ObservingSession(models.Model):
         self.slug = candidate
 
     def save(self, *args, **kwargs):
+
         attempts_remaining = 5
 
         while attempts_remaining:
             self.generate_slug()
+            # Ensure custom validation runs
+            self.full_clean()
 
             try:
                 return super().save(*args, **kwargs)
