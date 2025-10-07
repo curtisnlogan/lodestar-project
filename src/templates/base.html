@@ -38,40 +38,57 @@
                 </li>
             </ul>
             <ul class="flex">
-            {% if user.is_authenticated %}
-                <p>{{ user.username }} is logged in</p>
-                <a href="{% url 'account_logout' %}">Click to Sign Out</a>
-            {% else %}
-                <p>You are not signed in</p>
-                <a href="{% url 'account_login' %}">Click to Sign In</a>
-            {% endif %}
-        </nav>
-        <!-- Messages Section -->
-        {% if messages %}
-            <div class="space-y-4 mb-8">
-                {% for message in messages %}
-                    <div class="{% if message.tags == 'success' %}bg-green-500/20 border-green-400/50 text-green-100{% elif message.tags == 'error' %}bg-red-500/20 border-red-400/50 text-red-100{% elif message.tags == 'warning' %}bg-yellow-500/20 border-yellow-400/50 text-yellow-100{% else %}bg-blue-500/20 border-blue-400/50 text-blue-100{% endif %} backdrop-blur-sm rounded-xl p-4 border">
-                        <div class="flex items-center">
-                            <span class="mr-2">
-                                {% if message.tags == 'success' %}
-                                    ✅
-                                {% elif message.tags == 'error' %}
-                                    ❌
-                                {% elif message.tags == 'warning' %}
-                                    ⚠️
-                                {% else %}
-                                    ℹ️
-                                {% endif %}
-                            </span>
-                            <span>{{ message }}</span>
-                        </div>
+                {% if user.is_authenticated %}
+                    <p>{{ user.username }} is logged in</p>
+                    <a href="{% url 'account_logout' %}">Click to Sign Out</a>
+                {% else %}
+                    <p>You are not signed in</p>
+                    <a href="{% url 'account_login' %}">Click to Sign In</a>
+                {% endif %}
+            </nav>
+            <!-- Messages Section -->
+            <div class="flex-grow flex-col flex items-center justify-center">
+                {% if messages %}
+                    <div class="space-y-4 mb-8" role="alert" aria-live="polite">
+                        {% for message in messages %}
+                            <div class="backdrop-blur-sm rounded-xl p-4 border">
+                                <div class="flex items-center">
+                                    <span class="mr-2">
+                                        {% if message.tags == 'success' %}
+                                            ✅
+                                        {% elif message.tags == 'error' %}
+                                            ❌
+                                        {% elif message.tags == 'warning' %}
+                                            ⚠️
+                                        {% else %}
+                                            ℹ️
+                                        {% endif %}
+                                    </span>
+                                    <span>{{ message }}</span>
+                                </div>
+                            </div>
+                        {% endfor %}
                     </div>
-                {% endfor %}
-            {% endif %}
-            <!-- Content Block for Templates -->
-            {% block content %}
-            {% endblock content %}
-            <footer class="mt-auto">
+                {% endif %}
+                <!-- Main Content Block for Templates -->
+                <main class="flex-grow">
+                    {% block content %}
+                    {% endblock content %}
+                </main>
+            </div>
+            <footer class="flex justify-between">
+                <div></div> <!-- Empty spacer for flex -->
+                <ul class="flex">
+                    <li>
+                        <a href="#" class="nav-link">About</a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link">Resources</a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link">Privacy Policy</a>
+                    </li>
+                </ul>
                 <p class="">2025 Lodestar Project</p>
             </footer>
         </body>
