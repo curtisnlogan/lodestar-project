@@ -1,75 +1,72 @@
-{% extends 'base.html' %}
-{% load static %}
-{% load crispy_forms_tags %}
-{% block title %}Lodestar - Home{% endblock title %}
-{% block content %}
-    <!-- Login Section - Centerpiece -->
-    {% if user.is_authenticated %}
-    {% else %}
-        <section class="flex flex-col items-center justify-center">
-            <div class="login-c">
-                <!-- Image placeholder for login area -->
-                <div class="log">
-                    <div class="image-pla">
-                        <!-- Image placeholder for login illustration -->
-                        [Login Image Placeholder]
-                    </div>
-                </div>
-                <!-- Login Form -->
-                <div class="lo">
-                    <h2>Login</h2>
-                    <form method="post" action="{% url 'account_login' %}">
-                        {% csrf_token %}
-                        {{ form|crispy }}
-                        <!-- Submit Button -->
-                        <button type="submit" class="login-button">Login Button</button>
-                    </form>
-                    <!-- Additional Links -->
-                    <div class="login-links">
-                        <a href="{% url 'account_reset_password' %}">Forgot your password?</a>
-                    </div>
-                    <div>
-                        <a href="{% url 'account_signup' %}">Register</a>
-                    </div>
-                </div>
+{% extends 'base.html' %} {% load static %} {% load crispy_forms_tags %} {%
+block title %}Lodestar - Home{% endblock title %} {% block content %}
+<!-- Login Section - Centerpiece -->
+{% if user.is_authenticated %} {% else %}
+<section class="flex flex-col items-center justify-center">
+    <div class="login-c">
+        <!-- Image placeholder for login area -->
+        <div class="log">
+            <div class="image-pla">
+                <!-- Image placeholder for login illustration -->
+                [Login Image Placeholder]
             </div>
-        </section>
-    {% endif %}
-    <!-- Website Intro Section -->
-    <section class="flex flex-col items-center justify-center">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="mb-4">Website Intro</h2>
-            <p>
-                Aliquam volutpat accumsan ipsum, a luctus mauris bibendum in. Morbi
-                tempor mauris non commodo ultricies. Mauris iaculis ex ut lorem
-                porta venenatis. Proin ac varius sem, quis hendrerit ex. Etiam ac
-                lorem eu ex tempor lobortis ut eu nisl. Etiam augue tortor, molestie
-                ac pellentesque in, dapibus vitae tortor. Mauris et nunc eros.
-                Vestibulum at turpis ex. Sed tempor vitae augue at tincidunt.
-                Pellentesque porta lorem mi. Sed mauris libero, pulvinar vel
-                scelerisque sed, tincidunt et ipsum. Nulla pulvinar venenatis ipsum,
-                sed lobortis nulla tincidunt nec. Donec dapibus augue sit amet
-                pharetra fermentum. Nam maximus dignissim rutrum. Quisque eget
-                tortor nec ligula consectetur volutpat.
+        </div>
+        <!-- Login Form -->
+        <div class="lo">
+            <h2>Login</h2>
+            <form method="post" action="{% url 'account_login' %}">
+                {% csrf_token %} {{ form|crispy }}
+                <!-- Submit Button -->
+                <button type="submit" class="login-button">Login Button</button>
+            </form>
+            <!-- Additional Links -->
+            <div class="login-links">
+                <a href="{% url 'account_reset_password' %}"
+                    >Forgot your password?</a
+                >
+            </div>
+            <div>
+                <a href="{% url 'account_signup' %}">Register</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+<!-- Website Intro Section -->
+<section class="flex flex-col items-center justify-center">
+    <div class="max-w-4xl mx-auto">
+        <h2 class="mb-4">Website Intro</h2>
+        <p>
+            Aliquam volutpat accumsan ipsum, a luctus mauris bibendum in. Morbi
+            tempor mauris non commodo ultricies. Mauris iaculis ex ut lorem
+            porta venenatis. Proin ac varius sem, quis hendrerit ex. Etiam ac
+            lorem eu ex tempor lobortis ut eu nisl. Etiam augue tortor, molestie
+            ac pellentesque in, dapibus vitae tortor. Mauris et nunc eros.
+            Vestibulum at turpis ex. Sed tempor vitae augue at tincidunt.
+            Pellentesque porta lorem mi. Sed mauris libero, pulvinar vel
+            scelerisque sed, tincidunt et ipsum. Nulla pulvinar venenatis ipsum,
+            sed lobortis nulla tincidunt nec. Donec dapibus augue sit amet
+            pharetra fermentum. Nam maximus dignissim rutrum. Quisque eget
+            tortor nec ligula consectetur volutpat.
+        </p>
+    </div>
+</section>
+<!-- Quote Section -->
+<section class="flex items-center justify-center">
+    <div class="max-w-4xl mx-auto flex items-center gap-8">
+        <!-- Image placeholder for Stephen Hawking -->
+        <div class="w-64 h-64 flex items-center justify-center">
+            <p class="text-center">[Hawking Image Placeholder]</p>
+        </div>
+        <!-- Quote Content -->
+        <div class="flex-1">
+            <p class="mb-4">
+                "Look up at the stars and not down at your feet. Try to make
+                sense of what you see, and wonder about what makes the universe
+                exist. Be curious."
             </p>
+            <cite>- Stephen Hawking</cite>
         </div>
-    </section>
-    <!-- Quote Section -->
-    <section class="flex items-center justify-center">
-        <div class="max-w-4xl mx-auto flex items-center gap-8">
-            <!-- Image placeholder for Stephen Hawking -->
-            <div class="w-64 h-64 flex items-center justify-center">
-                <p class="text-center">[Hawking Image Placeholder]</p>
-            </div>
-            <!-- Quote Content -->
-            <div class="flex-1">
-                <p class="mb-4">
-                    "Look up at the stars and not down at your feet. Try to make
-                    sense of what you see, and wonder about what makes the universe
-                    exist. Be curious."
-                </p>
-                <cite>- Stephen Hawking</cite>
-            </div>
-        </div>
-    </section>
+    </div>
+</section>
 {% endblock content %}
