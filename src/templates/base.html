@@ -18,8 +18,26 @@
         <!-- Tailwind CSS folder -->
         <link rel="stylesheet" href="{% static 'css/dist/styles.css' %}" />
     </head>
-    <body>
-        <nav>
+    <body class="min-h-screen flex flex-col">
+        <!-- navigation bar to be used across all website pages -->
+        <nav class="flex justify-between">
+            <div>
+                <!-- logo -->
+                <img src="{% static 'path' %}" alt="Lodestar Logo">
+            </div>
+            <!-- navigation links -->
+            <ul class="flex">
+                <li>
+                    <a href="{% url 'home' %}" class="nav-link">Home</a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link">My Observations</a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link">My Astronomy News</a>
+                </li>
+            </ul>
+            <ul class="flex">
             {% if user.is_authenticated %}
                 <p>{{ user.username }} is logged in</p>
                 <a href="{% url 'account_logout' %}">Click to Sign Out</a>
