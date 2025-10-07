@@ -32,7 +32,7 @@ class Home(TemplateView):
             observing_session = form.save(commit=False)
             observing_session.user = request.user
             observing_session.save()
-            messages.success(request, 'New observing session created successfully!')
+            messages.success(request, 'New observing session created successfully! Click the "My Observations" link at the top of the page, to add observations to this session.')
             return redirect('home')
         else:
             # If form is invalid, redisplay with errors
