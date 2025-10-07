@@ -64,6 +64,12 @@ Lodestar uses **Django Allauth** for user authentication:
 -   **Minimalist:** Generous whitespace and clean layouts evoke the vastness of space while improving focus and readability during observation sessions
 -   **Tailwind CSS:** Utility-first framework enabling custom designs without the visual uniformity constraints of component-based frameworks like Bootstrap
 
+### Design Principles
+
+-   **Layout:** Plain backgrounds; uncluttered typography; consistent spacing; no decorative noise.
+-   **Whitespace:** Comfortable padding around sections.
+-   **Imagery:** images used sparingly for added effect.
+
 ### Typography
 
 -   **Headings:** `Exo 2`, readability first with subtle sci-fi styling.
