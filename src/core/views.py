@@ -3,5 +3,5 @@ from django.views.generic import TemplateView
 
 # Create your views here.
 
-class Base(TemplateView):
-    template_name = 'base.html'
+class Home(TemplateView):
+    template_name = 'home.html'
