@@ -52,7 +52,7 @@
                     <a href="{% url 'account_logout' %}">Click to Sign Out</a>
                 {% else %}
                     <p>You are not signed in</p>
-                    <a href="{% url 'account_login' %}">Click to Sign In</a>
+                    <a href="{% url 'home' %}">Click to Sign In</a>
                 {% endif %}
             </nav>
             <!-- Messages Section -->
@@ -86,7 +86,8 @@
                 </main>
             </div>
             <footer class="flex justify-between">
-                <div></div> <!-- Empty spacer for flex -->
+                <div></div>
+                <!-- Empty spacer for flex -->
                 <ul class="flex">
                     <li>
                         <a href="#" class="nav-link">About</a>
