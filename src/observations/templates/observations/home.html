@@ -2,46 +2,50 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block title %}
-Lodestar - Home
+    Lodestar - Home
 {% endblock title %}
 {% block content %}
-    <!-- Login Section - Centerpiece -->
     {% if user.is_authenticated %}
-        <section class="flex flex-col items-center justify-center mt-50">
-            <div class="observing-session-form">
-                <h2>Log New Observation</h2>
-                <form method="post">
+        <section class="flex flex-col items-center justify-center">
+            <div class="observing-session-form max-w-2xl">
+                <h2 class="text-center mb-6 text-xl font-semibold">Create a New Observing Session Entry in the Form below. To see existing sessions, click on 'My Observations' in the navigation bar.</h2>
+                <form method="post" class="p-6">
                     {% csrf_token %}
-                    {{ observing_session_form|crispy }}
-                    <!-- Submit Button -->
-                    <button type="submit" class="submit-button">Save Observation</button>
+                    <div class="form-fields space-y-6">
+                        {{ observing_session_form|crispy }}
+                    </div>
+                    <div class="flex justify-center mt-8">
+                        <button type="submit" class="bg-gray-600 text-white px-6 py-2 rounded-md hover:bg-gray-700 transition-colors">Save Observing Session</button>
+                    </div>
                 </form>
             </div>
         </section>
     {% else %}
         <section class="flex flex-col items-center justify-center">
             <div class="login-c">
-                <!-- Image placeholder for login area -->
-                <div class="log">
-                    <div class="image-pla">
-                        <!-- Image placeholder for login illustration -->
-                        [Login Image Placeholder]
+                <!-- Login container with image on left and form on right -->
+                <div class="flex items-center gap-8">
+                    <!-- Image placeholder for login area -->
+                    <div class="log">
+                        <div class="image-pla">
+                            <!-- Image placeholder for login illustration -->
+                            [Login Image Placeholder]
+                        </div>
                     </div>
-                </div>
-                <!-- Login Form -->
-                <div class="lo">
-                    <h2>Login</h2>
-                    <form method="post" action="{% url 'account_login' %}">
-                        {% csrf_token %} {{ login_form|crispy }}
-                        <!-- Submit Button -->
-                        <button type="submit" class="login-button">Login Button</button>
-                    </form>
-                    <!-- Additional Links -->
-                    <div class="login-links">
-                        <a href="{% url 'account_reset_password' %}">Forgot your password?</a>
-                    </div>
-                    <div>
-                        <a href="{% url 'account_signup' %}">Register</a>
+                    <!-- Login Form -->
+                    <div class="lo">
+                        <h2>Login</h2>
+                        <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="login" value="1" />
+                            {{ login_form|crispy }}
+                            <!-- Submit Button -->
+                            <button type="submit" class="login-button">Login Button</button>
+                        </form>
+                        <!-- Additional Links -->
+                        <div>
+                            <a href="{% url 'account_signup' %}">Register</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -50,24 +54,24 @@ Lodestar - Home
     <!-- Website Intro Section -->
     {% if user.is_authenticated %}
     {% else %}
-    <section class="flex flex-col items-center justify-center">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="mb-4">Website Intro</h2>
-            <p>
-                Aliquam volutpat accumsan ipsum, a luctus mauris bibendum in. Morbi
-                tempor mauris non commodo ultricies. Mauris iaculis ex ut lorem
-                porta venenatis. Proin ac varius sem, quis hendrerit ex. Etiam ac
-                lorem eu ex tempor lobortis ut eu nisl. Etiam augue tortor, molestie
-                ac pellentesque in, dapibus vitae tortor. Mauris et nunc eros.
-                Vestibulum at turpis ex. Sed tempor vitae augue at tincidunt.
-                Pellentesque porta lorem mi. Sed mauris libero, pulvinar vel
-                scelerisque sed, tincidunt et ipsum. Nulla pulvinar venenatis ipsum,
-                sed lobortis nulla tincidunt nec. Donec dapibus augue sit amet
-                pharetra fermentum. Nam maximus dignissim rutrum. Quisque eget
-                tortor nec ligula consectetur volutpat.
-            </p>
-        </div>
-    </section>
+        <section class="flex flex-col items-center justify-center">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="mb-4">Website Intro</h2>
+                <p>
+                    Aliquam volutpat accumsan ipsum, a luctus mauris bibendum in. Morbi
+                    tempor mauris non commodo ultricies. Mauris iaculis ex ut lorem
+                    porta venenatis. Proin ac varius sem, quis hendrerit ex. Etiam ac
+                    lorem eu ex tempor lobortis ut eu nisl. Etiam augue tortor, molestie
+                    ac pellentesque in, dapibus vitae tortor. Mauris et nunc eros.
+                    Vestibulum at turpis ex. Sed tempor vitae augue at tincidunt.
+                    Pellentesque porta lorem mi. Sed mauris libero, pulvinar vel
+                    scelerisque sed, tincidunt et ipsum. Nulla pulvinar venenatis ipsum,
+                    sed lobortis nulla tincidunt nec. Donec dapibus augue sit amet
+                    pharetra fermentum. Nam maximus dignissim rutrum. Quisque eget
+                    tortor nec ligula consectetur volutpat.
+                </p>
+            </div>
+        </section>
     {% endif %}
     <!-- Quote Section -->
     <section class="flex items-center justify-center">
