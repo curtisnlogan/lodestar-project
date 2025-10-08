@@ -1319,6 +1319,10 @@ form path {
     background-color: var(--color-gray-600);
   }
 }
+.login-form a[href*="password/reset"],
+form a[href*="password/reset"] {
+  display: none !important;
+}
 @layer base {
   :where(:root),:root:has(input.theme-controller[value=light]:checked),[data-theme=light] {
     color-scheme: light;
