@@ -27,8 +27,12 @@
             </div>
             <!-- navigation links -->
             <ul class="flex">
+                {% if user.is_authenticated %}
                 <li>
                     <a href="{% url 'home' %}" class="nav-link">Home</a>
+                </li>
+                <li>
+                    <a href="{% url 'add_observation' %}" class="nav-link">Add New Observation</a>
                 </li>
                 <li>
                     <a href="#" class="nav-link">My Observations</a>
@@ -36,6 +40,11 @@
                 <li>
                     <a href="#" class="nav-link">My Astronomy News</a>
                 </li>
+                {% else %}
+                <li>
+                    <a href="{% url 'home' %}" class="nav-link">Home</a>
+                </li>
+                {% endif %}
             </ul>
             <ul class="flex">
                 {% if user.is_authenticated %}
