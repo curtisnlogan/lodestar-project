@@ -22,5 +22,6 @@ from observations.views import Home
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('accounts/', include('allauth.urls')),
+    path('observations/', include('observations.urls')),
     path('', Home.as_view(), name='home'),
 ]
