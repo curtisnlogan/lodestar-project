@@ -7,70 +7,26 @@ Lodestar - Sign Up
 {% endblock title %}
 
 {% block content %}
-    <!-- Sign Up Section - Centerpiece (matching home.html structure) -->
-    <section class="flex flex-col items-center justify-center">
-        <div class="login-c">
-            <!-- Login container with image on left and form on right -->
-            <div class="flex items-center gap-8">
-                <!-- Image placeholder for signup area -->
-                <div class="log">
-                    <div class="image-pla">
-                        <!-- Image placeholder for signup illustration -->
-                        [Signup Image Placeholder]
-                    </div>
-                </div>
-                <!-- Sign Up Form -->
-                <div class="lo">
-                    <h2>Sign Up</h2>
-                    {% if redirect_field_value %}
-                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-                    {% endif %}
-                    
-                    <form method="post" action="{% url 'account_signup' %}">
+    
+    <section class="max-w-xl mx-auto">
+
+            <div class="flex flex-col bg-space p-12 rounded border border-accent-custom">
+                <h2 class="text-primary-custom text-2xl font-semibold mb-8 tracking-wide text-center font-heading">Sign Up for a Lodestar account</h2>
+                <form method="post">
+                    <div>
                         {% csrf_token %}
                         {{ form|crispy }}
-                        <!-- Submit Button -->
-                        <button type="submit" class="login-button">Sign Up</button>
-                    </form>
-                    
-                    <!-- Additional Links -->
-                    <div class="login-links">
-                        <p>Already have an account? <a href="{% url 'account_login' %}">Sign in</a>.</p>
                     </div>
-                </div>
+                    <div class="flex justify-center mt-8">
+                        <button type="submit" class="bg-accent-custom hover:bg-highlight-custom text-white hover:text-black px-8 py-3 rounded transition-all duration-500 ease-in-out font-semibold tracking-wide transform hover:scale-105">
+                            Sign Up
+                        </button>
+                    </div>
+                </form>
             </div>
-        </div>
+
     </section>
 
-    <!-- Website Intro Section (similar to home.html) -->
-    <section class="flex flex-col items-center justify-center">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="mb-4">Join Lodestar</h2>
-            <p>
-                Create your account to start tracking your astronomical observations 
-                and telescope sessions. Connect with fellow stargazers and build your 
-                personal observation log. Explore the universe and document your 
-                journey through the cosmos with Lodestar.
-            </p>
-        </div>
-    </section>
+    {% include 'includes/website_intro.html' with intro_title="Join Lodestar" intro_text="Create your account to start tracking your telescope sessions and astronomical observations. Explore skys and document your journey through the cosmos with Lodestar." %}
 
-    <!-- Quote Section (same as home.html) -->
-    <section class="flex items-center justify-center">
-        <div class="max-w-4xl mx-auto flex items-center gap-8">
-            <!-- Image placeholder for Stephen Hawking -->
-            <div class="w-64 h-64 flex items-center justify-center">
-                <p class="text-center">[Hawking Image Placeholder]</p>
-            </div>
-            <!-- Quote Content -->
-            <div class="flex-1">
-                <p class="mb-4">
-                    "Look up at the stars and not down at your feet. Try to make
-                    sense of what you see, and wonder about what makes the universe
-                    exist. Be curious."
-                </p>
-                <cite>- Stephen Hawking</cite>
-            </div>
-        </div>
-    </section>
 {% endblock content %}
