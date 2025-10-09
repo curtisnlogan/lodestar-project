@@ -6,89 +6,57 @@
 {% endblock title %}
 {% block content %}
     {% if user.is_authenticated %}
-        <section class="flex flex-col items-center justify-center">
-            <div class="observing-session-form max-w-2xl">
-                <h2 class="text-center mb-6 text-xl font-semibold">Create a New Observing Session Entry in the Form below. To see existing sessions, click on 'My Observations' in the navigation bar.</h2>
-                <form method="post" class="p-6">
-                    {% csrf_token %}
-                    <div class="form-fields space-y-6">
+        <section class="max-w-4xl mx-auto px-4">
+            <div class="flex flex-col sm:flex-row gap-12">
+                <!-- Newton Login Image div -->
+                {% include 'includes/newton_image.html' %}
+                <div class="text-center mb-12">
+                    <h1 class="text-primary-custom text-xl font-semibold mb-6 tracking-wide font-heading">
+                        Create a New Observing Session
+                    </h1>
+                    <p class="text-secondary-custom text-md tracking-wide mb-5">
+                        Fill out the form below to log an observing session. View your existing sessions in the 'My Observations' link above.
+                    </p>
+                    <form method="post" class="form-fields space-y-6 md:space-y-8">
+                        {% csrf_token %}
                         {{ observing_session_form|crispy }}
-                    </div>
-                    <div class="flex justify-center mt-8">
-                        <button type="submit" class="bg-gray-600 text-white px-6 py-2 rounded-md hover:bg-gray-700 transition-colors">Save Observing Session</button>
-                    </div>
-                </form>
-            </div>
-        </section>
-    {% else %}
-        <section class="flex flex-col items-center justify-center">
-            <div class="login-c">
-                <!-- Login container with image on left and form on right -->
-                <div class="flex items-center gap-8">
-                    <!-- Image placeholder for login area -->
-                    <div class="log">
-                        <div class="image-pla">
-                            <!-- Image placeholder for login illustration -->
-                            [Login Image Placeholder]
+                        <div class="flex justify-center mt-8">
+                            <button type="submit"
+                                    class="bg-accent-custom hover:bg-highlight text-white hover:text-black px-8 py-3 rounded transition-all duration-500 ease-in-out font-medium tracking-wide transform hover:scale-105">
+                                Save Observing Session
+                            </button>
                         </div>
-                    </div>
-                    <!-- Login Form -->
-                    <div class="lo">
-                        <h2>Login</h2>
-                        <form method="post">
-                            {% csrf_token %}
-                            <input type="hidden" name="login" value="1" />
-                            {{ login_form|crispy }}
-                            <!-- Submit Button -->
-                            <button type="submit" class="login-button">Login Button</button>
-                        </form>
-                        <!-- Additional Links -->
-                        <div>
-                            <a href="{% url 'account_signup' %}">Register</a>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </section>
-    {% endif %}
-    <!-- Website Intro Section -->
-    {% if user.is_authenticated %}
     {% else %}
-        <section class="flex flex-col items-center justify-center">
-            <div class="max-w-4xl mx-auto">
-                <h2 class="mb-4">Website Intro</h2>
-                <p>
-                    Aliquam volutpat accumsan ipsum, a luctus mauris bibendum in. Morbi
-                    tempor mauris non commodo ultricies. Mauris iaculis ex ut lorem
-                    porta venenatis. Proin ac varius sem, quis hendrerit ex. Etiam ac
-                    lorem eu ex tempor lobortis ut eu nisl. Etiam augue tortor, molestie
-                    ac pellentesque in, dapibus vitae tortor. Mauris et nunc eros.
-                    Vestibulum at turpis ex. Sed tempor vitae augue at tincidunt.
-                    Pellentesque porta lorem mi. Sed mauris libero, pulvinar vel
-                    scelerisque sed, tincidunt et ipsum. Nulla pulvinar venenatis ipsum,
-                    sed lobortis nulla tincidunt nec. Donec dapibus augue sit amet
-                    pharetra fermentum. Nam maximus dignissim rutrum. Quisque eget
-                    tortor nec ligula consectetur volutpat.
-                </p>
+        <section class="mx-auto">
+            <div class="flex flex-col justify-center items-center">
+                <!-- Login Form -->
+                <div class="bg-space p-12 rounded border border-bg-accent">
+                    <h2 class="text-primary-custom text-2xl font-semibold mb-8 tracking-wide text-center font-heading">Login</h2>
+                    <form method="post">
+                        <!-- used in the app view to distinguish between this post request and the default one, for the new observing session above -->
+                        <input type="hidden" name="login" value="1"/>
+                        <div class="space-y-6">{% csrf_token %}{{ login_form|crispy }}</div>
+                        <div class="flex justify-center mt-8">
+                            <button type="submit"
+                                    class="bg-accent-custom hover:bg-highlight text-white hover:text-black px-8 py-3 rounded transition-all duration-500 ease-in-out font-medium tracking-wide transform hover:scale-105 w-full">
+                                Login
+                            </button>
+                        </div>
+                    </form>
+                    <div class="text-center mt-6">
+                        <a href="{% url 'account_signup' %}"
+                           class="text-accent-custom hover:text-highlight text-md tracking-wide transition-all duration-200 ease-in-out">
+                            Create an Account Here
+                        </a>
+                    </div>
+                </div>
+                {% include 'includes/website_intro.html' %}
+                {% include 'includes/hawking_quote.html' %}
             </div>
         </section>
     {% endif %}
-    <!-- Quote Section -->
-    <section class="flex items-center justify-center">
-        <div class="max-w-4xl mx-auto flex items-center gap-8">
-            <!-- Image placeholder for Stephen Hawking -->
-            <div class="w-64 h-64 flex items-center justify-center">
-                <p class="text-center">[Hawking Image Placeholder]</p>
-            </div>
-            <!-- Quote Content -->
-            <div class="flex-1">
-                <p class="mb-4">
-                    "Look up at the stars and not down at your feet. Try to make
-                    sense of what you see, and wonder about what makes the universe
-                    exist. Be curious."
-                </p>
-                <cite>- Stephen Hawking</cite>
-            </div>
-        </div>
-    </section>
 {% endblock content %}
