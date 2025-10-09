@@ -1,32 +1,28 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
-
 {% block title %}
-Lodestar - Sign Up
+    Lodestar - Sign Up
 {% endblock title %}
-
 {% block content %}
-    
     <section class="max-w-xl mx-auto">
-
-            <div class="flex flex-col bg-space p-12 rounded border border-accent-custom">
-                <h2 class="text-primary-custom text-2xl font-semibold mb-8 tracking-wide text-center font-heading">Sign Up for a Lodestar account</h2>
-                <form method="post">
-                    <div>
-                        {% csrf_token %}
-                        {{ form|crispy }}
-                    </div>
-                    <div class="flex justify-center mt-8">
-                        <button type="submit" class="bg-accent-custom hover:bg-highlight text-white hover:text-black px-8 py-3 rounded transition-all duration-500 ease-in-out font-semibold tracking-wide transform hover:scale-105">
-                            Sign Up
-                        </button>
-                    </div>
-                </form>
-            </div>
-
+        <div class="flex flex-col bg-space p-12 rounded border border-accent-custom">
+            <h2 class="text-primary-custom text-2xl font-semibold mb-8 tracking-wide text-center font-heading">
+                Sign Up for a Lodestar account
+            </h2>
+            <form method="post">
+                <div>
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                </div>
+                <div class="flex justify-center mt-8">
+                    <button type="submit"
+                            class="bg-accent-custom hover:bg-highlight text-white hover:text-black px-8 py-3 rounded transition-all duration-500 ease-in-out font-semibold tracking-wide transform hover:scale-105">
+                        Sign Up
+                    </button>
+                </div>
+            </form>
+        </div>
     </section>
-
     {% include 'includes/website_intro.html' with intro_title="Join Lodestar" intro_text="Create your account to start tracking your telescope sessions and astronomical observations. Document your journey through the cosmos." %}
-
 {% endblock content %}
