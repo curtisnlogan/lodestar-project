@@ -25,6 +25,6 @@ urlpatterns = [
     path("accounts/logout/", AutoLogoutView.as_view(), name="account_logout"),
     path("accounts/", include("allauth.urls")),
     path("observations/", include("observations.urls")),
-    path("news/", include("news.urls"), name="news"),
+    path("news/", include("news.urls")),
     path("", Home.as_view(), name="home"),
 ]
