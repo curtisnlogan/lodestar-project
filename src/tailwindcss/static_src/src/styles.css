@@ -1,11 +1,97 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+/* Typography - Google Fonts Integration */
+@import url("https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap");
+
+/* Component imports */
+@import "./components/forms.css";
+
+/* Custom color definitions for Tailwind v4 */
+:root {
+    /* Color Palette */
+    --color-primary-bg: #000000; /* Deep space dark */
+    --color-cards-panels: #001430; /* Subtle nebula blue */
+    --color-primary-text: #f3f4f6; /* High-contrast on dark bg */
+    --color-secondary-text: #c3d1e3; /* Muted for helper text */
+    --color-accents: #398f9f; /* Buttons, links */
+    --color-highlights: #ffd966; /* Alerts, hover/focus */
+}
+
 /**
   * A catch-all path to Django template files, JavaScript, and Python files
-  * that contain Tailwind CSS classes and will be scanned by Tailwind to generate the final CSS file.
-  *
-  * If your final CSS file is not being updated after code changes, you may want to broaden or narrow
-  * the scope of this path.
+  that contain Tailwind CSS classes and will be scanned by Tailwind to generate the final CSS file.
   */
 @source "../../../**/*.{html,py,js}";
+
+/* Typography Font Families */
+.font-heading {
+    font-family: "Exo 2", sans-serif;
+}
+
+.font-body {
+    font-family: "Inter", sans-serif;
+}
+
+/* Custom Color Classes */
+.bg-space {
+    background-color: var(--color-primary-bg);
+}
+
+.bg-nebula {
+    background-color: var(--color-cards-panels);
+}
+
+.bg-nebula-hover {
+    background-color: var(--color-cards-panels);
+}
+
+.bg-accent {
+    background-color: var(--color-accents);
+}
+
+.bg-accent:hover {
+    background-color: var(--color-highlights);
+
+.bg-highlight {
+    background-color: var(--color-highlights);
+}
+
+.text-primary-custom {
+    color: var(--color-primary-text);
+}
+
+.text-secondary-custom {
+    color: var(--color-secondary-text);
+}
+
+.bg-nebula-form {
+    background-color: var(--color-cards-panels);
+}
+
+.bg-nebula-button {
+    background-color: var(--color-cards-panels);
+}
+
+.bg-nebula-button:hover {
+    background-color: var(--color-accents);
+}
+
+.border-accent {
+    border-color: var(--color-accents);
+}
+
+/* Default body styles to use Inter with fallback */
+body {
+    font-family: "Inter", sans-serif;
+}
+
+/* Default headings to use Exo 2 with fallback */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Exo 2", sans-serif;
+}
