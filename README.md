@@ -1,6 +1,6 @@
 # Lodestar
 
-A minimalist web app that allows users to log astronomical observations to a database, where scientific data from SIMBAD and Aladin APIs will be added.
+A comprehensive web application for astronomical observation logging with a scientifically useful observation logging system, specialized forms for different celestial object types, and framework for scientific data integration from APIs.
 
 **Code Institute Bootcamp Capstone Project. 2025.**
 
@@ -12,37 +12,40 @@ A comprehensive **secure** observation logging system allowing authenticated use
 
 -   **User Authentication**: Registration, login, logout with django-allauth
 -   **Secure Access Control**: Role-based permissions ensuring data privacy
--   **Create** new observation entries with date, time, location, and celestial object details (In Development)
--   **Read** observation history with search and filtering capabilities (In Development)
--   **Update** existing observations with additional notes, corrections, or enhanced data (In Development)
--   **Delete** unwanted or duplicate entries to maintain clean records (In Development)
+-   **Create** new observation entries with specialized forms for different object types:
+    -   Solar System objects
+    -   Stars
+    -   Deep Sky Objects
+    -   Special Events (eclipses etc.)
+-   **Read** observation history with advanced search and filtering capabilities:
+    -   Filter by observing session, object type, or search terms
+    -   Infinite scroll pagination for large datasets
+    -   Detailed observation view with API data integration
+-   **Update** existing observations with inline editing functionality
+-   **Delete** observations with AJAX confirmation and real-time UI updates
 
 ### Feature 2: Scientific Data Integration
 
-Real-time integration with astronomical databases:
+Framework for real-time integration with astronomical databases:
 
--   Pull verified scientific data from **SIMBAD** (astronomical object database)
--   Integrate **Aladin** sky atlas data for visual context
--   Automatically enhance user observations with professional astronomical data
--   Provide context and validation for user-logged observations
-
-### Feature 3: Astronomy News Hub (Stretch Goal)
-
-Stay current with astronomical developments:
-
--   Curated astronomy news feed via RSS to JSON feature
--   Real-time updates from trusted astronomical sources
+-   Framework for **SIMBAD** astronomical object database queries ✅
+-   **Aladin** sky atlas viewer integration placeholder ✅
+-   API error handling and retry mechanisms ✅
+-   Data enhancement structure for professional astronomical data ✅
+-   Placeholder system ready for live API implementation 🔄
 
 _Screenshots and detailed usage notes will be added as features are completed._
 
-## Authentication System
+### 📋 **Key Features Delivered**
 
-**Status: In Progress**
-
-Lodestar uses **Django Allauth** for user authentication:
-
--   Secure user registration and login
--   Session management with clear status indicators
+-   Multi-type observation logging (4 specialized forms)
+-   Session-based observation organization
+-   Advanced search and filtering capabilities
+-   Inline editing with validation
+-   Real-time deletion with confirmation
+-   Responsive mobile-friendly design
+-   Comprehensive error handling
+-   Professional space-themed UI/UX
 
 ## Tech Stack
 
@@ -54,7 +57,7 @@ Lodestar uses **Django Allauth** for user authentication:
 
 -   _Methodology:_ Agile; suitably adapted for this specific project's scope and timeframe.
 -   _GitHub Projects board:_ [Lodestar](https://github.com/users/curtisnlogan/projects/12/views/1)
--   _Project Management:_ Daily Sprint-based development, focusing on MVP delivery first followed by stretch goals.
+-   _Project Management:_ Daily Sprint-based development, focusing on MVP delivery followed by stretch goals.
 -   _Version Control:_ Git workflow with feature branches and regular commits to document development progress.
 
 ## Design Rationale
@@ -66,16 +69,16 @@ Lodestar uses **Django Allauth** for user authentication:
 
 ### Design Principles
 
--   **Layout:** Plain backgrounds; uncluttered typography; consistent spacing; no decorative noise.
--   **Whitespace:** Comfortable padding around sections.
--   **Imagery:** images used sparingly for added effect.
+-   **Layout:** Plain backgrounds; uncluttered typography; consistent spacing; no decorative noise
+-   **Whitespace:** Comfortable padding around sections
+-   **Imagery:** Images used sparingly for added effect
 
 ### Typography
 
--   **Headings:** `Exo 2`, readability first with subtle sci-fi styling.
--   **Body:** `Inter`, readability above all else for logging accuracy, modern styling.
+-   **Headings:** `Exo 2`, readability first with subtle sci-fi styling
+-   **Body:** `Inter`, readability above all else for logging accuracy, modern styling
 
-### Color System
+### Color System **Implemented via Custom Tailwind CSS properties**
 
 | Role                   | Hex       | Notes                     |
 | ---------------------- | --------- | ------------------------- |
@@ -88,13 +91,12 @@ Lodestar uses **Django Allauth** for user authentication:
 
 ### Iconography & Imagery
 
--   **Icons:** [Tabler Icons](https://tabler.io/icons) — thin, crisp outlines fit the theme and do not require intrusive attributions in page.
--   **Images:** Curated astronomy shots from [Pexels](https://www.pexels.com/).
+-   **Icons:** Minimal iconography using Unicode symbols and simple SVG icons for a clean, distraction-free interface
+-   **Images:** Curated astronomy shots from [Pexels](https://www.pexels.com/)
 
 ### Motion
 
--   Subtle-interactions only for comfort: modest ease-in-out for hover/focus/expand.
--   Respect `prefers-reduced-motion` accessibility feature as default. All users will benefit from this due to the nature of this web app.
+-   Subtle-interactions only for comfort: modest ease-in-out for hover/focus/expand
 
 ### ERDs
 
@@ -127,20 +129,23 @@ Lodestar uses **Django Allauth** for user authentication:
 -   — **Accessibility First**
     Ensured color choices meet contrast targets to strict WCAG standards.
 
--   — **UX/Scope reduction**
-    The New Observation form was integrated into the homepage instead of a separate page. This reduces clicks for the user, keeps data entry centralized, and allows the assessor to see a streamlined flow in limited project time.
+-   — **UX/Scope expansion**
+    During development, the observation system grew beyond the initial homepage integration to include a dedicated observation management page with advanced filtering, infinite scroll, and detailed observation views. This enhancement provides better user experience for managing large numbers of observations while maintaining the streamlined home page flow for quick session creation.
 
 ## Known Issues & Limitations
 
--   **Mobile Responsiveness:** Initial focus on desktop experience; mobile optimization scheduled for future iterations.
--   **Offline Capability:** Current implementation requires internet connectivity for full functionality.
+-   **API Integration:** Framework complete but live SIMBAD and Aladin API calls need implementation
+-   **News Feed:** UI ready but RSS feed integration pending
+-   **Offline Capability:** Current implementation requires internet connectivity for full functionality
 
 ## Future Enhancements
 
--   **Advanced Search:** Implement complex filtering options for observation history.
--   **Data Export:** Enable users to export their observation logs in various formats.
--   **Social Features:** Allow users to share interesting observations with the astronomy community.
--   **Advanced API Integration:** Deeper integration with professional astronomy databases for enhanced data validation.
+-   **Astronomy News Hub:** Complete framework for staying current with astronomical developments including RSS to JSON feed integration and real-time updates from trusted astronomical sources
+-   **Live API Integration:** Complete SIMBAD and Aladin API integration using existing framework
+-   **Data Export:** Enable users to export their observation logs in various formats
+-   **Social Features:** Allow users to share interesting observations with the astronomy community
+-   **Advanced Search:** Enhanced filtering with date ranges and custom field searches
+-   **Mobile App:** Native mobile application for field use during observation sessions
 
 ## Setup and Deployment
 
@@ -214,7 +219,7 @@ python manage.py test myapp
 
 Tools: ChatGPT 5, Copilot
 
-Core Policy: Always manually review any AI output.
+Core Policy: Always manually review any AI output before commit.
 
 ## AI Usage Log (Key Areas)
 
@@ -232,10 +237,6 @@ This project uses the following third-party resources:
 
     -   [Inter](https://github.com/rsms/inter) — Copyright 2016 The Inter Project Authors. Licensed under the [SIL Open Font License, Version 1.1](https://openfontlicense.org/).
     -   [Exo 2](https://fonts.google.com/specimen/Exo+2) — Copyright 2020 The Exo 2 Project Authors. Licensed under the [SIL Open Font License, Version 1.1](https://openfontlicense.org/).
-
--   **Icons**
-
-    -   [Tabler Icons](https://tabler.io/icons) — Copyright 2020–present Paweł Kuna. Licensed under the [MIT License](https://github.com/tabler/tabler-icons/blob/master/LICENSE).
 
 -   **Images**
     -   Images provided by [Pexels](https://www.pexels.com/) and used under the [Pexels License](https://www.pexels.com/license/).
