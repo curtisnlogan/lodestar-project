@@ -65,19 +65,7 @@
     color: var(--color-secondary-text);
 }
 
-.bg-nebula-form {
-    background-color: var(--color-cards-panels);
-}
-
-.bg-nebula-button {
-    background-color: var(--color-cards-panels);
-}
-
-.bg-nebula-button:hover {
-    background-color: var(--color-accents);
-}
-
-.border-accent {
+.border-accent-custom {
     border-color: var(--color-accents);
 }
 
