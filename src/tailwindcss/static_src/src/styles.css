@@ -52,6 +52,7 @@
 
 .bg-accent:hover {
     background-color: var(--color-highlights);
+}
 
 .bg-highlight {
     background-color: var(--color-highlights);
