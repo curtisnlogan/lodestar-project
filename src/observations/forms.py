@@ -24,7 +24,7 @@ class ObservingSessionForm(forms.ModelForm):
             "Enter observing session start time in UTC. Current UTC time automatically added."
         )
         self.fields["datetime_end_ut"].help_text = (
-            "Enter observing session end time in UTC. Can be estimated now or entered later when session ends."
+            "Enter observing session end time in UTC. Can be estimated or left blank."
         )
 
         # Add helpful text for the site name field
@@ -53,6 +53,12 @@ class SolarSystemForm(forms.ModelForm):
         ]
         widgets = {
             "additional_notes": forms.Textarea(attrs={"rows": 4}),
+            "drawing": forms.FileInput(
+                attrs={
+                    "class": "file:bg-gray-600 file:text-white file:border-0 file:px-3 file:py-1 file:rounded file:mr-3 file:cursor-pointer"
+                }
+            ),
+            "antoniadi_scale": forms.Select(attrs={"class": "appearance-none"}),
         }
 
 
@@ -74,6 +80,12 @@ class StarForm(forms.ModelForm):
         ]
         widgets = {
             "additional_notes": forms.Textarea(attrs={"rows": 4}),
+            "drawing": forms.FileInput(
+                attrs={
+                    "class": "file:bg-gray-600 file:text-white file:border-0 file:px-3 file:py-1 file:rounded file:mr-3 file:cursor-pointer"
+                }
+            ),
+            "antoniadi_scale": forms.Select(attrs={"class": "appearance-none"}),
         }
 
 
@@ -94,6 +106,12 @@ class DeepSkyForm(forms.ModelForm):
         ]
         widgets = {
             "additional_notes": forms.Textarea(attrs={"rows": 4}),
+            "drawing": forms.FileInput(
+                attrs={
+                    "class": "file:bg-gray-600 file:text-white file:border-0 file:px-3 file:py-1 file:rounded file:mr-3 file:cursor-pointer"
+                }
+            ),
+            "antoniadi_scale": forms.Select(attrs={"class": "appearance-none"}),
         }
 
 
@@ -114,4 +132,118 @@ class SpecialEventForm(forms.ModelForm):
         ]
         widgets = {
             "additional_notes": forms.Textarea(attrs={"rows": 4}),
+            "drawing": forms.FileInput(
+                attrs={
+                    "class": "file:bg-gray-600 file:text-white file:border-0 file:px-3 file:py-1 file:rounded file:mr-3 file:cursor-pointer"
+                }
+            ),
+            "antoniadi_scale": forms.Select(attrs={"class": "appearance-none"}),
+        }
+
+
+class SolarSystemUpdateForm(forms.ModelForm):
+    """Form for updating Solar System observations."""
+
+    class Meta:
+        model = SolarSystem
+        fields = [
+            "antoniadi_scale",
+            "telescope_size_type",
+            "magnification_used",
+            "eyepieces_used",
+            "filters_used",
+            "drawing",
+            "additional_notes",
+            "altitude_degrees",
+            "central_meridian_deg",
+            "phase_fraction",
+            "disk_diameter_arcsec",
+        ]
+        widgets = {
+            "additional_notes": forms.Textarea(attrs={"rows": 4}),
+            "drawing": forms.FileInput(
+                attrs={
+                    "class": "file:bg-gray-600 file:text-white file:border-0 file:px-3 file:py-1 file:rounded file:mr-3 file:cursor-pointer"
+                }
+            ),
+            "antoniadi_scale": forms.Select(attrs={"class": "appearance-none"}),
+        }
+
+
+class StarUpdateForm(forms.ModelForm):
+    """Form for updating Star observations."""
+
+    class Meta:
+        model = Star
+        fields = [
+            "antoniadi_scale",
+            "telescope_size_type",
+            "magnification_used",
+            "eyepieces_used",
+            "filters_used",
+            "drawing",
+            "additional_notes",
+            "magnitude_estimate",
+            "finder_chart_used",
+        ]
+        widgets = {
+            "additional_notes": forms.Textarea(attrs={"rows": 4}),
+            "drawing": forms.FileInput(
+                attrs={
+                    "class": "file:bg-gray-600 file:text-white file:border-0 file:px-3 file:py-1 file:rounded file:mr-3 file:cursor-pointer"
+                }
+            ),
+            "antoniadi_scale": forms.Select(attrs={"class": "appearance-none"}),
+        }
+
+
+class DeepSkyUpdateForm(forms.ModelForm):
+    """Form for updating Deep Sky observations."""
+
+    class Meta:
+        model = DeepSky
+        fields = [
+            "antoniadi_scale",
+            "telescope_size_type",
+            "magnification_used",
+            "eyepieces_used",
+            "filters_used",
+            "drawing",
+            "additional_notes",
+            "visibility_rating",
+        ]
+        widgets = {
+            "additional_notes": forms.Textarea(attrs={"rows": 4}),
+            "drawing": forms.FileInput(
+                attrs={
+                    "class": "file:bg-gray-600 file:text-white file:border-0 file:px-3 file:py-1 file:rounded file:mr-3 file:cursor-pointer"
+                }
+            ),
+            "antoniadi_scale": forms.Select(attrs={"class": "appearance-none"}),
+        }
+
+
+class SpecialEventUpdateForm(forms.ModelForm):
+    """Form for updating Special Event observations."""
+
+    class Meta:
+        model = SpecialEvent
+        fields = [
+            "antoniadi_scale",
+            "telescope_size_type",
+            "magnification_used",
+            "eyepieces_used",
+            "filters_used",
+            "drawing",
+            "additional_notes",
+            "event_name",
+        ]
+        widgets = {
+            "additional_notes": forms.Textarea(attrs={"rows": 4}),
+            "drawing": forms.FileInput(
+                attrs={
+                    "class": "file:bg-gray-600 file:text-white file:border-0 file:px-3 file:py-1 file:rounded file:mr-3 file:cursor-pointer"
+                }
+            ),
+            "antoniadi_scale": forms.Select(attrs={"class": "appearance-none"}),
         }
