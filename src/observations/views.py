@@ -1,3 +1,19 @@
+"""
+Views for the Lodestar astronomical observation logging application.
+
+This module contains all the view classes and functions for handling user interactions
+with the observation logging system. Includes views for:
+
+- Home page with authentication-aware content
+- Observation creation with live API integration (SIMBAD, JPL Horizons)
+- Observation listing with advanced filtering and pagination
+- Observation detail view with SIMBAD data display and Aladin sky maps
+- Observation editing and deletion with AJAX functionality
+
+The views integrate with external astronomical APIs to automatically enrich
+observation data with professional catalog information and distance calculations.
+"""
+
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, RedirectView
 from django.contrib import messages
@@ -34,9 +50,23 @@ logger = logging.getLogger(__name__)
 
 # renders home.html with observing session form if user is authenticated, login form if not
 class Home(TemplateView):
+    """
+    Home page view that displays different content based on authentication status.
+
+    For authenticated users: Shows observing session creation form
+    For unauthenticated users: Shows login form
+    Handles both GET (display) and POST (form submission) requests.
+    """
+
     template_name = "observations/home.html"
 
     def get_context_data(self, **kwargs):
+        """
+        Prepare context data for the template based on user authentication status.
+
+        Returns:
+            dict: Context containing either observing_session_form or login_form
+        """
         context = super().get_context_data(**kwargs)
 
         # Only show the observing sessions form if user is logged in
@@ -48,6 +78,16 @@ class Home(TemplateView):
         return context
 
     def post(self, request, **kwargs):
+        """
+        Handle POST requests for both login and observing session creation.
+
+        Args:
+            request: HTTP request object
+            **kwargs: Additional keyword arguments
+
+        Returns:
+            HttpResponse: Redirect or rendered template with form errors
+        """
         # Handle login form submission for non-authenticated users
         if not request.user.is_authenticated and "login" in request.POST:
             # Create a login view instance to handle the authentication
@@ -100,9 +140,23 @@ class Home(TemplateView):
 
 
 class AddObservationView(LoginRequiredMixin, TemplateView):
+    """
+    View for adding new astronomical observations with live API integration.
+
+    Provides forms for different observation types (Solar System, Star, Deep Sky, Special Event)
+    and integrates with SIMBAD and JPL Horizons APIs for automatic data enrichment.
+    Requires user authentication to ensure observations are associated with correct user.
+    """
+
     template_name = "observations/add_observation.html"
 
     def get_context_data(self, **kwargs):
+        """
+        Prepare context data with observation forms and user's observing sessions.
+
+        Returns:
+            dict: Context containing all observation forms and user's observing sessions
+        """
         context = super().get_context_data(**kwargs)
 
         # Get user's observing sessions for dropdown
