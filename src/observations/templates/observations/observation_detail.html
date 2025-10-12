@@ -242,9 +242,11 @@
                                     </fieldset>
 
                                     <!-- Editable Form Fields using Crispy Forms -->
-                                    <fieldset class="form-fields space-y-6 text-lg sm:text-xl">
+                                    <fieldset class="form-fields space-y-4 text-sm sm:text-base lg:text-lg">
                                         <legend class="sr-only">Editable observation fields</legend>
-                                        {{ form|crispy }}
+                                        <div class="crispy-form-wrapper">
+                                            {{ form|crispy }}
+                                        </div>
                                     </fieldset>
                                 </form>
                                 <!-- Action Buttons (hidden by default) -->
@@ -266,4 +268,50 @@
         </div>
     </section>
     <script src="{% static 'observations/js/observation_detail.js' %}"></script>
+    
+    <!-- Custom CSS for mobile form responsiveness -->
+    <style>
+        /* Ensure form fields don't overflow on mobile */
+        .crispy-form-wrapper .form-control,
+        .crispy-form-wrapper input,
+        .crispy-form-wrapper select,
+        .crispy-form-wrapper textarea {
+            max-width: 100% !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+            font-size: 0.875rem !important; /* 14px */
+            padding: 0.5rem !important;
+        }
+        
+        /* Mobile-specific adjustments */
+        @media (max-width: 640px) {
+            .crispy-form-wrapper .form-control,
+            .crispy-form-wrapper input,
+            .crispy-form-wrapper select,
+            .crispy-form-wrapper textarea {
+                font-size: 0.8rem !important; /* 12.8px on mobile */
+                padding: 0.4rem !important;
+            }
+            
+            .crispy-form-wrapper .form-group {
+                margin-bottom: 1rem !important;
+            }
+            
+            .crispy-form-wrapper label {
+                font-size: 0.875rem !important;
+                margin-bottom: 0.25rem !important;
+            }
+        }
+        
+        /* Ensure dropdowns and textareas are properly sized */
+        .crispy-form-wrapper select {
+            background-size: 16px 16px !important;
+            padding-right: 2rem !important;
+        }
+        
+        .crispy-form-wrapper textarea {
+            resize: vertical !important;
+            min-height: 80px !important;
+        }
+    </style>
 {% endblock content %}
