@@ -1,0 +1,204 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}
+    Lodestar - Add Observation
+{% endblock title %}
+{% block content %}
+    <section class="max-w-7xl mx-auto p-4 sm:p-6">
+        <div class="flex flex-col lg:flex-row lg:items-start gap-6 lg:gap-8">
+            <!-- Left side: Black hole image - Hidden on mobile, shown on large screens -->
+            <aside class="hidden lg:block lg:w-1/3 flex-shrink-0" aria-hidden="true">
+                <div>
+                    <img src="{% static 'images/backgrounds/black_hole.png' %}" 
+                         alt="Artistic representation of a black hole with accretion disk and event horizon" 
+                         class="w-full h-auto rounded-full shadow-lg">
+                </div>
+            </aside>
+            
+            <!-- Right side: Form content -->
+            <main class="flex-1 w-full">
+            <header class="text-center mb-6">
+                <h1 class="text-lg sm:text-xl font-semibold text-white">Add New Observation</h1>
+            </header>
+            
+            <!-- Observing Session Selection -->
+            <section class="bg-nebula p-6 rounded-lg shadow-sm mb-6 border border-gray-700" aria-labelledby="session-heading">
+                <h2 id="session-heading" class="sr-only">Select Observing Session</h2>
+                <fieldset class="mb-4">
+                    <legend class="sr-only">Observing Session Selection</legend>
+                    <label for="session-select"
+                           class="block text-left mb-2 font-medium text-white text-sm sm:text-base">Select Observing Session:</label>
+                    <select id="session-select"
+                            class="text-sm sm:text-md w-full px-3 py-2 border border-gray-600 rounded-md bg-nebula text-white focus:outline-none focus:ring-2 focus:ring-yellow-300"
+                            aria-describedby="session-tip">
+                        <option value="">Choose an observing session...</option>
+                        {% for session in observing_sessions %}
+                            <option value="{{ session.id }}">
+                                {{ session.datetime_start_ut|date:"M d, Y H:i" }} UTC - {{ session.site_name }}
+                            </option>
+                        {% empty %}
+                            <option value="">No observing sessions available. Create one first.</option>
+                        {% endfor %}
+                    </select>
+                    <!-- Note under observing session selection -->
+                    <div id="session-tip" class="mt-3 p-3 bg-nebula rounded-md border-l-4 border-blue-400">
+                        <p class="text-sm sm:text-md text-gray-300">
+                            <strong>Tip:</strong> If you don't see your session here, try and create another on the homepage again.
+                        </p>
+                    </div>
+                </fieldset>
+                <!-- Observation Type Selection -->
+                <fieldset class="mb-6">
+                    <legend class="sr-only">Observation Type Selection</legend>
+                    <label for="observation-type"
+                           class="block text-left mb-2 font-medium text-white text-sm sm:text-base">Observation Type:</label>
+                    <select id="observation-type"
+                            class="w-full px-3 py-2 border border-gray-600 rounded-md bg-nebula text-white text-sm sm:text-md focus:outline-none focus:ring-2 focus:ring-yellow-300">
+                        <option value="">Select observation type...</option>
+                        <option value="solar-system">Solar System</option>
+                        <option value="star">Star</option>
+                        <option value="deep-sky">Deep Sky Object</option>
+                        <option value="special-event">Special Event</option>
+                    </select>
+                    <p class="text-sm sm:text-md text-gray-400 mt-1">
+                        Choose what astronomical object you observed.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Astronomical Introductions for Each Type -->
+            <div id="astronomical-intros" class="mb-6">
+                <!-- Solar System Introduction -->
+                <div id="solar-system-intro" class="api-data-container p-6 hidden">
+                    <h3 class="text-lg font-bold text-blue-200 mb-3 tracking-wide">🪐 Solar System Objects</h3>
+                    <p class="text-gray-200 leading-relaxed mb-4">
+                        Solar System objects include planets, moons, asteroids, and comets within our own stellar neighborhood. 
+                        These celestial bodies are relatively close to Earth and show fascinating details through telescopes, 
+                        including planetary phases, surface features, atmospheric phenomena, and orbital dynamics.
+                    </p>
+                    <p class="text-blue-200 text-sm font-medium">
+                        📝 Record details like altitude, phase fraction, and central meridian in the form below to document your planetary observations.
+                    </p>
+                </div>
+                
+                <!-- Star Introduction -->
+                <div id="star-intro" class="api-data-container p-6 hidden">
+                    <h3 class="text-lg font-bold text-blue-200 mb-3 tracking-wide">⭐ Star Observations</h3>
+                    <p class="text-gray-200 leading-relaxed mb-4">
+                        Stars are massive, luminous spheres of plasma held together by gravity. Each star is a distant sun, 
+                        some single like ours, others in binary or multiple systems. Variable stars change brightness over time, 
+                        while double stars reveal stunning color contrasts and orbital motions.
+                    </p>
+                    <p class="text-blue-200 text-sm font-medium">
+                        📝 Use the form below to record star names, magnitude estimates, and finder chart references for your stellar observations.
+                    </p>
+                </div>
+                
+                <!-- Deep Sky Introduction -->
+                <div id="deep-sky-intro" class="api-data-container p-6 hidden">
+                    <h3 class="text-lg font-bold text-blue-200 mb-3 tracking-wide">🌌 Deep Sky Objects</h3>
+                    <p class="text-gray-200 leading-relaxed mb-4">
+                        Deep sky objects are astronomical treasures beyond our solar system, including nebulae (stellar nurseries and death shrouds), 
+                        star clusters (stellar families), and galaxies (island universes containing billions of stars). 
+                        These objects reveal the cosmos' grand scale and cosmic evolution.
+                    </p>
+                    <p class="text-blue-200 text-sm font-medium">
+                        📝 Document your deep sky discoveries below, noting object names and visibility ratings to track your exploration of the universe.
+                    </p>
+                </div>
+                
+                <!-- Special Event Introduction -->
+                <div id="special-event-intro" class="api-data-container p-6 hidden">
+                    <h3 class="text-lg font-bold text-blue-200 mb-3 tracking-wide">🌠 Special Astronomical Events</h3>
+                    <p class="text-gray-200 leading-relaxed mb-4">
+                        Special astronomical events are rare or periodic phenomena that create unique observing opportunities. 
+                        These include meteor showers, eclipses, auroras, comets, and transits—celestial performances that 
+                        connect us to the dynamic nature of our universe and often occur on predictable schedules.
+                    </p>
+                    <p class="text-blue-200 text-sm font-medium">
+                        📝 Capture these fleeting cosmic moments in the form below, preserving your experience of these extraordinary events.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Dynamic Forms for Each Observation Type -->
+            <div id="observation-forms">
+                <!-- Solar System Form -->
+                <form method="post"
+                      enctype="multipart/form-data"
+                      id="solar-system-form"
+                      class="observation-form bg-nebula p-6 rounded-lg shadow-sm border border-gray-700 hidden transition-opacity duration-300 ease-in-out">
+                    {% csrf_token %}
+                    <input type="hidden" name="observation_type" value="solar-system">
+                    <input type="hidden" name="selected_session" id="solarsystem-session">
+                    <div class="form-fields space-y-6 text-lg sm:text-xl">{{ solar_system_form|crispy }}</div>
+                    <div class="flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-4 mt-8">
+                        <button type="button"
+                                class="js-go-back bg-nebula text-white px-6 py-2 rounded-md hover:bg-nebula-hover transition-colors w-full sm:w-auto">
+                            Go Back
+                        </button>
+                        <button type="submit"
+                                class="bg-accent hover:bg-highlight text-white hover:text-black px-6 py-2 rounded-md transition-all duration-500 ease-in-out font-medium tracking-wide transform hover:scale-105 w-full sm:w-auto">
+                            Submit
+                        </button>
+                    </div>
+                </form>
+                <!-- Star Form -->
+                <form method="post"
+                      enctype="multipart/form-data"
+                      id="star-form"
+                      class="observation-form bg-nebula p-6 rounded-lg shadow-sm border border-gray-700 hidden transition-opacity duration-300 ease-in-out">
+                    {% csrf_token %}
+                    <input type="hidden" name="observation_type" value="star">
+                    <input type="hidden" name="selected_session" id="star-session">
+                    <div class="form-fields space-y-6 text-lg sm:text-xl">{{ star_form|crispy }}</div>
+                    <div class="flex justify-center mt-8">
+                        <button type="submit"
+                                class="bg-accent hover:bg-highlight text-white hover:text-black px-6 py-2 rounded-md transition-all duration-500 ease-in-out font-medium tracking-wide transform hover:scale-105 w-full sm:w-auto">
+                            Submit
+                        </button>
+                    </div>
+                </form>
+                <!-- Deep Sky Form -->
+                <form method="post"
+                      enctype="multipart/form-data"
+                      id="deep-sky-form"
+                      class="observation-form bg-nebula p-6 rounded-lg shadow-sm border border-gray-700 hidden transition-opacity duration-300 ease-in-out">
+                    {% csrf_token %}
+                    <input type="hidden" name="observation_type" value="deep-sky">
+                    <input type="hidden" name="selected_session" id="deepsky-session">
+                    <div class="form-fields space-y-6 text-lg sm:text-xl">{{ deep_sky_form|crispy }}</div>
+                    <div class="flex justify-center mt-8">
+                        <button type="submit"
+                                class="bg-accent hover:bg-highlight text-white hover:text-black px-6 py-2 rounded-md transition-all duration-500 ease-in-out font-medium tracking-wide transform hover:scale-105 w-full sm:w-auto">
+                            Submit
+                        </button>
+                    </div>
+                </form>
+                <!-- Special Event Form -->
+                <form method="post"
+                      enctype="multipart/form-data"
+                      id="special-event-form"
+                      class="observation-form bg-nebula p-6 rounded-lg shadow-sm border border-gray-700 hidden transition-opacity duration-300 ease-in-out">
+                    {% csrf_token %}
+                    <input type="hidden" name="observation_type" value="special-event">
+                    <input type="hidden" name="selected_session" id="special-event-session">
+                    <div class="form-fields space-y-6 text-lg sm:text-xl">{{ special_event_form|crispy }}</div>
+                    <div class="flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-4 mt-8">
+                        <button type="button"
+                                class="js-go-back bg-nebula text-white px-6 py-2 rounded-md hover:bg-nebula-hover transition-colors w-full sm:w-auto focus:outline-none focus:ring-2 focus:ring-blue-300">
+                            Go Back
+                        </button>
+                        <button type="submit"
+                                class="bg-accent hover:bg-highlight text-white hover:text-black px-6 py-2 rounded-md transition-all duration-500 ease-in-out font-medium tracking-wide transform hover:scale-105 w-full sm:w-auto focus:outline-none focus:ring-2 focus:ring-yellow-300">
+                            Submit
+                        </button>
+                    </div>
+                </form>
+            </section>
+            </main>
+        </div>
+    </section>
+    <script src="{% static 'observations/js/add_observation.js' %}"></script>
+{% endblock content %}
