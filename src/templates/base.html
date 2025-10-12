@@ -3,103 +3,127 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
+        <!-- default responsiveness -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <!-- SEO optimization -->
         <meta name="description"
-              content="Track your astronomical observations and telescope sessions with Lodestar." />
+              content="Track your astronomical observing sessions and observations with Lodestar." />
         <meta name="keywords"
-              content="astronomy, observation log, planet, star, deep sky, telescope, stargazing, universe, space" />
+              content="astronomy, observations, log, planet, star, deep sky, telescope, stargazing, universe, space" />
         <meta name="author" content="Project Lodestar" />
         <!-- Each template can provide its own tab title -->
         <title>
             {% block title %}
             {% endblock title %}
         </title>
-        <!-- Tailwind CSS folder -->
+        <!-- Tailwind CSS -->
         <link rel="stylesheet" href="{% static 'css/dist/styles.css' %}" />
     </head>
-    <body class="min-h-screen flex flex-col">
+    <!-- sticky footer on body with standard flex column layout -->
+    <body class="bg-auto bg-[url('/static/images/backgrounds/main_background.webp')] min-h-screen flex flex-col bg-space text-primary-custom font-body">
         <!-- navigation bar to be used across all website pages -->
-        <nav class="flex">
-            <div>
-                <!-- logo -->
-                <img src="{% static 'path' %}" alt="Lodestar Logo">
-            </div>
-            <!-- navigation links -->
-            <ul class="flex">
+        <nav class="bg-space border-b border-accent px-3 lg:px-12 xl:px-2 py-4 sm:py-6">
+            <div class="max-w-7xl mx-auto flex items-center justify-between">
+                <!-- Logo  -->
+                <a href="{% url 'home' %}">
+                    <img src="{% static 'images/logos/main_logo.png' %}"
+                            alt="Lodestar Logo"
+                            class="h-6 sm:h-10 md:h-14 transition-transform duration-200 ease-in-out hover:scale-105" />
+                </a>
+                <!-- Navigation Links - Hidden on mobile/small tablets -->
+                <div class="hidden md:flex space-x-8 lg:space-x-20">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'home' %}"
+                           class="text-primary-custom tracking-wide">
+                            Home
+                        </a>
+                        <a href="{% url 'observation_list' %}"
+                           class="text-primary-custom tracking-wide">
+                            My Observations
+                        </a>
+                    <!-- else show no nav links if not authenticated -->
+                    {% else %}
+                    {% endif %}
+                </div>
+                <!-- User Status section -->
                 {% if user.is_authenticated %}
-                <li>
-                    <a href="{% url 'home' %}" class="nav-link">Home</a>
-                </li>
-                <li>
-                    <a href="{% url 'add_observation' %}" class="nav-link">Add Observation</a>
-                </li>
-                <li>
-                    <a href="#" class="nav-link">My Observations</a>
-                </li>
-                <li>
-                    <a href="#" class="nav-link">My Astronomy News</a>
-                </li>
+                    <div class="space-x-2 sm:space-x-4">
+                        <span class="hidden md:flex text-secondary-custom text-sm sm:text-md tracking-wide mb-2">
+                            <strong>User:</strong>&nbsp;{{ user.username }}
+                        </span>
+                        <!-- Mobile menu button -->
+                        <button class="md:hidden text-accent hover:text-highlight transition-colors duration-200"
+                                id="mobile-menu-button"
+                                aria-label="Toggle mobile menu">
+                            <span class="text-3xl">☰</span>
+                        </button>
+                        <a href="{% url 'account_logout' %}"
+                           class="bg-accent hover:bg-accent:hovertext-white px-3 sm:px-4 py-2 rounded transition-all duration-200 ease-in-out text-xs sm:text-sm font-medium tracking-wide">
+                            Sign Out
+                        </a>
+                    </div>
                 {% else %}
-                <li>
-                    <a href="{% url 'home' %}" class="nav-link">Home</a>
-                </li>
-                {% endif %}
-            </ul>
-            <ul class="flex ml-auto">
-                {% if user.is_authenticated %}
-                    <p>{{ user.username }} is logged in</p>
-                    <a href="{% url 'account_logout' %}">Click to Sign Out</a>
-                {% else %}
-                    <p>You are not signed in</p>
-                    <a href="{% url 'home' %}">Click to Sign In</a>
-                {% endif %}
-            </nav>
-            <!-- Messages Section -->
-            <div class="flex-grow flex-col flex items-center justify-center">
-                {% if messages %}
-                    <div class="space-y-4 mb-8" role="alert" aria-live="polite">
-                        {% for message in messages %}
-                            <div class="backdrop-blur-sm rounded-xl p-4 border">
-                                <div class="flex items-center">
-                                    <span class="mr-2">
-                                        {% if message.tags == 'success' %}
-                                            ✅
-                                        {% elif message.tags == 'error' %}
-                                            ❌
-                                        {% elif message.tags == 'warning' %}
-                                            ⚠️
-                                        {% else %}
-                                            ℹ️
-                                        {% endif %}
-                                    </span>
-                                    <span>{{ message }}</span>
-                                </div>
-                            </div>
-                        {% endfor %}
+                    <div class="space-x-2 sm:space-x-4">
+                        <span class="ml-2 text-secondary-custom text-xs sm:text-sm tracking-wide">Not signed in</span>
+                        <a href="{% url 'home' %}"
+                           class="bg-accent text-black hover:!bg-highlight-custom hover:text-black px-3 sm:px-4 py-2 rounded transition-all duration-500 ease-in-out text-xs sm:text-sm font-medium tracking-wide transform hover:scale-105">
+                            Sign In
+                        </a>
                     </div>
                 {% endif %}
-                <!-- Main Content Block for Templates -->
-                <main class="flex-grow">
-                    {% block content %}
-                    {% endblock content %}
-                </main>
             </div>
-            <footer class="flex justify-between">
-                <div></div>
-                <!-- Empty spacer for flex -->
-                <ul class="flex">
-                    <li>
-                        <a href="#" class="nav-link">About</a>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-link">Resources</a>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-link">Privacy Policy</a>
-                    </li>
-                </ul>
-                <p class="">2025 Lodestar Project</p>
-            </footer>
-        </body>
-    </html>
+            <!-- Mobile Navigation Dropdown -->
+            {% if user.is_authenticated %}
+                <div class="md:hidden mt-4 pt-4 border-t border-gray-700 hidden" id="mobile-menu">
+                    <div class="flex flex-col space-y-2">
+                        <div class="text-secondary-custom text-sm tracking-wide py-2 border-b border-gray-600 mb-2">
+                            <strong>User:</strong>&nbsp;{{ user.username }}
+                        </div>
+                        <a href="{% url 'home' %}"
+                           class="text-secondary-custom hover:text-highlight transition-all duration-200 ease-in-out font-medium tracking-wide py-2">
+                            Home
+                        </a>
+                        <a href="{% url 'observation_list' %}"
+                           class="text-secondary-custom hover:text-highlight transition-all duration-200 ease-in-out font-medium tracking-wide py-2">
+                            My Observations
+                        </a>
+                    </div>
+                </div>
+            {% endif %}
+        </nav>
+        <!-- Messages Section -->
+        {% if messages %}
+            {% for message in messages %}
+            <div class="flex mt-10 message-alert bg-nebula rounded border border-accent-custom p-6 max-w-2xl mx-auto relative transition-all duration-300 ease-in-out" role="alert" aria-live="polite">
+                    <span class="text-primary-custom text-lg tracking-wide">{{ message }}</span>
+                    <button class="close-message ml-4"
+                            aria-label="Close message">
+                        x
+                    </button>
+            
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <!-- Main Content Block for Templates -->
+        <!-- flex grow ensures content, not the footer takes up any remaining space -->
+        <main class="flex-grow mt-16">
+            {% block content %}
+            {% endblock content %}
+        </main>
+        <footer class="mt-16 py-8 border-t border-accent-custom">
+            <!-- Copyright Info -->
+            <div class="text-center mt-6">
+                <span class="text-secondary-custom text-lg tracking-wide"><strong>2025</strong> Lodestar Project</span>
+            </div>
+        </footer>
+
+        <!-- Base JavaScript Block -->
+        {% block extra_js %}
+        <!-- Message alert functionality -->
+        <script src="{% static 'js/messages.js' %}"></script>
+        <!-- Mobile menu toggle functionality -->
+        <script src="{% static 'js/mobile-menu.js' %}"></script>
+        {% endblock extra_js %}
+    </body>
+</html>
