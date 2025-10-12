@@ -1,0 +1,269 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load distance_filters %}
+{% load crispy_forms_tags %}
+{% block title %}
+    Lodestar - {{ obs_type_display }} Observation Details
+{% endblock title %}
+{% block content %}
+    <section class="px-4 py-6">
+        <div class="max-w-6xl mx-auto w-full">
+            <!-- Header with Back Button -->
+            <header class="flex flex-col items-center justify-between gap-4">
+                <a href="{% url 'observation_list' %}"
+                   class="bg-nebula text-white p-6 rounded-md hover:bg-nebula-hover transition-colors focus:outline-none focus:ring-2 focus:ring-blue-300">
+                    ← Back to My Observations
+                </a>
+                <h1 class="text-2xl font-bold text-white">{{ obs_type_display }} Observation Details</h1>
+                <div class="w-32" aria-hidden="true"></div>
+                <!-- Spacer for centering -->
+            </header>
+            {% if error %}
+                <!-- Error Message -->
+                <div class="bg-red-600 text-white p-6 rounded-lg border border-red-500 text-center" role="alert" aria-live="polite">
+                    <h2 class="text-xl font-bold mb-2">Error</h2>
+                    <p>{{ error }}</p>
+                </div>
+            {% else %}
+                <!-- Success/Error Messages -->
+                <div id="api-error-message"
+                     class="bg-red-600 text-white p-3 rounded-md mb-6 border border-red-500 hidden"
+                     role="alert" aria-live="polite">
+                    <p class="text-sm">❌ API error: Unable to fetch data from {{ api_data.api_type }}. Please try again later.</p>
+                </div>
+                <div id="update-success-message"
+                     class="bg-green-600 text-white p-3 rounded-md mb-6 border border-green-500 hidden"
+                     role="status" aria-live="polite">
+                    <p class="text-sm">✅ Observation updated successfully!</p>
+                </div>
+                <div id="update-error-message"
+                     class="bg-red-600 text-white p-3 rounded-md mb-6 border border-red-500 hidden"
+                     role="alert" aria-live="polite">
+                    <p class="text-sm">❌ Failed to update observation. Please check your entries and try again.</p>
+                </div>
+                <!-- Main Content Area -->
+                <main class="max-w-6xl mx-auto w-full">
+                    <div class="grid grid-cols-1 {% if not observation.event_type %}md:grid-cols-2{% endif %} gap-6 md:gap-8 items-start">
+                        {% if not observation.event_type %}
+                        <!-- Left Column - SIMBAD/API Data (Hidden for Special Events) -->
+                        <aside class="space-y-6" aria-label="Astronomical Data">
+                            
+                            <!-- Expand Your Knowledge Section -->
+                            <article class="api-data-container p-8" aria-labelledby="api-data-heading">
+                                <h2 id="api-data-heading" class="text-2xl font-bold text-center mb-2 aladin-title">{{ api_data.api_type }} Data</h2>
+                                <h3 class="text-lg font-semibold text-blue-200 mb-6 text-center tracking-wide">Expand your knowledge of {{ api_data.object_name|default:"this object" }}</h3>
+                                <!-- Knowledge Content Placeholder -->
+                                <div class="knowledge-placeholder rounded-lg">
+                                    <div class="text-center">
+                                        {% if observation.distance_light_years or observation.distance_miles %}
+                                            <div class="cosmic-distance-card rounded-xl p-8 mb-6 shadow-2xl">
+                                                <div class="cosmic-distance-content p-6 rounded-xl">
+                                                    <h3 class="text-yellow-300 text-xl font-bold mb-4 tracking-widest text-center">COSMIC DISTANCE</h3>
+                                                    <div class="space-y-4">
+                                                        {% if observation.distance_light_years %}
+                                                            <div class="bg-black bg-opacity-60 rounded-xl p-6 border-2 border-blue-400 shadow-lg">
+                                                                <div class="text-3xl font-bold text-blue-300 mb-2 tracking-wide">{{ observation.distance_light_years|floatformat:1 }}</div>
+                                                                <div class="text-blue-100 text-base font-bold tracking-widest">LIGHT YEARS AWAY</div>
+                                                                <div class="text-gray-200 text-sm mt-3 leading-relaxed">Light traveling at 186,282 miles/second takes {{ observation.distance_light_years|floatformat:1 }} years to reach us!</div>
+                                                            </div>
+                                                        {% endif %}
+                                                        {% if observation.distance_miles %}
+                                                            <div class="bg-black bg-opacity-60 rounded-xl p-6 border-2 border-blue-400 shadow-lg">
+                                                                <div class="text-2xl font-bold text-blue-300 mb-2">{{ observation.distance_miles|humanize_distance_miles }}</div>
+                                                                <div class="text-blue-100 text-base font-bold tracking-widest">FROM EARTH</div>
+                                                                <div class="text-gray-200 text-sm mt-3 leading-relaxed">That's an unimaginably vast distance across the cosmos!</div>
+                                                            </div>
+                                                        {% endif %}
+                                                    </div>
+                                                    <div class="mt-6 text-yellow-200 text-sm font-semibold tracking-wide">
+                                                        This celestial object is incredibly far from our planet!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                        <div class="text-gray-300 text-sm space-y-4">
+                                            {% if not observation.distance_light_years and not observation.distance_miles %}
+                                                <div class="bg-gray-800 bg-opacity-60 rounded-lg p-4 border border-gray-600">
+                                                    <p class="text-gray-400">Distance: Not available</p>
+                                                </div>
+                                            {% endif %}
+                                            
+                                            <!-- Apparent Magnitude and Object Type Information -->
+                                            {% if observation.api_payload %}
+                                                <div class="catalog-info-card rounded-xl p-6 mt-6">
+                                                    <h4 class="text-yellow-300 font-bold mb-4 text-lg tracking-wide">Catalog Information</h4>
+                                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                                                        {% with observation.api_payload|get_apparent_magnitude as magnitude %}
+                                                            {% if magnitude %}
+                                                                <div class="magnitude-card rounded-lg p-4 transform hover:scale-105 transition-all duration-300">
+                                                                    <div class="text-blue-200 font-semibold text-sm tracking-wide">Apparent Magnitude</div>
+                                                                    <div class="text-white text-xl font-bold mt-1">{{ magnitude }}</div>
+                                                                    <div class="text-blue-100 text-xs mt-2">Brighter objects have lower numbers</div>
+                                                                </div>
+                                                            {% endif %}
+                                                        {% endwith %}
+                                                        
+                                                        {% with observation.api_payload|get_object_type as obj_type %}
+                                                            {% if obj_type %}
+                                                                <div class="object-type-card rounded-lg p-4 transform hover:scale-105 transition-all duration-300">
+                                                                    <div class="text-blue-200 font-semibold text-sm tracking-wide">Object Type</div>
+                                                                    <div class="text-white text-xl font-bold mt-1">{{ obj_type }}</div>
+                                                                    {% with observation.api_payload|get_spectral_type as spec_type %}
+                                                                        {% if spec_type %}
+                                                                            <div class="text-blue-100 text-xs mt-2">Spectral Class: {{ spec_type }}</div>
+                                                                        {% endif %}
+                                                                    {% endwith %}
+                                                                </div>
+                                                            {% endif %}
+                                                        {% endwith %}
+                                                    </div>
+                                                </div>
+                                            {% else %}
+                                                <div class="bg-gray-800 bg-opacity-60 rounded-lg p-4 border border-gray-600">
+                                                    <p class="text-gray-400">Apparent Magnitude: Not available</p>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!-- Aladin Lite Sky Viewer -->
+                            <article class="aladin-container p-8" aria-labelledby="aladin-heading">
+                                <h2 id="aladin-heading" class="text-2xl font-bold text-center mb-2 aladin-title">Aladin Lite Sky Viewer</h2>
+                                <h3 class="text-lg font-semibold text-blue-200 mb-6 text-center tracking-wide">{{ api_data.object_name }}</h3>
+                                <!-- Aladin View Window -->
+                                <div class="flex justify-center px-2">
+                                    <div id="aladin-lite-div" 
+                                         class="aladin-viewer w-full max-w-sm sm:max-w-md md:max-w-lg h-64 sm:h-80 md:h-96 overflow-hidden"
+                                         role="img" 
+                                         aria-label="Interactive sky map showing {{ api_data.object_name }}">
+                                    </div>
+                                </div>
+                                <script type="text/javascript" src="https://aladin.cds.unistra.fr/AladinLite/api/v3/latest/aladin.js" charset="utf-8"></script>
+                                <script type="text/javascript">
+                                let aladin;
+                                A.init.then(() => {
+                                    aladin = A.aladin('#aladin-lite-div', {survey: "P/DSS2/color", fov:1.5, target: "{{ api_data.object_name }}"})
+                                });
+                                </script>
+                                <!-- Aladin Info -->
+                                <div class="mt-6 text-center tech-border rounded-lg p-4 bg-gray-900 bg-opacity-50" role="region" aria-label="Instructions for using the sky viewer">
+                                    <p class="text-blue-300 text-sm font-semibold tracking-wide mb-2">◦ HOW TO USE ◦</p>
+                                    <p class="text-gray-200 text-sm mb-2 leading-relaxed">Drag to pan • Scroll to zoom • Click icons for extra options</p>
+                                    <p class="text-gray-400 text-xs italic">Interactive sky map powered by Aladin Lite</p>
+                                </div>
+                            </article>
+                        </aside>
+                        {% endif %}
+                        <!-- Right Column - User's Observation Data -->
+                        <section class="space-y-6" aria-label="User observation data">
+                            <article class="bg-nebula p-6 rounded-lg border border-gray-700">
+                                <header class="flex justify-between items-center mb-4">
+                                    <h2 id="observation-form-heading" class="text-xl font-semibold text-white">My Observation Data</h2>
+                                    <button class="edit-data-button bg-accent hover:bg-highlight text-white hover:text-black px-4 py-2 rounded-md transition-all duration-500 ease-in-out font-medium tracking-wide transform hover:scale-105 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-300">
+                                        Edit data
+                                    </button>
+                                </header>
+                                <!-- Observation Fields Form -->
+                                <form id="observation-form" method="post" enctype="multipart/form-data" class="observation-form">
+                                    {% csrf_token %}
+                                    
+                                    <!-- Read-only Session Information -->
+                                    <fieldset class="space-y-4 mb-6">
+                                        <legend class="sr-only">Read-only observation information</legend>
+                                        <div class="grid grid-cols-1 md:grid-cols-3 gap-2 bg-nebula bg-opacity-50 p-3 rounded border-l-4 border-blue-500">
+                                            <label for="session-info" class="text-sm font-medium text-gray-300">Observing Session:</label>
+                                            <div class="md:col-span-2">
+                                                <input id="session-info"
+                                                       type="text"
+                                                       value="{{ session_info.site_name }} - {{ session_info.start_time|date:'M d, Y H:i' }} UTC"
+                                                       disabled
+                                                       class="w-full bg-nebula text-gray-300 text-sm rounded border border-gray-500 px-3 py-2 cursor-not-allowed"
+                                                       aria-describedby="session-help">
+                                                <p id="session-help" class="text-xs text-gray-400 mt-1">Session information cannot be edited here</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Object Name/Type (Read-only) -->
+                                        {% if observation.star_name %}
+                                            <div class="grid grid-cols-1 md:grid-cols-3 gap-2 bg-nebula bg-opacity-50 p-3 rounded border-l-4 border-yellow-500">
+                                                <label for="star-name" class="text-sm font-medium text-gray-300">Star Name:</label>
+                                                <div class="md:col-span-2">
+                                                    <input id="star-name" 
+                                                           type="text" 
+                                                           value="{{ observation.star_name }}" 
+                                                           disabled
+                                                           class="w-full bg-nebula text-gray-300 text-sm rounded border border-gray-500 px-3 py-2 cursor-not-allowed"
+                                                           aria-describedby="star-help">
+                                                    <p id="star-help" class="text-xs text-gray-400 mt-1">Star name cannot be changed</p>
+                                                </div>
+                                            </div>
+                                        {% elif observation.object_name %}
+                                            <div class="grid grid-cols-1 md:grid-cols-3 gap-2 bg-nebula bg-opacity-50 p-3 rounded border-l-4 border-yellow-500">
+                                                <label for="object-name" class="text-sm font-medium text-gray-300">Object Name:</label>
+                                                <div class="md:col-span-2">
+                                                    <input id="object-name" 
+                                                           type="text" 
+                                                           value="{{ observation.object_name }}" 
+                                                           disabled
+                                                           class="w-full bg-nebula text-gray-300 text-sm rounded border border-gray-500 px-3 py-2 cursor-not-allowed"
+                                                           aria-describedby="object-help">
+                                                    <p id="object-help" class="text-xs text-gray-400 mt-1">Object name cannot be changed</p>
+                                                </div>
+                                            </div>
+                                        {% elif observation.celestial_body %}
+                                            <div class="grid grid-cols-1 md:grid-cols-3 gap-2 bg-nebula bg-opacity-50 p-3 rounded border-l-4 border-yellow-500">
+                                                <label for="celestial-body" class="text-sm font-medium text-gray-300">Celestial Body:</label>
+                                                <div class="md:col-span-2">
+                                                    <input id="celestial-body" 
+                                                           type="text" 
+                                                           value="{{ observation.get_celestial_body_display }}" 
+                                                           disabled
+                                                           class="w-full bg-nebula text-gray-300 text-sm rounded border border-gray-500 px-3 py-2 cursor-not-allowed"
+                                                           aria-describedby="celestial-help">
+                                                    <p id="celestial-help" class="text-xs text-gray-400 mt-1">Celestial body cannot be changed</p>
+                                                </div>
+                                            </div>
+                                        {% elif observation.event_type %}
+                                            <div class="grid grid-cols-1 md:grid-cols-3 gap-2 bg-nebula bg-opacity-50 p-3 rounded border-l-4 border-yellow-500">
+                                                <label for="event-type" class="text-sm font-medium text-gray-300">Event Type:</label>
+                                                <div class="md:col-span-2">
+                                                    <input id="event-type" 
+                                                           type="text" 
+                                                           value="{{ observation.get_event_type_display }}" 
+                                                           disabled
+                                                           class="w-full bg-nebula text-gray-300 text-sm rounded border border-gray-500 px-3 py-2 cursor-not-allowed"
+                                                           aria-describedby="event-help">
+                                                    <p id="event-help" class="text-xs text-gray-400 mt-1">Event type cannot be changed</p>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </fieldset>
+
+                                    <!-- Editable Form Fields using Crispy Forms -->
+                                    <fieldset class="form-fields space-y-6 text-lg sm:text-xl">
+                                        <legend class="sr-only">Editable observation fields</legend>
+                                        {{ form|crispy }}
+                                    </fieldset>
+                                </form>
+                                <!-- Action Buttons (hidden by default) -->
+                                <div class="action-buttons flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4 mt-8">
+                                    <button class="cancel-edit-button bg-nebula text-white px-6 py-2 rounded-md hover:bg-nebula-hover transition-colors focus:outline-none focus:ring-2 focus:ring-blue-300">
+                                        Cancel edit
+                                    </button>
+                                    <button class="submit-update-button bg-accent hover:bg-highlight text-white hover:text-black px-6 py-2 rounded-md transition-all duration-500 ease-in-out font-medium tracking-wide transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-yellow-300">
+                                        Submit
+                                    </button>
+                                </div>
+                            </article>
+                        </section>
+                    </div>
+                    <!-- end grid layout -->
+                </main>
+                <!-- end main content -->
+            {% endif %}
+        </div>
+    </section>
+    <script src="{% static 'observations/js/observation_detail.js' %}"></script>
+{% endblock content %}
