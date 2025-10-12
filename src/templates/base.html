@@ -21,6 +21,11 @@
     </head>
     <!-- sticky footer on body with standard flex column layout -->
     <body class="bg-auto bg-[url('/static/images/backgrounds/main_background.webp')] min-h-screen flex flex-col bg-space text-primary-custom font-body">
+        <!-- Skip Navigation Link for Accessibility -->
+        <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-accent text-black px-4 py-2 rounded z-50 focus:outline-none focus:ring-2 focus:ring-yellow-300">
+            Skip to main content
+        </a>
+        
         <!-- navigation bar to be used across all website pages -->
         <nav class="bg-space border-b border-accent px-3 lg:px-12 xl:px-2 py-4 sm:py-6">
             <div class="max-w-7xl mx-auto flex items-center justify-between">
@@ -34,11 +39,11 @@
                 <div class="hidden md:flex space-x-8 lg:space-x-20">
                     {% if user.is_authenticated %}
                         <a href="{% url 'home' %}"
-                           class="text-primary-custom tracking-wide">
+                           class="text-primary-custom tracking-wide hover:text-accent transition-colors focus:outline-none focus:ring-2 focus:ring-yellow-300 rounded px-2 py-1">
                             Home
                         </a>
                         <a href="{% url 'observation_list' %}"
-                           class="text-primary-custom tracking-wide">
+                           class="text-primary-custom tracking-wide hover:text-accent transition-colors focus:outline-none focus:ring-2 focus:ring-yellow-300 rounded px-2 py-1">
                             My Observations
                         </a>
                     <!-- else show no nav links if not authenticated -->
@@ -58,7 +63,7 @@
                             <span class="text-3xl">☰</span>
                         </button>
                         <a href="{% url 'account_logout' %}"
-                           class="bg-accent hover:bg-accent:hovertext-white px-3 sm:px-4 py-2 rounded transition-all duration-200 ease-in-out text-xs sm:text-sm font-medium tracking-wide">
+                           class="bg-accent hover:bg-highlight text-white px-3 sm:px-4 py-2 rounded transition-all duration-200 ease-in-out text-xs sm:text-sm font-medium tracking-wide focus:outline-none focus:ring-2 focus:ring-yellow-300">
                             Sign Out
                         </a>
                     </div>
@@ -66,7 +71,7 @@
                     <div class="space-x-2 sm:space-x-4">
                         <span class="ml-2 text-secondary-custom text-xs sm:text-sm tracking-wide">Not signed in</span>
                         <a href="{% url 'home' %}"
-                           class="bg-accent text-black hover:!bg-highlight-custom hover:text-black px-3 sm:px-4 py-2 rounded transition-all duration-500 ease-in-out text-xs sm:text-sm font-medium tracking-wide transform hover:scale-105">
+                           class="bg-accent text-black hover:!bg-highlight-custom hover:text-black px-3 sm:px-4 py-2 rounded transition-all duration-500 ease-in-out text-xs sm:text-sm font-medium tracking-wide transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-yellow-300">
                             Sign In
                         </a>
                     </div>
@@ -103,11 +108,10 @@
             
             </div>
             {% endfor %}
-        </div>
         {% endif %}
         <!-- Main Content Block for Templates -->
         <!-- flex grow ensures content, not the footer takes up any remaining space -->
-        <main class="flex-grow mt-16">
+        <main id="main-content" class="flex-grow mt-16">
             {% block content %}
             {% endblock content %}
         </main>
