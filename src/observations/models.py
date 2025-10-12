@@ -82,6 +82,15 @@ class ObservingSession(TimestampMixin, models.Model):
             )
 
     def __str__(self):
+        """
+        Return string representation of observing session.
+
+        Provides user-friendly display showing user, start time, end time (or 'ongoing'),
+        and site name if provided. Used in admin interface and form dropdowns.
+
+        Returns:
+            str: Formatted string representation of the observing session
+        """
         if self.datetime_end_ut:
             end_info = f" to {self.datetime_end_ut.strftime('%Y-%m-%d %H:%M')} UTC"
         else:
@@ -116,7 +125,20 @@ class ObservingSession(TimestampMixin, models.Model):
         self.slug = candidate
 
     def save(self, *args, **kwargs):
+        """
+        Custom save method with automatic slug generation and retry logic.
 
+        Handles validation, slug generation, and potential IntegrityError exceptions
+        that might occur during concurrent session creation. Includes retry logic
+        to handle edge cases where multiple sessions are created simultaneously.
+
+        Args:
+            *args: Variable length argument list
+            **kwargs: Arbitrary keyword arguments
+
+        Raises:
+            IntegrityError: If unable to save after 5 attempts due to slug conflicts
+        """
         attempts_remaining = 5
 
         while attempts_remaining:
@@ -333,10 +355,24 @@ class SolarSystem(ObservationMixin, ApiMixin):
         verbose_name_plural = "Solar System Observations"
 
     def __str__(self):
+        """
+        Return string representation of solar system observation.
+
+        Returns:
+            str: Formatted string showing celestial body and observation date
+        """
         return f"{self.celestial_body} observation on {self.session.datetime_start_ut.date()}"
 
 
 class Star(ObservationMixin, ApiMixin):
+    """
+    Model for stellar observations.
+
+    Stores observations of stars including magnitude estimates, finder chart information,
+    and automatically retrieved SIMBAD catalog data. Supports distance calculations
+    from parallax measurements when available from SIMBAD queries.
+    """
+
     star_name = models.CharField(
         max_length=200,
         help_text='Examples: Sirius, Mira, HD 209458. See <a href="https://cds.unistra.fr/cgi-bin/Dic-Simbad" target="_blank">Dictionary of Nomenclature</a>',
@@ -362,12 +398,26 @@ class Star(ObservationMixin, ApiMixin):
         verbose_name_plural = "Star Observations"
 
     def __str__(self):
+        """
+        Return string representation of star observation.
+
+        Returns:
+            str: Formatted string showing star name and observation date
+        """
         return (
             f"{self.star_name} observation on {self.session.datetime_start_ut.date()}"
         )
 
 
 class DeepSky(ObservationMixin, ApiMixin):
+    """
+    Model for deep sky object observations.
+
+    Stores observations of nebulae, galaxies, star clusters, and other deep sky objects.
+    Includes visibility rating and automatically retrieved SIMBAD catalog data.
+    Supports distance calculations from parallax when available.
+    """
+
     object_name = models.CharField(
         max_length=200,
         help_text='Examples: Sirius, M31, MCG+02-60-010. See <a href="https://cds.unistra.fr/cgi-bin/Dic-Simbad" target="_blank">Dictionary of Nomenclature</a>',
