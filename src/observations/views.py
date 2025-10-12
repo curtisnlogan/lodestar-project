@@ -1023,7 +1023,7 @@ class DeleteObservationView(LoginRequiredMixin, TemplateView):
             return JsonResponse(
                 {
                     "success": True,
-                    "message": f"Successfully deleted observation of {obs_name}",
+                    "message": f"Successfully deleted '{obs_name}'.",
                 }
             )
 
