@@ -1,18 +1,33 @@
-// observation_list.js
-// Handles infinite scroll, filtering, and dynamic updates for the observations list page
+/**
+ * Observation List Page JavaScript
+ * 
+ * Manages the interactive functionality for the observations list page including:
+ * - Infinite scroll pagination for large datasets
+ * - Real-time filtering by session, object type, and search terms
+ * - AJAX-based observation deletion with confirmation
+ * - Dynamic URL updates for bookmarkable filter states
+ * - Responsive UI updates and loading indicators
+ * 
+ * The page provides a comprehensive view of all user observations with advanced
+ * filtering capabilities and seamless infinite scroll for optimal performance.
+ * 
+ * @author Lodestar Project
+ * @version 1.0.0
+ */
 
 document.addEventListener("DOMContentLoaded", function () {
-    let currentPage = 1;
-    let isLoading = false;
-    let hasMore = true;
-    const observationsContainer = document.getElementById(
-        "observations-container"
-    );
+    // Pagination and loading state management
+    let currentPage = 1; // Track current page for infinite scroll
+    let isLoading = false; // Prevent multiple concurrent requests
+    let hasMore = true; // Track if more observations are available
+    
+    // Cache DOM elements for performance
+    const observationsContainer = document.getElementById("observations-container");
     const loadingIndicator = document.getElementById("loading-indicator");
     const filterForm = document.getElementById("filter-form");
     const clearFiltersBtn = document.getElementById("clear-filters");
 
-    // Get current filters from URL parameters
+    // Extract current filters from URL parameters for bookmarkable state
     const urlParams = new URLSearchParams(window.location.search);
     const initialFilters = {
         session: urlParams.get("session") || "",
@@ -20,19 +35,22 @@ document.addEventListener("DOMContentLoaded", function () {
         search: urlParams.get("search") || "",
     };
 
-    // Initialize filters in form
+    // Initialize filter form with URL parameters
     document.getElementById("session-filter").value = initialFilters.session;
-    document.getElementById("object-type-filter").value =
-        initialFilters.object_type;
+    document.getElementById("object-type-filter").value = initialFilters.object_type;
     document.getElementById("search-filter").value = initialFilters.search;
 
-    // Update hasMore based on initial load
+    // Update pagination state based on server-side data attribute
     hasMore = document.querySelector("[data-has-next]")
         ? document.querySelector("[data-has-next]").dataset.hasNext === "True"
         : false;
 
-    // Infinite scroll functionality
+    /**
+     * Load more observations via AJAX for infinite scroll
+     * Fetches next page of results and appends to existing list
+     */
     function loadMoreObservations() {
+        // Prevent loading if already in progress or no more data available
         if (isLoading || !hasMore) return;
 
         isLoading = true;
@@ -41,10 +59,11 @@ document.addEventListener("DOMContentLoaded", function () {
         const nextPage = currentPage + 1;
         const currentFilters = getCurrentFilters();
 
-        // Build URL with current filters and next page
+        // Build URL with current filters and next page number
         const params = new URLSearchParams(currentFilters);
         params.set("page", nextPage);
 
+        // Fetch next page of observations
         fetch(`${window.location.pathname}?${params.toString()}`, {
             headers: {
                 "X-Requested-With": "XMLHttpRequest",
@@ -83,6 +102,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Append new observations to the container
+    /**
+     * Append new observation data to the DOM container
+     * Converts observation objects into HTML elements and adds them to the list
+     * @param {Array} observations - Array of observation objects from AJAX response
+     */
     function appendObservations(observations) {
         observations.forEach((obs) => {
             const observationRow = createObservationRow(obs);
@@ -90,7 +114,19 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Create HTML for an observation row
+    /**
+     * Create HTML element for a single observation row
+     * Generates complete observation card with session info, object details, and action buttons
+     * @param {Object} obs - Observation object containing all observation data
+     * @param {string} obs.id - Unique observation identifier
+     * @param {string} obs.object_type - Type of astronomical object observed
+     * @param {string} obs.object_name - Name of the observed object
+     * @param {string} obs.session_slug - Session identifier with date information
+     * @param {string} obs.created_at - ISO timestamp of observation creation
+     * @param {string} obs.date_time - Observation session date/time
+     * @param {string} obs.type_class - CSS class for observation type styling
+     * @returns {HTMLElement} Complete observation row element ready for insertion
+     */
     function createObservationRow(obs) {
         const row = document.createElement("div");
         row.className =
@@ -151,7 +187,14 @@ document.addEventListener("DOMContentLoaded", function () {
         return row;
     }
 
-    // Get current filter values
+    /**
+     * Extract current filter values from form inputs
+     * Used for building filter parameters for AJAX requests and URL updates
+     * @returns {Object} Object containing current filter values
+     * @property {string} session - Selected session filter value
+     * @property {string} object_type - Selected object type filter value  
+     * @property {string} search - Current search term filter value
+     */
     function getCurrentFilters() {
         return {
             session: document.getElementById("session-filter").value,
@@ -160,13 +203,21 @@ document.addEventListener("DOMContentLoaded", function () {
         };
     }
 
-    // Handle filter form submission
+    /**
+     * Handle form submission for filter application
+     * Prevents default form submission and applies filters via AJAX
+     * @param {Event} event - Form submit event object
+     */
     function handleFilterSubmit(event) {
         event.preventDefault();
         applyFilters();
     }
 
-    // Apply filters and reload the page
+    /**
+     * Apply current filters and reload the page with filtered results
+     * Updates URL parameters to maintain bookmarkable filter state
+     * Redirects to new URL with filter parameters included
+     */
     function applyFilters() {
         const filters = getCurrentFilters();
         const params = new URLSearchParams();
@@ -186,7 +237,10 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.href = newUrl;
     }
 
-    // Clear all filters
+    /**
+     * Clear all active filters and reload page
+     * Resets all filter form inputs and redirects to unfiltered view
+     */
     function clearFilters() {
         document.getElementById("session-filter").value = "";
         document.getElementById("object-type-filter").value = "";
@@ -196,7 +250,12 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.href = window.location.pathname;
     }
 
-    // Show message (success or error)
+    /**
+     * Display temporary notification message to user
+     * Creates floating notification that auto-dismisses after 5 seconds
+     * @param {string} message - Message text to display
+     * @param {string} type - Message type ('success' or 'error') for styling
+     */
     function showMessage(message, type = "success") {
         const div = document.createElement("div");
         div.className =
@@ -213,15 +272,29 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 5000);
     }
 
+    /**
+     * Show error notification message
+     * Convenience wrapper for showMessage with error styling
+     * @param {string} message - Error message to display
+     */
     function showErrorMessage(message) {
         showMessage(message, "error");
     }
 
+    /**
+     * Show success notification message  
+     * Convenience wrapper for showMessage with success styling
+     * @param {string} message - Success message to display
+     */
     function showSuccessMessage(message) {
         showMessage(message, "success");
     }
 
-    // Add event listeners to action buttons
+    /**
+     * Attach event listeners to observation action buttons
+     * Adds click handlers for delete and view/update buttons in container
+     * @param {HTMLElement} container - DOM container holding buttons to bind
+     */
     function addButtonEventListeners(container) {
         const deleteButtons = container.querySelectorAll(".delete-btn");
         const viewUpdateButtons =
@@ -236,7 +309,11 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Handle delete observation
+    /**
+     * Handle observation deletion with confirmation and AJAX request
+     * Shows confirmation dialog, makes AJAX delete request, and updates UI
+     * @param {Event} event - Click event from delete button
+     */
     function handleDeleteObservation(event) {
         const button = event.target;
         const obsId = button.dataset.id;
@@ -323,7 +400,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Update observation count after deletion
+    /**
+     * Update observation count and UI after successful deletion
+     * Updates count display, handles pluralization, and shows empty state if needed
+     */
     function updateObservationCount() {
         const remainingObservations =
             document.querySelectorAll(".observation-row").length;
@@ -356,7 +436,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Handle view/update observation
+    /**
+     * Handle navigation to observation detail/update page
+     * Redirects user to observation detail page for viewing and editing
+     * @param {Event} event - Click event from view/update button
+     */
     function handleViewUpdateObservation(event) {
         const button = event.target;
         const obsId = button.dataset.id;
@@ -367,7 +451,10 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.href = detailUrl;
     }
 
-    // Scroll event listener for infinite scroll
+    /**
+     * Scroll event handler for infinite scroll functionality
+     * Triggers loading of more observations when user approaches bottom of page
+     */
     function handleScroll() {
         if (isLoading || !hasMore) return;
 
@@ -382,7 +469,13 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Debounce function for search input
+    /**
+     * Debounce utility function to limit function execution frequency
+     * Prevents excessive API calls during rapid user input (e.g., typing in search)
+     * @param {Function} func - Function to debounce
+     * @param {number} wait - Milliseconds to wait before execution
+     * @returns {Function} Debounced function
+     */
     function debounce(func, wait) {
         let timeout;
         return function executedFunction(...args) {
@@ -395,7 +488,15 @@ document.addEventListener("DOMContentLoaded", function () {
         };
     }
 
-    // Helper function to extract date from session slug (matches Django template filter)
+    /**
+     * Extract date portion from Django session slug format
+     * Parses session slug to extract the date components for display
+     * @param {string} slug - Session slug in format "id-YYYY-MM-DD-sequence"  
+     * @returns {string} Extracted date in YYYY-MM-DD format
+     * @example
+     * extractDateFromSlug("1-2025-10-11-1") returns "2025-10-11"
+     * extractDateFromSlug("2-2024-12-25-3") returns "2024-12-25"
+     */
     function extractDateFromSlug(slug) {
         /**
          * Extract the date part from a session slug.
@@ -411,7 +512,15 @@ document.addEventListener("DOMContentLoaded", function () {
         return slug;
     }
 
-    // Helper function to calculate relative time
+    /**
+     * Calculate human-readable relative time from a date
+     * Converts timestamp to user-friendly relative time display
+     * @param {Date} date - Date object to calculate relative time from
+     * @returns {string} Human-readable relative time string
+     * @example
+     * getRelativeTime(new Date(Date.now() - 60000)) returns "1m ago"
+     * getRelativeTime(new Date(Date.now() - 3600000)) returns "1h ago"
+     */
     function getRelativeTime(date) {
         const now = new Date();
         const diffMs = now - date;

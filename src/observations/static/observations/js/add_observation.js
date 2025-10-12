@@ -1,4 +1,22 @@
+/**
+ * Add Observation Form Handler
+ * 
+ * Manages the dynamic form selection and session handling for the Add Observation page.
+ * Provides UI logic for switching between different observation types (Solar System, 
+ * Star, Deep Sky, Special Event) and displays relevant forms and educational content.
+ * 
+ * Features:
+ * - Dynamic form switching based on observation type
+ * - Session selection propagation across forms
+ * - Educational intro display for each observation type
+ * - Form state management and navigation
+ * 
+ * @author Lodestar Project
+ * @version 1.0.0
+ */
+
 document.addEventListener("DOMContentLoaded", function () {
+    // Cache DOM elements for performance
     const sessionSelect = document.getElementById("session-select");
     const observationTypeSelect = document.getElementById("observation-type");
     const observationForms = document.querySelectorAll(
@@ -9,12 +27,15 @@ document.addEventListener("DOMContentLoaded", function () {
     );
     const goBackButtons = document.querySelectorAll(".js-go-back");
 
-    // Handle observation type selection
+    /**
+     * Handle observation type selection change
+     * Shows appropriate form and educational content based on user selection
+     */
     observationTypeSelect.addEventListener("change", function () {
         const selectedType = this.value;
         const selectedSession = sessionSelect.value;
 
-        // Hide all forms and intros
+        // Hide all forms and intros to reset the display
         observationForms.forEach((form) => {
             form.classList.add("hidden");
         });
@@ -22,8 +43,8 @@ document.addEventListener("DOMContentLoaded", function () {
             intro.classList.add("hidden");
         });
 
+        // Show educational introduction for selected observation type
         if (selectedType) {
-            // Show the corresponding astronomical introduction
             const targetIntroId = selectedType + "-intro";
             const targetIntro = document.getElementById(targetIntroId);
             if (targetIntro) {
@@ -31,15 +52,15 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
 
+        // Show the observation form if both type and session are selected
         if (selectedType && selectedSession) {
-            // Show the selected form
             const targetFormId = selectedType + "-form";
             const targetForm = document.getElementById(targetFormId);
 
             if (targetForm) {
                 targetForm.classList.remove("hidden");
 
-                // Set the selected session in the form
+                // Propagate selected session to the form fields
                 const sessionInput = targetForm.querySelector(
                     'input[name="selected_session"]'
                 );
