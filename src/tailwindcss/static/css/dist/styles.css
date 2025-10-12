@@ -930,73 +930,6 @@
     right: var(--indicator-e, 0);
     translate: var(--indicator-x, 50%) var(--indicator-y, -50%);
   }
-  .table {
-    font-size: 0.875rem;
-    position: relative;
-    width: 100%;
-    border-radius: var(--radius-box);
-    text-align: left;
-  }
-  .table:where(:dir(rtl), [dir="rtl"], [dir="rtl"] *) {
-    text-align: right;
-  }
-  @media (hover: hover) {
-    .table tr.row-hover:hover, .table tr.row-hover:nth-child(even):hover {
-      background-color: var(--color-base-200);
-    }
-  }
-  .table :where(th, td) {
-    padding-inline: calc(0.25rem * 4);
-    padding-block: calc(0.25rem * 3);
-    vertical-align: middle;
-  }
-  .table :where(thead, tfoot) {
-    white-space: nowrap;
-    color: var(--color-base-content);
-  }
-  @supports (color: color-mix(in lab, red, red)) {
-    .table :where(thead, tfoot) {
-      color: color-mix(in oklab, var(--color-base-content) 60%, transparent);
-    }
-  }
-  .table :where(thead, tfoot) {
-    font-size: 0.875rem;
-    font-weight: 600;
-  }
-  .table :where(tfoot) {
-    border-top: var(--border) solid var(--color-base-content);
-  }
-  @supports (color: color-mix(in lab, red, red)) {
-    .table :where(tfoot) {
-      border-top: var(--border) solid color-mix(in oklch, var(--color-base-content) 5%, #0000);
-    }
-  }
-  .table :where(.table-pin-rows thead tr) {
-    position: sticky;
-    top: calc(0.25rem * 0);
-    z-index: 1;
-    background-color: var(--color-base-100);
-  }
-  .table :where(.table-pin-rows tfoot tr) {
-    position: sticky;
-    bottom: calc(0.25rem * 0);
-    z-index: 1;
-    background-color: var(--color-base-100);
-  }
-  .table :where(.table-pin-cols tr th) {
-    position: sticky;
-    right: calc(0.25rem * 0);
-    left: calc(0.25rem * 0);
-    background-color: var(--color-base-100);
-  }
-  .table :where(thead tr, tbody tr:not(:last-child)) {
-    border-bottom: var(--border) solid var(--color-base-content);
-  }
-  @supports (color: color-mix(in lab, red, red)) {
-    .table :where(thead tr, tbody tr:not(:last-child)) {
-      border-bottom: var(--border) solid color-mix(in oklch, var(--color-base-content) 5%, #0000);
-    }
-  }
   .select {
     border: var(--border) solid #0000;
     position: relative;
@@ -1537,9 +1470,6 @@
   .inline-block {
     display: inline-block;
   }
-  .table {
-    display: table;
-  }
   .h-6 {
     height: calc(var(--spacing) * 6);
   }
@@ -1596,6 +1526,9 @@
   }
   .flex-1 {
     flex: 1;
+  }
+  .flex-shrink {
+    flex-shrink: 1;
   }
   .flex-shrink-0 {
     flex-shrink: 0;
