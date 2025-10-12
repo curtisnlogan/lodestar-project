@@ -63,7 +63,6 @@ INSTALLED_APPS = [
     "tailwindcss",
     "django_extensions",  # third-party Django package that provides a collection of useful management commands and utilities for Django development.
     "observations",
-    "news",
 ]
 
 # django-tailwind now knows where to place its files
