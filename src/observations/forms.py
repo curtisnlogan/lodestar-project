@@ -4,6 +4,14 @@ from .models import ObservingSession, SolarSystem, Star, DeepSky, SpecialEvent
 
 
 class ObservingSessionForm(forms.ModelForm):
+    """
+    Form for creating and editing observing sessions.
+
+    Provides datetime inputs for session start/end times and site name field.
+    Automatically sets current UTC time as default for start time on new sessions.
+    Includes helpful text to guide users in proper time zone handling.
+    """
+
     class Meta:
         model = ObservingSession
         fields = ("datetime_start_ut", "datetime_end_ut", "site_name")
@@ -14,6 +22,12 @@ class ObservingSessionForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
+        """
+        Initialize form with helpful text and default values.
+
+        Sets current UTC time as default start time for new sessions and adds
+        helpful guidance text for all fields to ensure proper data entry.
+        """
         super().__init__(*args, **kwargs)
         # Set default start time to current UTC time for new sessions
         if not self.instance.pk:
@@ -34,6 +48,14 @@ class ObservingSessionForm(forms.ModelForm):
 
 
 class SolarSystemForm(forms.ModelForm):
+    """
+    Form for recording solar system object observations.
+
+    Includes fields specific to planetary observations such as altitude,
+    central meridian, phase fraction, and disk diameter. Integrates with
+    JPL Horizons API for automatic distance calculations.
+    """
+
     class Meta:
         model = SolarSystem
         fields = [
