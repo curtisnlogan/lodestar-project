@@ -14,16 +14,16 @@ from cloudinary.models import CloudinaryField
 class TimestampMixin(models.Model):
     """
     Abstract base model that provides timestamp fields for tracking record lifecycle.
-    
+
     Adds created_at and updated_at fields to any model that inherits from it.
     """
+
     created_at = models.DateTimeField(
-        auto_now_add=True,
-        help_text="Timestamp indicating when the record was created."
+        auto_now_add=True, help_text="Timestamp indicating when the record was created."
     )
     updated_at = models.DateTimeField(
         auto_now=True,
-        help_text="Timestamp indicating when the record was last updated."
+        help_text="Timestamp indicating when the record was last updated.",
     )
 
     class Meta:
@@ -32,11 +32,11 @@ class TimestampMixin(models.Model):
 
 class ObservingSession(TimestampMixin, models.Model):
     """
-        Represents an astronomical observing session.
+    Represents an astronomical observing session.
 
-        A time-based and location-based container for an individual's
-        astronomical observations. Each session can contain multiple
-        observations of astronomical objects.
+    A time-based and location-based container for an individual's
+    astronomical observations. Each session can contain multiple
+    observations of astronomical objects.
     """
 
     user = models.ForeignKey(
@@ -64,25 +64,26 @@ class ObservingSession(TimestampMixin, models.Model):
     def clean(self):
         """Custom validation for observing session."""
         super().clean()
-        
+
         # Validate that start time is not in the future
         if self.datetime_start_ut and self.datetime_start_ut > timezone.now():
             raise ValidationError(
-                {'datetime_start_ut': 'Start time cannot be in the future.'}
+                {"datetime_start_ut": "Start time cannot be in the future."}
             )
-        
+
         # Validate that end time is after start time
-        if (self.datetime_start_ut and self.datetime_end_ut and 
-            self.datetime_end_ut <= self.datetime_start_ut):
+        if (
+            self.datetime_start_ut
+            and self.datetime_end_ut
+            and self.datetime_end_ut <= self.datetime_start_ut
+        ):
             raise ValidationError(
-                {'datetime_end_ut': 'End time must be after start time.'}
+                {"datetime_end_ut": "End time must be after start time."}
             )
 
     def __str__(self):
         if self.datetime_end_ut:
-            end_info = (
-                f" to {self.datetime_end_ut.strftime('%Y-%m-%d %H:%M')} UTC"
-            )
+            end_info = f" to {self.datetime_end_ut.strftime('%Y-%m-%d %H:%M')} UTC"
         else:
             end_info = "ongoing"
         return (
@@ -119,8 +120,8 @@ class ObservingSession(TimestampMixin, models.Model):
         attempts_remaining = 5
 
         while attempts_remaining:
-             # 1. catch missing/invalid user-entered fields early, don't check for slug as it doesn't exist yet will throw error
-            self.full_clean(exclude=['slug'])
+            # 1. catch missing/invalid user-entered fields early, don't check for slug as it doesn't exist yet will throw error
+            self.full_clean(exclude=["slug"])
             # 2. only build a slug when we have the key inputs
             self.generate_slug()
             # ensure generated slug is validated
@@ -175,8 +176,15 @@ class ObservationMixin(TimestampMixin, models.Model):
     filters_used = models.CharField(
         max_length=25, blank=True, help_text='e.g., "Moon filter"'
     )
-    drawing = CloudinaryField(null=True, blank=True, help_text="Is North marked on your drawing? This keeps it scientifically useful!")
-    additional_notes = models.TextField(blank=True, help_text="Additional observations, impressions, or details about your session.")
+    drawing = CloudinaryField(
+        null=True,
+        blank=True,
+        help_text="Is North marked on your drawing? This keeps it scientifically useful!",
+    )
+    additional_notes = models.TextField(
+        blank=True,
+        help_text="Additional observations, impressions, or details about your session.",
+    )
 
     class Meta:
         abstract = True
@@ -189,6 +197,7 @@ class ApiMixin(TimestampMixin, models.Model):
     SIMBAD API used by Star and DeepSky models to store catalog data, validate
     coordinate fields for Aladin sky atlas display, and calculate stellar distances from parallax. JPLHorizons API used by Solar System object to store catalog data.
     """
+
     # updated_at field from TimestampMixin not needed
     updated_at = None
     # holds the entire API query data in JSON
@@ -220,7 +229,7 @@ class ApiMixin(TimestampMixin, models.Model):
     # data transformation method
     def calculate_distances_from_parallax(self, parallax):
         """Convert parallax to distance in light-years and miles."""
-        
+
         try:
             parallax_value = Decimal(str(parallax))
         except (TypeError, InvalidOperation):
@@ -230,6 +239,28 @@ class ApiMixin(TimestampMixin, models.Model):
             raise ValueError(f"Parallax must be positive, got: {parallax_value}")
 
         distance_light_years = Decimal("3260.0") / parallax_value
+        distance_miles = distance_light_years * Decimal("5880000000000")
+
+        self.distance_light_years = distance_light_years
+        self.distance_miles = distance_miles
+        return self.distance_light_years, self.distance_miles
+
+    def calculate_distances_from_lighttime(self, lighttime_minutes):
+        """Convert JPL Horizons lighttime to distance in light-years and miles."""
+
+        try:
+            lighttime_value = Decimal(str(lighttime_minutes))
+        except (TypeError, InvalidOperation):
+            raise ValueError(f"Invalid lighttime value: {lighttime_minutes}")
+
+        if lighttime_value <= 0:
+            raise ValueError(f"Lighttime must be positive, got: {lighttime_value}")
+
+        # Convert lighttime minutes to light-years
+        # 1 light-year = 525,600 light-minutes (365.25 days * 24 hours * 60 minutes)
+        distance_light_years = lighttime_value / Decimal("525600.0")
+
+        # Convert to miles: 1 light-year = 5.88 trillion miles
         distance_miles = distance_light_years * Decimal("5880000000000")
 
         self.distance_light_years = distance_light_years
@@ -258,7 +289,7 @@ class SolarSystem(ObservationMixin, ApiMixin):
         ("neptune", "Neptune"),
         ("other", "Other"),
     ]
-    
+
     celestial_body = models.CharField(
         max_length=25,
         choices=SOLAR_SYSTEM_CHOICES,
@@ -296,16 +327,13 @@ class SolarSystem(ObservationMixin, ApiMixin):
         help_text="How big the planet appeared in arcseconds (grab from your astronomy app).",
     )
 
-
     class Meta(ObservationMixin.Meta, ApiMixin.Meta):
         abstract = False
         verbose_name = "Solar System Observation"
         verbose_name_plural = "Solar System Observations"
 
     def __str__(self):
-        return (
-            f"{self.celestial_body} observation on {self.session.datetime_start_ut.date()}"
-        )
+        return f"{self.celestial_body} observation on {self.session.datetime_start_ut.date()}"
 
 
 class Star(ObservationMixin, ApiMixin):
@@ -334,7 +362,9 @@ class Star(ObservationMixin, ApiMixin):
         verbose_name_plural = "Star Observations"
 
     def __str__(self):
-        return f"{self.star_name} observation on {self.session.datetime_start_ut.date()}"
+        return (
+            f"{self.star_name} observation on {self.session.datetime_start_ut.date()}"
+        )
 
 
 class DeepSky(ObservationMixin, ApiMixin):
@@ -395,4 +425,6 @@ class SpecialEvent(ObservationMixin):
     def __str__(self):
         if self.event_name:
             return f"({self.event_type}) {self.event_name} observation on {self.session.datetime_start_ut.date()}"
-        return f"{self.event_type} observation on {self.session.datetime_start_ut.date()}"
+        return (
+            f"{self.event_type} observation on {self.session.datetime_start_ut.date()}"
+        )
