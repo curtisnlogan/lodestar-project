@@ -1,16 +1,23 @@
 {% load static %}
-<div>
-    <video src="{% static 'images/videos/issac_newton.mp4' %}"
-           class="w-full h-60 md:h-115 object-cover rounded-full transition-all duration-300 mx-auto mb-4"
-           autoplay
-           muted
-           playsinline
-           preload="metadata"
-           loading="lazy">
-        <p>Your browser does not support displaying this video. Please use a modern browser to view this content.</p>
-    </video>
-    <p class="text-primary-custom text-lg leading-relaxed text-center mt-10">
-        <em>"Gravity explains the motions of the planets, but it cannot explain who sets the planets in motion."</em>
-        <cite class="text-secondary-custom text-md font-bold mb-2 text-center"> - Isaac Newton</cite>
-    </p>
-</div>
+<aside class="newton-quote-section" role="complementary" aria-labelledby="newton-quote">
+    <figure class="newton-video-container">
+        <video src="{% static 'images/videos/issac_newton.mp4' %}"
+               class="w-full h-60 md:h-115 object-cover rounded-full transition-all duration-300 mx-auto mb-4"
+               autoplay
+               muted
+               playsinline
+               preload="metadata"
+               loading="lazy"
+               aria-label="Portrait video of Isaac Newton">
+            <p>Your browser does not support displaying this video. Please use a modern browser to view this content.</p>
+        </video>
+        <figcaption>
+            <blockquote class="text-primary-custom text-lg leading-relaxed text-center mt-10">
+                <p id="newton-quote">
+                    <em>"Gravity explains the motions of the planets, but it cannot explain who sets the planets in motion."</em>
+                </p>
+                <cite class="text-secondary-custom text-md font-bold mb-2 text-center block mt-2">— Isaac Newton</cite>
+            </blockquote>
+        </figcaption>
+    </figure>
+</aside>
