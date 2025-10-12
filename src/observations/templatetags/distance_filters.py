@@ -7,12 +7,21 @@ register = template.Library()
 @register.filter
 def humanize_large_number(value):
     """
-    Convert a large number into a human-readable format.
+    Convert a large number into a human-readable format using scientific notation suffixes.
+
+    Transforms large astronomical distances and numbers into readable formats
+    for better user experience in templates. Handles quadrillions down to thousands.
+
+    Args:
+        value: Numeric value to humanize (int, float, Decimal, or string)
+
+    Returns:
+        str: Human-readable formatted number with appropriate suffix
 
     Examples:
-    147191891269293 -> "147 trillion"
-    5280000000000 -> "5.3 trillion"
-    1500000000 -> "1.5 billion"
+        147191891269293 -> "147 trillion"
+        5280000000000 -> "5.3 trillion"
+        1500000000 -> "1.5 billion"
     """
     if not value:
         return value
