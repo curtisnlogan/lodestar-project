@@ -51,7 +51,7 @@
                             <!-- Expand Your Knowledge Section -->
                             <article class="api-data-container p-8" aria-labelledby="api-data-heading">
                                 <h2 id="api-data-heading" class="text-2xl font-bold text-center mb-2 aladin-title">{{ api_data.api_type }} Data</h2>
-                                <h3 class="text-lg font-semibold text-blue-200 mb-6 text-center tracking-wide">Expand your knowledge of {{ api_data.object_name|default:"this object" }}</h3>
+                                <h3 class="text-lg font-semibold text-blue-200 mb-6 text-center tracking-wide">{{ api_data.object_name|default:"this object" }}</h3>
                                 <!-- Knowledge Content Placeholder -->
                                 <div class="knowledge-placeholder rounded-lg">
                                     <div class="text-center">
