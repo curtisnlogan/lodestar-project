@@ -1,3 +1,22 @@
+"""
+URL Configuration for Observations App
+
+Defines URL patterns for all observation-related views including:
+- Adding new observations with dynamic form selection
+- Listing observations with filtering and infinite scroll
+- Viewing/editing observation details with inline editing
+- Deleting observations with AJAX confirmation
+
+URL Patterns:
+- /observations/add/ - Add new observation form
+- /observations/list/ - List all observations with filters
+- /observations/detail/<obs_type>/<obs_id>/ - View/edit specific observation
+- /observations/delete/<obs_type>/<obs_id>/ - Delete specific observation
+
+The observation type parameter supports: 'star', 'deepsky', 'planet', 'moon', 'sun'
+corresponding to the different astronomical object models.
+"""
+
 from django.urls import path
 from .views import (
     AddObservationView,
