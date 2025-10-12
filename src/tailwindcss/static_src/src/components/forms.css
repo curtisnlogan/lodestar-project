@@ -1,0 +1,234 @@
+/* 
+ * Forms CSS
+ * Only custom styles that cannot be achieved with Tailwind utilities
+ * 
+ * Note: The following styles have been moved to Tailwind classes in templates:
+ * - Select dropdown styling: Use 'appearance-none' class
+ * - File input button styling: Use 'file:bg-gray-600 file:text-white file:border-0 file:px-3 file:py-1 file:rounded file:mr-3 file:cursor-pointer' classes
+ */
+
+/* Hide any SVG elements in forms */
+.observation-form svg,
+.observation-form path,
+form svg,
+form svg path {
+    display: none !important;
+}
+
+/* Hide the session field in observation forms since we select it at the top */
+.observation-form select[name="session"] {
+    display: none !important;
+}
+
+.observation-form select[name="session"] + label,
+.observation-form label[for*="session"] {
+    display: none !important;
+}
+
+/* Hide the entire container div for session fields */
+.observation-form .form-fields > div:has(select[name="session"]) {
+    display: none !important;
+}
+
+/* Hide the "Forgot your password?" link in login forms */
+.login-form a[href*="password/reset"],
+form a[href*="password/reset"] {
+    display: none !important;
+}
+
+/* SpaceX-like API Data Display Styling */
+.api-data-container {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    position: relative;
+    border-radius: 16px;
+    box-shadow: 
+        0 0 20px rgba(59, 130, 246, 0.3),
+        0 0 60px rgba(59, 130, 246, 0.1),
+        inset 0 0 20px rgba(59, 130, 246, 0.05);
+}
+
+.api-data-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, #3b82f6, #1e40af, #06b6d4, #3b82f6);
+    border-radius: 16px;
+    z-index: -1;
+    margin: -2px;
+    animation: borderGlow 4s ease-in-out infinite alternate;
+}
+
+@keyframes borderGlow {
+    0% { opacity: 0.5; }
+    100% { opacity: 0.8; }
+}
+
+.cosmic-distance-card {
+    background: linear-gradient(135deg, #001430 0%, #002050 50%, #001430 100%);
+    border: 2px solid #fbbf24;
+    position: relative;
+    overflow: hidden;
+}
+
+.cosmic-distance-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(from 0deg, transparent, #fbbf24, transparent);
+    animation: rotate 8s linear infinite;
+    z-index: 0;
+}
+
+@keyframes rotate {
+    to { transform: rotate(360deg); }
+}
+
+.cosmic-distance-content {
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(135deg, #001430 0%, #002050 100%);
+    border-radius: 14px;
+    margin: 2px;
+}
+
+.catalog-info-card {
+    background: linear-gradient(135deg, #111827 0%, #1f2937 50%, #111827 100%);
+    border: 1px solid #374151;
+    box-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.magnitude-card {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+    border: 1px solid #3b82f6;
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+}
+
+.object-type-card {
+    background: linear-gradient(135deg, #001430 0%, #002050 100%);
+    border: 1px solid #3b82f6;
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+}
+
+/* Aladin Viewer Styling */
+.aladin-container {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    border: 2px solid #1e40af;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+        0 0 30px rgba(30, 64, 175, 0.4),
+        0 0 60px rgba(30, 64, 175, 0.2),
+        inset 0 0 30px rgba(30, 64, 175, 0.1);
+}
+
+.aladin-container::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #1e40af, #3b82f6, #06b6d4, #1e40af);
+    border-radius: 20px;
+    z-index: -1;
+    animation: aladinBorderGlow 6s ease-in-out infinite alternate;
+}
+
+@keyframes aladinBorderGlow {
+    0% { opacity: 0.6; }
+    100% { opacity: 0.9; }
+}
+
+.aladin-viewer {
+    border: 3px solid #1e40af;
+    border-radius: 12px;
+    box-shadow: 
+        0 0 20px rgba(30, 64, 175, 0.5),
+        inset 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.aladin-title {
+    background: linear-gradient(90deg, #3b82f6, #06b6d4, #3b82f6);
+    background-size: 200% 200%;
+    animation: titleGradient 3s ease-in-out infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+@keyframes titleGradient {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.tech-border {
+    border: 1px solid #374151;
+    border-image: linear-gradient(45deg, #3b82f6, #1e40af, #06b6d4, #3b82f6) 1;
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.2);
+}
+
+/* Hover effects */
+.api-data-container:hover {
+    box-shadow: 
+        0 0 30px rgba(59, 130, 246, 0.5),
+        0 0 80px rgba(59, 130, 246, 0.2),
+        inset 0 0 30px rgba(59, 130, 246, 0.1);
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
+
+.aladin-container:hover {
+    box-shadow: 
+        0 0 40px rgba(30, 64, 175, 0.6),
+        0 0 80px rgba(30, 64, 175, 0.3),
+        inset 0 0 40px rgba(30, 64, 175, 0.15);
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
+
+/* Statistics Dashboard Styling */
+.stats-dashboard-card {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    border: 2px solid #1e40af;
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+        0 0 25px rgba(30, 64, 175, 0.4),
+        0 0 50px rgba(30, 64, 175, 0.2),
+        inset 0 0 25px rgba(30, 64, 175, 0.1);
+    transition: all 0.3s ease;
+}
+
+.stats-dashboard-card:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 
+        0 0 35px rgba(30, 64, 175, 0.6),
+        0 0 70px rgba(30, 64, 175, 0.3),
+        inset 0 0 35px rgba(30, 64, 175, 0.15);
+}
+
+.stats-number {
+    background: linear-gradient(90deg, #3b82f6, #06b6d4, #3b82f6);
+    background-size: 200% 200%;
+    animation: titleGradient 4s ease-in-out infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 800;
+    text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+}
