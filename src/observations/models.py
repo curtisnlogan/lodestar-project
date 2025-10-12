@@ -339,7 +339,7 @@ class SolarSystem(ObservationMixin, ApiMixin):
 class Star(ObservationMixin, ApiMixin):
     star_name = models.CharField(
         max_length=200,
-        help_text='e.g., "Mira"',
+        help_text='Examples: Sirius, Mira, HD 209458. See <a href="https://cds.unistra.fr/cgi-bin/Dic-Simbad" target="_blank">Dictionary of Nomenclature</a>',
         db_index=True,
     )
     magnitude_estimate = models.DecimalField(
@@ -370,7 +370,7 @@ class Star(ObservationMixin, ApiMixin):
 class DeepSky(ObservationMixin, ApiMixin):
     object_name = models.CharField(
         max_length=200,
-        help_text='e.g. "Orion Nebula"',
+        help_text='Examples: Sirius, M31, MCG+02-60-010. See <a href="https://cds.unistra.fr/cgi-bin/Dic-Simbad" target="_blank">Dictionary of Nomenclature</a>',
         db_index=True,
     )
     visibility_rating = models.CharField(
