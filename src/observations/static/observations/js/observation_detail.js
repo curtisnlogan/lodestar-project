@@ -1,18 +1,38 @@
-// observation_detail.js - JavaScript for observation detail page functionality
+/**
+ * Observation Detail Page JavaScript
+ * 
+ * Manages the interactive functionality for the observation detail page including:
+ * - Inline editing of observation data
+ * - API state management (SIMBAD/JPL Horizons data display)
+ * - Form submission and validation
+ * - User feedback and error handling
+ * 
+ * The page displays observation details alongside professional astronomical data
+ * from external APIs with options to edit and update observation records.
+ * 
+ * @author Lodestar Project
+ * @version 1.0.0
+ */
 
-// Global variables for state management
-let apiCallInProgress = false;
-let editMode = false;
+// Global state variables for page functionality
+let apiCallInProgress = false; // Prevents multiple concurrent API calls
+let editMode = false; // Tracks whether user is in edit mode
 
-// DOM Content Loaded Event
+/**
+ * Initialize page when DOM is fully loaded
+ * Sets up default state and event listeners
+ */
 document.addEventListener("DOMContentLoaded", function () {
     console.log("Observation detail page loaded");
     initializePage();
 });
 
-// Initialize page state
+/**
+ * Initialize the page state and default visibility
+ * Ensures API content is visible and action buttons are hidden initially
+ */
 function initializePage() {
-    // Ensure API content is visible by default
+    // Ensure API content is visible by default (show SIMBAD/JPL data)
     const apiContent = document.getElementById("api-content");
     const apiErrorContent = document.getElementById("api-error-content");
 
@@ -25,44 +45,50 @@ function initializePage() {
         apiErrorContent.classList.remove("block");
     }
 
-    // Hide action buttons initially
+    // Hide action buttons initially (shown when user enters edit mode)
     const actionButtons = document.querySelector(".action-buttons");
     if (actionButtons) {
         actionButtons.classList.add("hidden");
     }
 
-    // Initialize event listeners
+    // Initialize all event listeners
     initializeEventListeners();
 }
 
-// Initialize event listeners
+/**
+ * Set up all event listeners for page interactions
+ * Handles edit, submit, cancel, and retry button functionality
+ */
 function initializeEventListeners() {
-    // Edit button functionality
+    // Edit button - toggles between view and edit mode
     const editButton = document.querySelector(".edit-data-button");
     if (editButton) {
         editButton.addEventListener("click", toggleEditMode);
     }
 
-    // Submit button functionality
+    // Submit button - saves form data via AJAX
     const submitButton = document.querySelector(".submit-update-button");
     if (submitButton) {
         submitButton.addEventListener("click", submitUpdate);
     }
 
-    // Cancel button functionality
+    // Cancel button - exits edit mode without saving
     const cancelButton = document.querySelector(".cancel-edit-button");
     if (cancelButton) {
         cancelButton.addEventListener("click", toggleEditMode);
     }
 
-    // Retry API button functionality
+    // Retry API button - attempts to reload API data
     const retryButton = document.querySelector(".retry-api-button");
     if (retryButton) {
         retryButton.addEventListener("click", retryApiCall);
     }
 }
 
-// Show/hide API error state
+/**
+ * Display API error state when astronomical data cannot be loaded
+ * Hides normal content and shows error message with retry option
+ */
 function showApiError() {
     const apiContent = document.getElementById("api-content");
     const apiErrorContent = document.getElementById("api-error-content");
@@ -81,7 +107,10 @@ function showApiError() {
     }
 }
 
-// Show/hide API success state
+/**
+ * Display API success state when astronomical data loads successfully
+ * Shows normal content and hides any error messages
+ */
 function showApiSuccess() {
     const apiContent = document.getElementById("api-content");
     const apiErrorContent = document.getElementById("api-error-content");
