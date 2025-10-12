@@ -6,23 +6,23 @@
 {% endblock title %}
 {% block content %}
     {% if user.is_authenticated %}
-        <section class="max-w-4xl mx-auto px-4">
-            <div class="flex gap-12">
+        <section class="max-w-4xl mx-auto px-4" aria-labelledby="session-form-heading">
+            <div class="flex flex-col lg:flex-row gap-6 lg:gap-12 items-center">
                 <!-- Newton Login Image div -->
                 {% include 'includes/newton_image.html' %}
-                <div class="text-center">
-                    <h1 class="text-primary-custom text-xl font-semibold mb-6 tracking-wide font-heading">
+                <div class="text-center w-full lg:w-auto">
+                    <h1 id="session-form-heading" class="text-primary-custom text-xl font-semibold mb-6 tracking-wide font-heading">
                         Create a New Observing Session
                     </h1>
                     <p class="text-secondary-custom text-md tracking-wide mb-5">
                         Fill out the form below to log an observing session. View your existing sessions in 'My Observations' above.
                     </p>
-                    <form method="post">
+                    <form method="post" aria-labelledby="session-form-heading">
                         {% csrf_token %}
                         {{ observing_session_form|crispy }}
                         <div class="flex flex-col justify-center items-center mt-8">
                             <button type="submit"
-                                    class="bg-accent hover:bg-highlight text-white hover:text-black px-8 py-3 rounded transition-all duration-500 ease-in-out font-medium tracking-wide transform hover:scale-105">
+                                    class="bg-accent hover:bg-highlight text-white hover:text-black px-8 py-3 rounded transition-all duration-500 ease-in-out font-medium tracking-wide transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-yellow-300">
                                 Save Observing Session
                             </button>
                         </div>
@@ -31,12 +31,12 @@
             </div>
         </section>
     {% else %}
-        <section class="max-w-xl mx-auto">
+        <section class="max-w-xl mx-auto" aria-labelledby="login-heading">
             <div class="flex flex-col">
                 <!-- Login Form -->
-                <div class="bg-space p-12 rounded border border-bg-accent">
-                    <h1 class="text-primary-custom text-2xl font-semibold mb-8 tracking-wide text-center font-heading">Login</h1>
-                    <form method="post" class="login-form">
+                <article class="bg-space p-12 rounded border border-bg-accent">
+                    <h1 id="login-heading" class="text-primary-custom text-2xl font-semibold mb-8 tracking-wide text-center font-heading">Login</h1>
+                    <form method="post" class="login-form" aria-labelledby="login-heading">
                         <!-- input used in the app view to distinguish between this post request and the default one, which is for the new observing session above -->
                         <input type="hidden" name="login" value="1"/>
                         <div>
@@ -45,18 +45,18 @@
                         </div>
                         <div class="mt-8">
                             <button type="submit"
-                                    class="bg-accent hover:bg-highlight text-white hover:text-black px-8 py-3 rounded transition-all duration-500 ease-in-out font-medium tracking-wide transform hover:scale-105 w-full">
+                                    class="bg-accent hover:bg-highlight text-white hover:text-black px-8 py-3 rounded transition-all duration-500 ease-in-out font-medium tracking-wide transform hover:scale-105 w-full focus:outline-none focus:ring-2 focus:ring-yellow-300">
                                 Login
                             </button>
                         </div>
                     </form>
                     <div class="text-center mt-6">
                         <a href="{% url 'account_signup' %}"
-                           class="text-accent text-md tracking-wide transition-all duration-200 ease-in-out">
+                           class="text-accent text-md tracking-wide transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-yellow-300 rounded px-2 py-1">
                             Create an Account Here
                         </a>
                     </div>
-                </div>
+                </article>
             </div>
         </section>
         <section class="w-full">
