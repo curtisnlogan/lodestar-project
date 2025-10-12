@@ -1,0 +1,254 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load distance_filters %}
+{% block title %}
+    Lodestar - My Observations
+{% endblock title %}
+{% block content %}
+    <section class="flex flex-col items-center justify-start px-4 py-6">
+        <div class="max-w-7xl w-full mx-auto">
+            <header class="text-center mb-8">
+                <h1 class="text-2xl font-bold text-white">My Observations</h1>
+            </header>
+            
+            <!-- Quick Action Buttons -->
+            <nav class="flex flex-col md:flex-row gap-4 justify-center mb-8" aria-label="Quick actions">
+                <a href="{% url 'home' %}"
+                   class="bg-accent text-white px-6 py-3 rounded-md hover:bg-green-700 hover:text-black transition-colors text-center font-medium focus:outline-none focus:ring-2 focus:ring-yellow-300">
+                    <span class="text-lg" aria-hidden="true">🔭</span> Add New Observing Session
+                </a>
+                <a href="{% url 'add_observation' %}"
+                   class="bg-accent text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-colors text-center font-medium hover:text-black focus:outline-none focus:ring-2 focus:ring-yellow-300">
+                    <span class="text-lg" aria-hidden="true">🪐</span> Add New Observation
+                </a>
+            </nav>
+            <!-- Statistics Section -->
+            <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8" aria-labelledby="stats-heading">
+                <h2 id="stats-heading" class="sr-only">Observation Statistics</h2>
+                <!-- Total Observations -->
+                <article class="stats-dashboard-card p-8 text-center" aria-labelledby="total-obs">
+                    <div class="text-6xl font-bold mb-3 stats-number" aria-label="{{ filtered_count }} observations">{{ filtered_count }}</div>
+                    <h3 id="total-obs" class="text-xl text-blue-200 mb-2 font-semibold tracking-wide">{{ filtered_count|pluralize:"Observation,Observations" }}</h3>
+                    {% if filters.session or filters.object_type or filters.search %}
+                        <p class="text-sm text-gray-300 mb-3">({{ total_observations }} total)</p>
+                    {% endif %}
+                    
+                    <!-- Sagan Quote -->
+                    <blockquote class="text-md text-yellow-300 italic font-medium mt-4 px-2 leading-relaxed">
+                        "The cosmos is within us. We are made of star-stuff. We are a way for the universe to know itself."
+                        <footer class="text-xs text-gray-400 mt-2">— Carl Sagan</footer>
+                    </blockquote>
+                </article>
+                <!-- Favorite Observation Type -->
+                <article class="stats-dashboard-card p-8 text-center" aria-labelledby="favorite-type">
+                    {% if favorite_type %}
+                        <div class="text-6xl font-bold mb-3 stats-number" aria-label="{{ favorite_type_count }} {{ favorite_type }} observations">{{ favorite_type_count }}</div>
+                        <h3 id="favorite-type" class="text-xl text-blue-200 mb-2 font-semibold tracking-wide">{{ favorite_type }}</h3>
+                        <p class="text-sm text-gray-300 mb-3">Favorite Type</p>
+                        
+                        <!-- Personality Text Based on Favorite Type -->
+                        <p class="text-sm text-yellow-300 italic font-semibold mt-3">
+                            {% if favorite_type == "Solar System" %}
+                                You're probably a planet lover! Those wandering worlds captivate you.
+                            {% elif favorite_type == "Deep Sky Object" %}
+                                Black holes and infinite space call to your soul!
+                            {% elif favorite_type == "Star" %}
+                                The stellar realm speaks to you - those distant suns are your guide.
+                            {% elif favorite_type == "Special Event" %}
+                                You get excited when the whole world is watching too!
+                            {% else %}
+                                Your cosmic curiosity knows no bounds!
+                            {% endif %}
+                        </p>
+                    {% else %}
+                        <div class="text-6xl font-bold text-gray-500 mb-3" aria-label="No observations yet">--</div>
+                        <h3 id="favorite-type" class="text-xl text-blue-200 font-semibold">No observations yet</h3>
+                        <p class="text-sm text-gray-400 italic mt-3 font-medium">Start observing to discover your cosmic personality!</p>
+                    {% endif %}
+                </article>
+                <!-- Top Favorites -->
+                <article class="stats-dashboard-card p-8" aria-labelledby="favorites-heading">
+                    <h3 id="favorites-heading" class="text-xl text-blue-200 mb-4 text-center font-bold tracking-wide">Favorite Objects</h3>
+                    {% if top_objects %}
+                        <ul role="list">
+                        {% for object_name, count, distance_miles in top_objects %}
+                            <li class="catalog-info-card rounded-lg p-3 mb-2 transform hover:scale-105 transition-all duration-300">
+                                <div class="flex justify-between items-center">
+                                    <div class="flex-1">
+                                        <span class="text-gray-200 font-medium">{{ object_name }}</span>
+                                        {% if distance_miles %}
+                                            <div class="text-xs text-blue-300 mt-1">{{ distance_miles|humanize_distance_miles }} away</div>
+                                        {% endif %}
+                                    </div>
+                                    <span class="text-blue-300 font-bold text-lg ml-3" aria-label="{{ count }} observations">{{ count }}</span>
+                                </div>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="text-center text-gray-400 text-sm">No observations yet</p>
+                    {% endif %}
+                </article>
+            </section>
+            <!-- Filters Section -->
+            <section class="bg-nebula p-6 rounded-lg border border-gray-700 mb-6" aria-labelledby="filters-heading">
+                <h2 id="filters-heading" class="text-xl font-semibold text-white mb-4 text-center">Filters</h2>
+                <form id="filter-form"
+                      class="grid grid-cols-1 md:grid-cols-3 gap-4"
+                      method="get"
+                      aria-labelledby="filters-heading">
+                    <!-- Observing Session Filter -->
+                    <fieldset>
+                        <legend class="sr-only">Observing Session Filter</legend>
+                        <label for="session-filter"
+                               class="block text-sm font-medium text-white mb-2">Observing Session</label>
+                        <select id="session-filter"
+                                name="session"
+                                class="w-full px-3 py-2 border border-gray-600 rounded-md bg-nebula text-white appearance-none focus:outline-none focus:ring-2 focus:ring-yellow-300">
+                            <option value="">All Sessions</option>
+                            {% for session in observing_sessions %}
+                                <option value="{{ session.id }}"
+                                        {% if filters.session == session.id|stringformat:"s" %}selected{% endif %}>
+                                    {{ session.datetime_start_ut|date:"M d, Y H:i" }} UTC - {{ session.site_name|default:"No site" }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </fieldset>
+                    <!-- Object Type Filter -->
+                    <fieldset>
+                        <legend class="sr-only">Object Type Filter</legend>
+                        <label for="object-type-filter"
+                               class="block text-sm font-medium text-white mb-2">Object Type</label>
+                        <select id="object-type-filter"
+                                name="object_type"
+                                class="w-full px-3 py-2 border border-gray-600 rounded-md bg-nebula text-white appearance-none focus:outline-none focus:ring-2 focus:ring-yellow-300">
+                            <option value="">All Types</option>
+                            <option value="solar_system"
+                                    {% if filters.object_type == "solar_system" %}selected{% endif %}>
+                                Solar System
+                            </option>
+                            <option value="star"
+                                    {% if filters.object_type == "star" %}selected{% endif %}>Star</option>
+                            <option value="deep_sky"
+                                    {% if filters.object_type == "deep_sky" %}selected{% endif %}>Deep Sky</option>
+                            <option value="special_event"
+                                    {% if filters.object_type == "special_event" %}selected{% endif %}>
+                                Special Event
+                            </option>
+                        </select>
+                    </fieldset>
+                    <!-- Search Filter -->
+                    <fieldset>
+                        <legend class="sr-only">Search Filter</legend>
+                        <label for="search-filter" class="block text-sm font-medium text-white mb-2">Search Objects</label>
+                        <input type="text"
+                               id="search-filter"
+                               name="search"
+                               value="{{ filters.search }}"
+                               placeholder="e.g., Jupiter, Mira, Orion..."
+                               class="w-full px-3 py-2 border border-gray-600 rounded-md bg-nebula text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-300">
+                    </fieldset>
+                    <!-- Clear Filters Button -->
+                    <div class="md:col-span-3 flex justify-center mt-4">
+                        <button type="button"
+                                id="clear-filters"
+                                class="bg-nebula text-white px-6 py-2 rounded-md hover:bg-nebula-hover transition-colors focus:outline-none focus:ring-2 focus:ring-yellow-300">
+                            Clear Filters
+                        </button>
+                    </div>
+                </form>
+            </section>
+            <!-- Results Section -->
+            <div class="bg-nebula rounded-lg border border-gray-700 overflow-hidden">
+                <div class="p-4 border-b border-gray-700">
+                    <h2 class="text-xl font-semibold text-white text-center">Results</h2>
+                    {% if filtered_count != total_observations %}
+                        <div class="text-center text-sm text-gray-400 mt-1">
+                            Showing {{ filtered_count }} of {{ total_observations }} observations
+                        </div>
+                    {% endif %}
+                </div>
+                <!-- Success/Error Messages -->
+                {% if messages %}
+                    <div class="p-4 border-b border-gray-700">
+                        {% for message in messages %}<div class="bg-red-600 text-white p-3 rounded-md mb-2">{{ message }}</div>{% endfor %}
+                    </div>
+                {% endif %}
+                <!-- Table Header -->
+                <div class="hidden md:grid grid-cols-6 gap-4 p-4 bg-nebula border-b border-gray-700 font-medium text-gray-300">
+                    <div>SESSION</div>
+                    <div>OBSERVATION</div>
+                    <div>CREATED</div>
+                    <div>OBJECT</div>
+                    <div class="col-span-2 text-center">ACTIONS</div>
+                </div>
+                <!-- Observations List -->
+                <div id="observations-container" data-has-next="{{ has_next|yesno:'True,False' }}">
+                    {% for obs_data in observations %}
+                        {% with observation=obs_data.observation display_data=obs_data.display_data %}
+                            <div class="observation-row grid grid-cols-1 md:grid-cols-6 gap-4 p-4 border-b border-gray-700 hover:bg-nebula-hover transition-colors">
+                                <!-- Session -->
+                                <div class="md:col-span-1">
+                                    <div class="md:hidden text-sm font-medium text-gray-400 mb-1">Session:</div>
+                                    <div class="text-white text-sm">{{ observation.session.slug|extract_date_from_slug|upper }}</div>
+                                </div>
+                                <!-- Observation Type -->
+                                <div class="md:col-span-1">
+                                    <div class="md:hidden text-sm font-medium text-gray-400 mb-1">Observation:</div>
+                                    <div class="text-white">{{ display_data.type }}</div>
+                                </div>
+                                <!-- Created -->
+                                <div class="md:col-span-1">
+                                    <div class="md:hidden text-sm font-medium text-gray-400 mb-1">Created:</div>
+                                    <div class="text-white">{{ observation.created_at|date:"m/d/y H:i" }}</div>
+                                    <div class="text-xs text-gray-400" title="Session: {{ observation.session.datetime_start_ut|date:'m/d/y H:i' }}">{{ observation.created_at|timesince }} ago</div>
+                                </div>
+                                <!-- Object -->
+                                <div class="md:col-span-1">
+                                    <div class="md:hidden text-sm font-medium text-gray-400 mb-1">Object:</div>
+                                    <div class="text-white font-medium">{{ display_data.object_name }}</div>
+                                </div>
+                                <!-- Actions -->
+                                <div class="md:col-span-2 flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 md:justify-center">
+                                    <button class="delete-btn bg-red-900 text-white px-4 py-1 rounded-md hover:bg-red-700 transition-colors text-sm focus:outline-none focus:ring-2 focus:ring-red-300"
+                                            data-id="{{ observation.id }}"
+                                            data-type="{{ display_data.type_class }}"
+                                            aria-label="Delete observation of {{ display_data.object_name }}">Delete</button>
+                                    <button class="view-update-btn bg-accent text-white px-4 py-1 rounded-md hover:bg-blue-700 transition-colors text-sm focus:outline-none focus:ring-2 focus:ring-yellow-300"
+                                            data-id="{{ observation.id }}"
+                                            data-type="{{ display_data.type_class }}"
+                                            aria-label="View and update observation of {{ display_data.object_name }}">View/Update</button>
+                                </div>
+                            </div>
+                        {% endwith %}
+                    {% empty %}
+                        <div class="p-8 text-center text-gray-400">
+                            {% if filters.session or filters.object_type or filters.search %}
+                                No observations match your current filters. Try adjusting your search criteria.
+                            {% else %}
+                                You haven't made any observations yet. <a href="{% url 'add_observation' %}"
+    class="text-blue-400 hover:text-blue-300 underline">Add your first observation!</a>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+                <!-- Loading indicator for infinite scroll -->
+                <div id="loading-indicator" class="p-4 text-center text-gray-400 hidden">
+                    <div class="inline-block animate-spin rounded-full h-6 w-6 border-b-2 border-blue-400"></div>
+                    <span class="ml-2">Loading more observations...</span>
+                </div>
+                <!-- End of results indicator -->
+                {% if not has_next and observations %}
+                    <div class="p-4 text-center text-gray-500 text-sm">
+                        <!-- INFINITE SCROLL -->
+                        End of observations
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    <!-- CSRF Token for AJAX requests -->
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+    <!-- JavaScript for infinite scroll and filtering -->
+    <script src="{% static 'observations/js/observation_list.js' %}"></script>
+{% endblock content %}
