@@ -1,0 +1,69 @@
+/* Mobile-responsive file input styles */
+
+/* Ensure file inputs don't overflow on mobile */
+.django-ckeditor-widget,
+input[type="file"] {
+    max-width: 100% !important;
+    word-break: break-all;
+}
+
+/* Enhanced mobile styling for file inputs */
+@media (max-width: 640px) {
+    input[type="file"] {
+        font-size: 0.875rem;
+        padding: 0.5rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    
+    /* Make the file button more touch-friendly on mobile */
+    input[type="file"]::-webkit-file-upload-button {
+        padding: 0.5rem 1rem;
+        margin-right: 0.75rem;
+        font-size: 0.875rem;
+        border-radius: 0.375rem;
+    }
+    
+    /* Firefox file input styling */
+    input[type="file"]::-moz-file-upload-button {
+        padding: 0.5rem 1rem;
+        margin-right: 0.75rem;
+        font-size: 0.875rem;
+        border-radius: 0.375rem;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+    input[type="file"] {
+        font-size: 0.8rem;
+    }
+    
+    input[type="file"]::-webkit-file-upload-button {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+    }
+    
+    input[type="file"]::-moz-file-upload-button {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+    }
+}
+
+/* Ensure crispy forms file inputs are contained */
+.crispy-form input[type="file"] {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Container for form fields to prevent overflow */
+.form-fields {
+    overflow-x: hidden;
+}
+
+.form-fields > div {
+    max-width: 100%;
+    overflow-x: hidden;
+}
