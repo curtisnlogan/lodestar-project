@@ -18,6 +18,9 @@
         </title>
         <!-- Tailwind CSS -->
         <link rel="stylesheet" href="{% static 'css/dist/styles.css' %}" />
+        <!-- Additional CSS block for page-specific styles -->
+        {% block extra_css %}
+        {% endblock extra_css %}
     </head>
     <!-- sticky footer on body with standard flex column layout -->
     <body class="bg-auto bg-[url('/static/images/backgrounds/main_background.webp')] min-h-screen flex flex-col bg-space text-primary-custom font-body">
