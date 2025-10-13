@@ -39,7 +39,7 @@
                 <div class="hidden md:flex space-x-8 lg:space-x-20">
                     {% if user.is_authenticated %}
                         <a href="{% url 'observation_list' %}"
-                           class="text-primary-custom tracking-wide hover:text-accent transition-colors focus:outline-none focus:ring-2 focus:ring-yellow-300 rounded px-2 py-1">
+                           class="text-primary-custom text-xl tracking-wide focus:outline-none focus:ring-2 focus:ring-yellow-300 rounded px-2 py-1">
                             My Observations
                         </a>
                     <!-- else show no nav links if not authenticated -->
@@ -59,7 +59,7 @@
                             <span class="text-3xl">☰</span>
                         </button>
                         <a href="{% url 'account_logout' %}"
-                           class="bg-accent hover:bg-highlight text-white px-3 sm:px-4 py-2 rounded transition-all duration-200 ease-in-out text-xs sm:text-sm font-medium tracking-wide focus:outline-none focus:ring-2 focus:ring-yellow-300">
+                           class="bg-accent hover:bg-highlight hover:text-black text-white px-3 sm:px-4 py-2 rounded transition-all duration-200 ease-in-out text-xs sm:text-sm font-medium tracking-wide focus:outline-none focus:ring-2 focus:ring-yellow-300">
                             Sign Out
                         </a>
                     </div>
@@ -107,7 +107,7 @@
             {% block content %}
             {% endblock content %}
         </main>
-        <footer class="mt-16 py-8 border-t border-accent-custom">
+        <footer class="mt-16 py-8 border-t border-accent">
             <!-- Copyright Info -->
             <div class="text-center mt-6">
                 <span class="text-secondary-custom text-lg tracking-wide"><strong>2025</strong> Lodestar Project</span>
