@@ -83,8 +83,31 @@ class SolarSystemForm(forms.ModelForm):
             "antoniadi_scale": forms.Select(attrs={"class": "appearance-none"}),
         }
 
+    def __init__(self, *args, **kwargs):
+        """
+        Initialize form with helpful text for solar system observations.
+
+        Adds clear guidance for the celestial body selection and other fields
+        to ensure proper data entry and validation feedback.
+        """
+        super().__init__(*args, **kwargs)
+
+        # Add clear help text indicating celestial body is required
+        self.fields["celestial_body"].help_text = (
+            "REQUIRED: Select the solar system object you observed. "
+            "Choose from planets, the Moon, or the Sun."
+        )
+
 
 class StarForm(forms.ModelForm):
+    """
+    Form for recording stellar observations.
+
+    Includes fields specific to star observations such as magnitude estimates
+    and finder chart information. Integrates with SIMBAD API for automatic
+    stellar data retrieval and distance calculations.
+    """
+
     class Meta:
         model = Star
         fields = [
@@ -110,8 +133,31 @@ class StarForm(forms.ModelForm):
             "antoniadi_scale": forms.Select(attrs={"class": "appearance-none"}),
         }
 
+    def __init__(self, *args, **kwargs):
+        """
+        Initialize form with helpful text for stellar observations.
+
+        Adds clear guidance for the star name field and other fields
+        to ensure proper data entry and validation feedback.
+        """
+        super().__init__(*args, **kwargs)
+
+        # Add clear help text indicating star name is required
+        self.fields["star_name"].help_text = (
+            "REQUIRED: Enter the name of the star you observed. "
+            'Examples: Sirius, Mira, HD 209458. See <a href="https://cds.unistra.fr/cgi-bin/Dic-Simbad" target="_blank">Dictionary of Nomenclature</a>'
+        )
+
 
 class DeepSkyForm(forms.ModelForm):
+    """
+    Form for recording deep sky object observations.
+
+    Includes fields specific to deep sky observations such as visibility ratings
+    and object information. Integrates with SIMBAD API for automatic catalog
+    data retrieval and distance calculations.
+    """
+
     class Meta:
         model = DeepSky
         fields = [
@@ -136,8 +182,31 @@ class DeepSkyForm(forms.ModelForm):
             "antoniadi_scale": forms.Select(attrs={"class": "appearance-none"}),
         }
 
+    def __init__(self, *args, **kwargs):
+        """
+        Initialize form with helpful text for deep sky observations.
+
+        Adds clear guidance for the object name field and other fields
+        to ensure proper data entry and validation feedback.
+        """
+        super().__init__(*args, **kwargs)
+
+        # Add clear help text indicating object name is required
+        self.fields["object_name"].help_text = (
+            "REQUIRED: Enter the name of the deep sky object you observed. "
+            'Examples: Sirius, M31, MCG+02-60-010. See <a href="https://cds.unistra.fr/cgi-bin/Dic-Simbad" target="_blank">Dictionary of Nomenclature</a>'
+        )
+
 
 class SpecialEventForm(forms.ModelForm):
+    """
+    Form for recording special astronomical event observations.
+
+    Includes fields specific to special events such as meteor showers,
+    eclipses, and comet appearances. Provides event type selection
+    and optional event naming for cataloging purposes.
+    """
+
     class Meta:
         model = SpecialEvent
         fields = [
@@ -161,6 +230,21 @@ class SpecialEventForm(forms.ModelForm):
             ),
             "antoniadi_scale": forms.Select(attrs={"class": "appearance-none"}),
         }
+
+    def __init__(self, *args, **kwargs):
+        """
+        Initialize form with helpful text for special event observations.
+
+        Adds clear guidance for the event type field and other fields
+        to ensure proper data entry and validation feedback.
+        """
+        super().__init__(*args, **kwargs)
+
+        # Add clear help text indicating event type is required
+        self.fields["event_type"].help_text = (
+            "REQUIRED: Select the type of astronomical event you observed. "
+            "Choose from meteor shower, eclipse, comet, or transit."
+        )
 
 
 class SolarSystemUpdateForm(forms.ModelForm):
