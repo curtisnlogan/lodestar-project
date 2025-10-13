@@ -174,7 +174,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         data-id="${obs.id}" data-type="${obs.type_class}" data-created-at="${obs.created_at}">
                     Delete
                 </button>
-                <button class="view-update-btn bg-accent text-white px-4 py-1 rounded-md hover:bg-blue-700 transition-colors text-sm"
+                <button class="view-update-btn bg-accent text-white hover:text-black px-4 py-1 rounded-md hover:bg-blue-700 transition-colors text-sm"
                         data-id="${obs.id}" data-type="${obs.type_class}" data-created-at="${obs.created_at}">
                     View/Update
                 </button>
