@@ -77,7 +77,7 @@ class SolarSystemForm(forms.ModelForm):
             "additional_notes": forms.Textarea(attrs={"rows": 4}),
             "drawing": forms.FileInput(
                 attrs={
-                    "class": "file:bg-gray-600 file:text-white file:border-0 file:px-3 file:py-1 file:rounded file:mr-3 file:cursor-pointer"
+                    "class": "w-full text-sm text-gray-300 bg-gray-700 border border-gray-600 rounded-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-300 file:mr-3 file:py-2 file:px-4 file:rounded-l-lg file:border-0 file:text-sm file:font-medium file:bg-gray-600 file:text-white hover:file:bg-gray-500 file:cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap"
                 }
             ),
             "antoniadi_scale": forms.Select(attrs={"class": "appearance-none"}),
@@ -127,7 +127,7 @@ class StarForm(forms.ModelForm):
             "additional_notes": forms.Textarea(attrs={"rows": 4}),
             "drawing": forms.FileInput(
                 attrs={
-                    "class": "file:bg-gray-600 file:text-white file:border-0 file:px-3 file:py-1 file:rounded file:mr-3 file:cursor-pointer"
+                    "class": "w-full text-sm text-gray-300 bg-gray-700 border border-gray-600 rounded-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-300 file:mr-3 file:py-2 file:px-4 file:rounded-l-lg file:border-0 file:text-sm file:font-medium file:bg-gray-600 file:text-white hover:file:bg-gray-500 file:cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap"
                 }
             ),
             "antoniadi_scale": forms.Select(attrs={"class": "appearance-none"}),
@@ -176,7 +176,7 @@ class DeepSkyForm(forms.ModelForm):
             "additional_notes": forms.Textarea(attrs={"rows": 4}),
             "drawing": forms.FileInput(
                 attrs={
-                    "class": "file:bg-gray-600 file:text-white file:border-0 file:px-3 file:py-1 file:rounded file:mr-3 file:cursor-pointer"
+                    "class": "w-full text-sm text-gray-300 bg-gray-700 border border-gray-600 rounded-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-300 file:mr-3 file:py-2 file:px-4 file:rounded-l-lg file:border-0 file:text-sm file:font-medium file:bg-gray-600 file:text-white hover:file:bg-gray-500 file:cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap"
                 }
             ),
             "antoniadi_scale": forms.Select(attrs={"class": "appearance-none"}),
@@ -225,7 +225,7 @@ class SpecialEventForm(forms.ModelForm):
             "additional_notes": forms.Textarea(attrs={"rows": 4}),
             "drawing": forms.FileInput(
                 attrs={
-                    "class": "file:bg-gray-600 file:text-white file:border-0 file:px-3 file:py-1 file:rounded file:mr-3 file:cursor-pointer"
+                    "class": "w-full text-sm text-gray-300 bg-gray-700 border border-gray-600 rounded-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-300 file:mr-3 file:py-2 file:px-4 file:rounded-l-lg file:border-0 file:text-sm file:font-medium file:bg-gray-600 file:text-white hover:file:bg-gray-500 file:cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap"
                 }
             ),
             "antoniadi_scale": forms.Select(attrs={"class": "appearance-none"}),
@@ -269,7 +269,7 @@ class SolarSystemUpdateForm(forms.ModelForm):
             "additional_notes": forms.Textarea(attrs={"rows": 4}),
             "drawing": forms.FileInput(
                 attrs={
-                    "class": "file:bg-gray-600 file:text-white file:border-0 file:px-3 file:py-1 file:rounded file:mr-3 file:cursor-pointer"
+                    "class": "w-full text-sm text-gray-300 bg-gray-700 border border-gray-600 rounded-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-300 file:mr-3 file:py-2 file:px-4 file:rounded-l-lg file:border-0 file:text-sm file:font-medium file:bg-gray-600 file:text-white hover:file:bg-gray-500 file:cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap"
                 }
             ),
             "antoniadi_scale": forms.Select(attrs={"class": "appearance-none"}),
@@ -296,7 +296,7 @@ class StarUpdateForm(forms.ModelForm):
             "additional_notes": forms.Textarea(attrs={"rows": 4}),
             "drawing": forms.FileInput(
                 attrs={
-                    "class": "file:bg-gray-600 file:text-white file:border-0 file:px-3 file:py-1 file:rounded file:mr-3 file:cursor-pointer"
+                    "class": "w-full text-sm text-gray-300 bg-gray-700 border border-gray-600 rounded-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-300 file:mr-3 file:py-2 file:px-4 file:rounded-l-lg file:border-0 file:text-sm font-medium file:bg-gray-600 file:text-white hover:file:bg-gray-500 file:cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap"
                 }
             ),
             "antoniadi_scale": forms.Select(attrs={"class": "appearance-none"}),
@@ -322,7 +322,7 @@ class DeepSkyUpdateForm(forms.ModelForm):
             "additional_notes": forms.Textarea(attrs={"rows": 4}),
             "drawing": forms.FileInput(
                 attrs={
-                    "class": "file:bg-gray-600 file:text-white file:border-0 file:px-3 file:py-1 file:rounded file:mr-3 file:cursor-pointer"
+                    "class": "w-full text-sm text-gray-300 bg-gray-700 border border-gray-600 rounded-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-300 file:mr-3 file:py-2 file:px-4 file:rounded-l-lg file:border-0 file:text-sm file:font-medium file:bg-gray-600 file:text-white hover:file:bg-gray-500 file:cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap"
                 }
             ),
             "antoniadi_scale": forms.Select(attrs={"class": "appearance-none"}),
@@ -348,7 +348,7 @@ class SpecialEventUpdateForm(forms.ModelForm):
             "additional_notes": forms.Textarea(attrs={"rows": 4}),
             "drawing": forms.FileInput(
                 attrs={
-                    "class": "file:bg-gray-600 file:text-white file:border-0 file:px-3 file:py-1 file:rounded file:mr-3 file:cursor-pointer"
+                    "class": "w-full text-sm text-gray-300 bg-gray-700 border border-gray-600 rounded-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-300 file:mr-3 file:py-2 file:px-4 file:rounded-l-lg file:border-0 file:text-sm file:font-medium file:bg-gray-600 file:text-white hover:file:bg-gray-500 file:cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap"
                 }
             ),
             "antoniadi_scale": forms.Select(attrs={"class": "appearance-none"}),
