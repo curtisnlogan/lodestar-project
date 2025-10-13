@@ -38,10 +38,6 @@
                 <!-- Navigation Links - Hidden on mobile/small tablets -->
                 <div class="hidden md:flex space-x-8 lg:space-x-20">
                     {% if user.is_authenticated %}
-                        <a href="{% url 'home' %}"
-                           class="text-primary-custom tracking-wide hover:text-accent transition-colors focus:outline-none focus:ring-2 focus:ring-yellow-300 rounded px-2 py-1">
-                            Home
-                        </a>
                         <a href="{% url 'observation_list' %}"
                            class="text-primary-custom tracking-wide hover:text-accent transition-colors focus:outline-none focus:ring-2 focus:ring-yellow-300 rounded px-2 py-1">
                             My Observations
@@ -84,10 +80,6 @@
                         <div class="text-secondary-custom text-sm tracking-wide py-2 border-b border-gray-600 mb-2">
                             <strong>User:</strong>&nbsp;{{ user.username }}
                         </div>
-                        <a href="{% url 'home' %}"
-                           class="text-secondary-custom hover:text-highlight transition-all duration-200 ease-in-out font-medium tracking-wide py-2">
-                            Home
-                        </a>
                         <a href="{% url 'observation_list' %}"
                            class="text-secondary-custom hover:text-highlight transition-all duration-200 ease-in-out font-medium tracking-wide py-2">
                             My Observations
