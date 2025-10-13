@@ -547,6 +547,21 @@ _Note: Detailed testing screenshots and results are documented in the project's 
 - ✅ Database queries optimized for large datasets
 - ✅ Infinite scroll pagination handles 1000+ observations efficiently
 
+### Lighthouse Performance Results
+
+The application has been thoroughly tested using Google Lighthouse for performance, accessibility, best practices, and SEO optimization:
+
+![Lighthouse Results](docs/images/lighthouse_results.png)
+
+**Key Performance Metrics:**
+
+- ✅ **Performance**: Optimized loading speeds and resource management
+- ✅ **Accessibility**: Full compliance with accessibility standards
+- ✅ **Best Practices**: Following modern web development standards
+- ✅ **SEO**: Search engine optimization implemented
+
+_The Lighthouse audit demonstrates the application's commitment to web standards, performance optimization, and user experience across all devices._
+
 ## AI Usage Report
 
 Tools: ChatGPT 5, Copilot
