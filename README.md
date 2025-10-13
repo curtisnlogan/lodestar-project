@@ -102,9 +102,150 @@ _Production-ready with live astronomical API integration and comprehensive data 
 ## Software Development Approach
 
 - _Methodology:_ Agile; suitably adapted for this specific project's scope and timeframe.
-- _GitHub Projects board:_ [Lodestar](https://github.com/users/curtisnlogan/projects/12/views/1)
+- _GitHub Projects board:_ [Lodestar Project Board](https://github.com/users/curtisnlogan/projects/12)
 - _Project Management:_ Daily Sprint-based development, focusing on MVP delivery followed by stretch goals.
 - _Version Control:_ Git workflow with feature branches and regular commits to document development progress.
+
+### Project Management & Agile Planning
+
+This project was developed using agile methodology with GitHub Projects for task management and user story tracking. The project board organizes work into epics, user stories, and tasks with MoSCoW prioritization.
+
+**🔗 Live Project Board:** [Lodestar - GitHub Projects](https://github.com/users/curtisnlogan/projects/12)
+
+#### Board Structure
+
+- **Epics** - High-level feature areas with associated sub-issues
+- **Backlog** - Planned work ready for development
+- **Todo** - Work ready to start in current sprint
+- **In Progress** - Currently being developed (WIP limit: 2)
+- **Done** - Completed and tested features
+- **Won't Do** - Descoped items for future consideration
+
+#### Sprint Methodology
+
+- **Sprint Length:** 3-4 days (adapted for project timeline)
+- **Daily Focus:** Single epic completion with incremental delivery
+- **Definition of Done:** Feature complete, tested, and deployed
+- **Retrospective:** Continuous improvement with scope adjustments
+
+## Epics & User Stories
+
+The following epics and user stories guided the development of Lodestar, organized by MoSCoW priority levels and aligned with the assessment criteria.
+
+### 🎯 **Epic 1: User Based Astronomical Log with CRUD functionality**
+
+**Priority:** Must-Have | **Status:** ✅ Complete
+
+_As an amateur astronomer, I need a comprehensive observation logging system so that I can record, organize, and track my astronomical observations with scientific accuracy._
+
+#### User Stories:
+
+**📝 #7 - Astronomical Log CRUD** _(Must-Have)_
+
+- **Story:** As a user, I can create, read, update, and delete astronomical observations so that I can maintain a complete log of my observing sessions.
+- **Acceptance Criteria:**
+  - ✅ Create new observations with specialized forms for different object types
+  - ✅ View observation history with search and filtering capabilities
+  - ✅ Edit existing observations with proper validation
+  - ✅ Delete observations with confirmation prompts
+  - ✅ Secure access control (users can only access their own data)
+
+**📄 #6 - Notes** _(Must-Have)_
+
+- **Story:** As an observer, I can add detailed notes to my observations so that I can record conditions, equipment used, and personal insights.
+- **Acceptance Criteria:**
+  - ✅ Rich text notes field in observation forms
+  - ✅ Support for markdown formatting
+  - ✅ Notes display in observation detail views
+
+**🗑️ #9 - Delete UI With Two-Step Confirm for Log Deletions** _(Must-Have)_
+
+- **Story:** As a user, I need a confirmation process before deleting observations so that I don't accidentally lose important data.
+- **Acceptance Criteria:**
+  - ✅ Two-step deletion confirmation
+  - ✅ AJAX-powered real-time UI updates
+  - ✅ Clear warning messages about permanent deletion
+
+**📢 #10 - Data-Change Notifications** _(Must-Have)_
+
+- **Story:** As a user, I want to receive feedback when I create, update, or delete observations so that I know my actions were successful.
+- **Acceptance Criteria:**
+  - ✅ Success notifications for all CRUD operations
+  - ✅ Error handling with clear user feedback
+  - ✅ Real-time UI updates without page refresh
+
+### 🔌 **Epic 2: Enhance Astronomical Log with API integration**
+
+**Priority:** Should-Have | **Status:** ✅ Complete
+
+_As an observer, I want my log entries enhanced with real-time astronomical data so that I can have scientifically accurate information about the objects I observe._
+
+#### User Stories:
+
+**🌟 #1 - API Integration for Enhanced Object Data** _(Should-Have)_
+
+- **Story:** As a user, I want my observations automatically enhanced with data from astronomical databases so that I have accurate object information.
+- **Acceptance Criteria:**
+  - ✅ SIMBAD integration for stellar and deep-sky objects
+  - ✅ JPL Horizons integration for solar system objects
+  - ✅ Automatic distance calculations from API data
+  - ✅ Object type recognition and humanization
+  - ✅ Graceful fallback when APIs are unavailable
+
+### 📰 **Epic 3: User Can See Interesting Astronomical News/Information from an API**
+
+**Priority:** Could-Have | **Status:** 🚧 Framework Ready
+
+_As an astronomy enthusiast, I want to stay updated with current astronomical news and events so that I can plan my observations and stay informed about discoveries._
+
+#### User Stories:
+
+**📡 #2 - Recent Astronomical Information via API** _(Could-Have)_
+
+- **Story:** As a user, I can view current astronomical news and information so that I stay informed about recent discoveries and events.
+- **Acceptance Criteria:**
+  - 🚧 News feed UI framework implemented
+  - ⏳ RSS feed integration (pending)
+  - ⏳ Real-time updates from trusted sources
+  - ⏳ Filtering by news category
+
+### 🎨 **Quality & UX Stories**
+
+**🎨 #20 - Minimalist Space-Themed UI** _(Must-Have)_
+
+- **Story:** As a user, I want a clean, space-themed interface that doesn't distract from my observation work.
+- **Status:** ✅ Complete - Dark theme with astronomy-focused design
+
+**📱 #15 - Accessible, Responsive Web App** _(Must-Have)_
+
+- **Story:** As a user, I need the app to work on all my devices and be accessible to users with disabilities.
+- **Status:** ✅ Complete - WCAG compliant, responsive design
+
+**🔍 #17 - Essential Criteria Checks** _(Must-Have)_
+
+- **Story:** As a project stakeholder, I need the application to meet all assessment criteria for successful completion.
+- **Status:** ✅ Complete - All criteria satisfied
+
+**📋 #19 - README Documentation** _(Must-Have)_
+
+- **Story:** As a developer or user, I need comprehensive documentation to understand the project's features and setup.
+- **Status:** ✅ Complete - Comprehensive README with setup instructions
+
+**🧪 #16 - Quality Assurance & Test Reporting** _(Must-Have)_
+
+- **Story:** As a developer, I need comprehensive testing to ensure code quality and reliability.
+- **Status:** ✅ Complete - Manual testing completed, automated test foundation established
+
+### 📊 **Story Completion Summary**
+
+| Priority Level  | Total Stories | Completed | In Progress | Pending |
+| --------------- | ------------- | --------- | ----------- | ------- |
+| **Must-Have**   | 8             | ✅ 8      | 0           | 0       |
+| **Should-Have** | 1             | ✅ 1      | 0           | 0       |
+| **Could-Have**  | 1             | 0         | 🚧 1        | 0       |
+| **Won't-Have**  | 1             | -         | -           | ❌ 1    |
+
+**Overall Completion:** 9/10 user stories completed (90%)
 
 ## User Experience Design
 
