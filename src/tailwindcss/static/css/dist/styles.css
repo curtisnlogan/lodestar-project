@@ -705,9 +705,6 @@
   .invisible {
     visibility: hidden;
   }
-  .visible {
-    visibility: visible;
-  }
   .list {
     display: flex;
     flex-direction: column;
@@ -1899,14 +1896,8 @@
   .w-48 {
     width: calc(var(--spacing) * 48);
   }
-  .w-50 {
-    width: calc(var(--spacing) * 50);
-  }
   .w-64 {
     width: calc(var(--spacing) * 64);
-  }
-  .w-100 {
-    width: calc(var(--spacing) * 100);
   }
   .w-full {
     width: 100%;
@@ -2448,9 +2439,6 @@
   .file\:cursor-pointer::file-selector-button {
     cursor: pointer;
   }
-  .file\:rounded::file-selector-button {
-    border-radius: 0.25rem;
-  }
   .file\:rounded-l-lg::file-selector-button {
     border-top-left-radius: var(--radius-lg);
     border-bottom-left-radius: var(--radius-lg);
@@ -2462,14 +2450,8 @@
   .file\:bg-gray-600::file-selector-button {
     background-color: var(--color-gray-600);
   }
-  .file\:px-3::file-selector-button {
-    padding-inline: calc(var(--spacing) * 3);
-  }
   .file\:px-4::file-selector-button {
     padding-inline: calc(var(--spacing) * 4);
-  }
-  .file\:py-1::file-selector-button {
-    padding-block: calc(var(--spacing) * 1);
   }
   .file\:py-2::file-selector-button {
     padding-block: calc(var(--spacing) * 2);
@@ -2511,11 +2493,6 @@
   @media (hover: hover) {
     .hover\:bg-red-700:hover {
       background-color: var(--color-red-700);
-    }
-  }
-  @media (hover: hover) {
-    .hover\:text-accent:hover {
-      color: var(--color-accent);
     }
   }
   @media (hover: hover) {
