@@ -125,7 +125,7 @@ class Home(TemplateView):
             observing_session.save()
             messages.success(
                 request,
-                'New observing session created successfully! Click the "My Observations" link to add observations to it.',
+                "New observing session created successfully! Click the 'My Observations' link to add your observations.",
             )
             return redirect("home")
         else:
