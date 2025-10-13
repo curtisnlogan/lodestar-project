@@ -4,6 +4,19 @@
 {% block title %}
     Lodestar - Add Observation
 {% endblock title %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'observations/css/mobile-file-input.css' %}">
+    <style>
+        /* Additional mobile-first file input fixes */
+        @media (max-width: 640px) {
+            .form-fields input[type="file"] {
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                hyphens: auto;
+            }
+        }
+    </style>
+{% endblock extra_css %}
 {% block content %}
     <section class="max-w-7xl mx-auto p-4 sm:p-6">
         <div class="flex flex-col lg:flex-row lg:items-start gap-6 lg:gap-8">
@@ -44,7 +57,7 @@
                     <!-- Note under observing session selection -->
                     <div id="session-tip" class="mt-3 p-3 bg-nebula rounded-md border-l-4 border-blue-400">
                         <p class="text-sm sm:text-md text-gray-300">
-                            <strong>Tip:</strong> If you don't see your session here, try and create another on the homepage again.
+                            <strong>Tip:</strong> If you don't see your observing session here, try to create one again.
                         </p>
                     </div>
                 </fieldset>
@@ -77,8 +90,8 @@
                         These celestial bodies are relatively close to Earth and show fascinating details through telescopes, 
                         including planetary phases, surface features, atmospheric phenomena, and orbital dynamics.
                     </p>
-                    <p class="text-blue-200 text-sm font-medium">
-                        📝 Record details like altitude, phase fraction, and central meridian in the form below to document your planetary observations.
+                    <p class="text-blue-200 text-md font-medium">
+                        Record details like altitude, phase fraction, and central meridian in the form below to scientifically document your planetary observations.
                     </p>
                 </div>
                 
@@ -90,8 +103,8 @@
                         some single like ours, others in binary or multiple systems. Variable stars change brightness over time, 
                         while double stars reveal stunning color contrasts and orbital motions.
                     </p>
-                    <p class="text-blue-200 text-sm font-medium">
-                        📝 Use the form below to record star names, magnitude estimates, and finder chart references for your stellar observations.
+                    <p class="text-blue-200 text-md font-medium">
+                        Use the form below to record star names, magnitude estimates, and finder chart references for your scientific stellar observations.
                     </p>
                 </div>
                 
@@ -99,12 +112,12 @@
                 <div id="deep-sky-intro" class="api-data-container p-6 hidden">
                     <h3 class="text-lg font-bold text-blue-200 mb-3 tracking-wide">🌌 Deep Sky Objects</h3>
                     <p class="text-gray-200 leading-relaxed mb-4">
-                        Deep sky objects are astronomical treasures beyond our solar system, including nebulae (stellar nurseries and death shrouds), 
-                        star clusters (stellar families), and galaxies (island universes containing billions of stars). 
-                        These objects reveal the cosmos' grand scale and cosmic evolution.
+                        Deep sky objects are astronomical treasures of infinite space, including nebulae (stellar nurseries and death shrouds), 
+                        star clusters (stellar families), galaxies (island universes containing billions of stars) and even supermassive black holes (best avoided!).
+                        These objects reveal the cosmos' grand scale and deep-time
                     </p>
-                    <p class="text-blue-200 text-sm font-medium">
-                        📝 Document your deep sky discoveries below, noting object names and visibility ratings to track your exploration of the universe.
+                    <p class="text-blue-200 text-md font-medium">
+                        Document your deep sky discoveries below, noting object names and visibility ratings to track your exploration of the universe.
                     </p>
                 </div>
                 
@@ -113,11 +126,11 @@
                     <h3 class="text-lg font-bold text-blue-200 mb-3 tracking-wide">🌠 Special Astronomical Events</h3>
                     <p class="text-gray-200 leading-relaxed mb-4">
                         Special astronomical events are rare or periodic phenomena that create unique observing opportunities. 
-                        These include meteor showers, eclipses, auroras, comets, and transits—celestial performances that 
-                        connect us to the dynamic nature of our universe and often occur on predictable schedules.
+                        These include meteor showers, eclipses, auroras and comets that 
+                        connect us to the dynamic nature of our universe and often occur on predictable schedules. You may even hear about these on the news!
                     </p>
-                    <p class="text-blue-200 text-sm font-medium">
-                        📝 Capture these fleeting cosmic moments in the form below, preserving your experience of these extraordinary events.
+                    <p class="text-blue-200 text-md font-medium">
+                        Capture these fleeting cosmic moments in the form below, preserving your experience of these extraordinary events.
                     </p>
                 </div>
             </div>
@@ -132,7 +145,7 @@
                     {% csrf_token %}
                     <input type="hidden" name="observation_type" value="solar-system">
                     <input type="hidden" name="selected_session" id="solarsystem-session">
-                    <div class="form-fields space-y-6 text-lg sm:text-xl">{{ solar_system_form|crispy }}</div>
+                    <div class="form-fields space-y-6 text-lg md:text-xl">{{ solar_system_form|crispy }}</div>
                     <div class="flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-4 mt-8">
                         <button type="button"
                                 class="js-go-back bg-nebula text-white px-6 py-2 rounded-md hover:bg-nebula-hover transition-colors w-full sm:w-auto">
@@ -201,4 +214,5 @@
         </div>
     </section>
     <script src="{% static 'observations/js/add_observation.js' %}"></script>
+    <script src="{% static 'observations/js/mobile-file-input.js' %}"></script>
 {% endblock content %}
