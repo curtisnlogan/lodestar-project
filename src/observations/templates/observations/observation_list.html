@@ -19,7 +19,7 @@
                 </a>
                 <a href="{% url 'add_observation' %}"
                    class="bg-accent text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-colors text-center font-medium hover:text-black focus:outline-none focus:ring-2 focus:ring-yellow-300">
-                    <span class="text-lg" aria-hidden="true">🪐</span> Add New Observation
+                    <span class="text-lg" aria-hidden="true">🌙</span> Add New Observation
                 </a>
             </nav>
             <!-- Statistics Section -->
@@ -36,7 +36,7 @@
                     <!-- Sagan Quote -->
                     <blockquote class="text-md text-yellow-300 italic font-medium mt-4 px-2 leading-relaxed">
                         "The cosmos is within us. We are made of star-stuff. We are a way for the universe to know itself."
-                        <footer class="text-xs text-gray-400 mt-2">— Carl Sagan</footer>
+                        <footer class="text-sm text-secondary-custom mt-2">— Carl Sagan</footer>
                     </blockquote>
                 </article>
                 <!-- Favorite Observation Type -->
@@ -47,13 +47,13 @@
                         <p class="text-sm text-gray-300 mb-3">Favorite Type</p>
                         
                         <!-- Personality Text Based on Favorite Type -->
-                        <p class="text-sm text-yellow-300 italic font-semibold mt-3">
+                        <p class="text-md text-yellow-300 italic font-semibold mt-3">
                             {% if favorite_type == "Solar System" %}
-                                You're probably a planet lover! Those wandering worlds captivate you.
+                                You're probably a planet lover! Those wandering worlds, that may harbour life, captivate you.
                             {% elif favorite_type == "Deep Sky" %}
                                 Black holes and infinite space call to your soul!
                             {% elif favorite_type == "Star" %}
-                                The stellar realm speaks to you - those distant suns are your guide.
+                                The stellar realm speaks to you - those lonely suns illuminate the blackness of space.
                             {% elif favorite_type == "Special Event" %}
                                 You get excited when the whole world is watching too!
                             {% else %}
@@ -77,7 +77,7 @@
                                     <div class="flex-1">
                                         <span class="text-gray-200 font-medium">{{ object_name }}</span>
                                         {% if distance_miles %}
-                                            <div class="text-xs text-blue-300 mt-1">{{ distance_miles|humanize_distance_miles }} away</div>
+                                            <div class="text-sm text-blue-300 mt-1">{{ distance_miles|humanize_distance_miles }} away</div>
                                         {% endif %}
                                     </div>
                                     <span class="text-blue-300 font-bold text-lg ml-3" aria-label="{{ count }} observations">{{ count }}</span>
@@ -214,7 +214,7 @@
                                             data-id="{{ observation.id }}"
                                             data-type="{{ display_data.type_class }}"
                                             aria-label="Delete observation of {{ display_data.object_name }}">Delete</button>
-                                    <button class="view-update-btn bg-accent text-white px-4 py-1 rounded-md hover:bg-blue-700 transition-colors text-sm focus:outline-none focus:ring-2 focus:ring-yellow-300"
+                                    <button class="hover:text-black view-update-btn bg-accent text-white px-4 py-1 rounded-md hover:bg-blue-700 transition-colors text-sm focus:outline-none focus:ring-2 focus:ring-yellow-300"
                                             data-id="{{ observation.id }}"
                                             data-type="{{ display_data.type_class }}"
                                             aria-label="View and update observation of {{ display_data.object_name }}">View/Update</button>
