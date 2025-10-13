@@ -243,7 +243,6 @@ class SpecialEventForm(forms.ModelForm):
         # Add clear help text indicating event type is required
         self.fields["event_type"].help_text = (
             "REQUIRED: Select the type of astronomical event you observed. "
-            "Choose from meteor shower, eclipse, comet, or transit."
         )
 
 
