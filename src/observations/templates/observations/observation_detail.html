@@ -71,12 +71,11 @@
                                                             <div class="bg-black bg-opacity-60 rounded-xl p-6 border-2 border-blue-400 shadow-lg">
                                                                 <div class="text-2xl font-bold text-blue-300 mb-2">{{ observation.distance_miles|humanize_distance_miles }}</div>
                                                                 <div class="text-blue-100 text-base font-bold tracking-widest">FROM EARTH</div>
-                                                                <div class="text-gray-200 text-sm mt-3 leading-relaxed">That's an unimaginably vast distance across the cosmos!</div>
                                                             </div>
                                                         {% endif %}
                                                     </div>
-                                                    <div class="mt-6 text-yellow-200 text-sm font-semibold tracking-wide">
-                                                        This celestial object is incredibly far from our planet!
+                                                    <div class="mt-6 text-yellow-200 text-md font-semibold tracking-wide">
+                                                        The universe is more vast than we could ever have imagined!
                                                     </div>
                                                 </div>
                                             </div>
@@ -181,7 +180,7 @@
                                                        disabled
                                                        class="w-full bg-nebula text-gray-300 text-sm rounded border border-gray-500 px-3 py-2 cursor-not-allowed"
                                                        aria-describedby="session-help">
-                                                <p id="session-help" class="text-xs text-gray-400 mt-1">Session information cannot be edited here</p>
+                                                <p id="session-help" class="text-xs text-gray-400 mt-1">Session information cannot be edited.</p>
                                             </div>
                                         </div>
                                         
@@ -292,11 +291,11 @@
                             <div>
                                 <h3 class="text-lg font-bold text-white">For the Nerds!</h3>
                                 <div class="flex items-center space-x-2">
-                                    <p class="text-sm text-gray-400">Raw {{ api_data.api_type }} API payload data</p>
+                                    <p class="text-sm text-primary-custom">Raw {{ api_data.api_type }} API payload data</p>
                                     <a href="{% if api_data.api_type == 'SIMBAD' %}https://simbad.cds.unistra.fr/simbad/sim-help?Page=sim-fscript#VotableFields{% elif api_data.api_type == 'JPL Horizons' %}https://ssd.jpl.nasa.gov/horizons/manual.html#observer_table{% else %}https://astroquery.readthedocs.io/en/latest/{% endif %}" 
                                        target="_blank" 
                                        rel="noopener noreferrer"
-                                       class="text-xs text-blue-400 hover:text-blue-300 underline flex items-center space-x-1"
+                                       class="text-sm text-blue-400 hover:text-blue-300 underline flex items-center space-x-1"
                                        title="Learn what these field names mean">
                                         <span>Field meanings</span>
                                         <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -365,7 +364,7 @@
                             
                             <!-- Technical Note -->
                             <div class="mt-4 p-3 bg-blue-900 bg-opacity-30 rounded border-l-4 border-blue-400">
-                                <p class="text-xs text-blue-200">
+                                <p class="text-sm text-primary-custom">
                                     <strong>Technical Note:</strong> This data is retrieved in real-time from 
                                     {% if api_data.api_type == "SIMBAD" %}
                                         the SIMBAD astronomical database via the astroquery Python library.
