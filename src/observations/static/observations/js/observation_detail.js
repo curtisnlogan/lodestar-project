@@ -3,61 +3,38 @@
  * 
  * Manages the interactive functionality for the observation detail page including:
  * - Inline editing of observation data
- * - API state management (SIMBAD/JPL Horizons data display)
  * - Form submission and validation
  * - User feedback and error handling
  * 
- * The page displays observation details alongside professional astronomical data
- * from external APIs with options to edit and update observation records.
+ * The page displays observation details with options to edit and update observation records.
  * 
  * @author Lodestar Project
  * @version 1.0.0
  */
 
 // Global state variables for page functionality
-let apiCallInProgress = false; // Prevents multiple concurrent API calls
 let editMode = false; // Tracks whether user is in edit mode
 
 /**
  * Initialize page when DOM is fully loaded
- * Sets up default state and event listeners
+ * Sets up event listeners for edit functionality
  */
 document.addEventListener("DOMContentLoaded", function () {
     console.log("Observation detail page loaded");
-    initializePage();
-});
-
-/**
- * Initialize the page state and default visibility
- * Ensures API content is visible and action buttons are hidden initially
- */
-function initializePage() {
-    // Ensure API content is visible by default (show SIMBAD/JPL data)
-    const apiContent = document.getElementById("api-content");
-    const apiErrorContent = document.getElementById("api-error-content");
-
-    if (apiContent) {
-        apiContent.classList.remove("hidden");
-        apiContent.classList.add("block");
-    }
-    if (apiErrorContent) {
-        apiErrorContent.classList.add("hidden");
-        apiErrorContent.classList.remove("block");
-    }
-
+    
     // Hide action buttons initially (shown when user enters edit mode)
     const actionButtons = document.querySelector(".action-buttons");
     if (actionButtons) {
         actionButtons.classList.add("hidden");
     }
 
-    // Initialize all event listeners
+    // Initialize event listeners
     initializeEventListeners();
-}
+});
 
 /**
  * Set up all event listeners for page interactions
- * Handles edit, submit, cancel, and retry button functionality
+ * Handles edit, submit, and cancel button functionality
  */
 function initializeEventListeners() {
     // Edit button - toggles between view and edit mode
@@ -66,7 +43,7 @@ function initializeEventListeners() {
         editButton.addEventListener("click", toggleEditMode);
     }
 
-    // Submit button - saves form data via AJAX
+    // Submit button - saves form data
     const submitButton = document.querySelector(".submit-update-button");
     if (submitButton) {
         submitButton.addEventListener("click", submitUpdate);
@@ -77,57 +54,9 @@ function initializeEventListeners() {
     if (cancelButton) {
         cancelButton.addEventListener("click", toggleEditMode);
     }
-
-    // Retry API button - attempts to reload API data
-    const retryButton = document.querySelector(".retry-api-button");
-    if (retryButton) {
-        retryButton.addEventListener("click", retryApiCall);
-    }
 }
 
-/**
- * Display API error state when astronomical data cannot be loaded
- * Hides normal content and shows error message with retry option
- */
-function showApiError() {
-    const apiContent = document.getElementById("api-content");
-    const apiErrorContent = document.getElementById("api-error-content");
-    const apiErrorMessage = document.getElementById("api-error-message");
 
-    if (apiContent) {
-        apiContent.classList.remove("block");
-        apiContent.classList.add("hidden");
-    }
-    if (apiErrorContent) {
-        apiErrorContent.classList.remove("hidden");
-        apiErrorContent.classList.add("block");
-    }
-    if (apiErrorMessage) {
-        apiErrorMessage.classList.remove("hidden");
-    }
-}
-
-/**
- * Display API success state when astronomical data loads successfully
- * Shows normal content and hides any error messages
- */
-function showApiSuccess() {
-    const apiContent = document.getElementById("api-content");
-    const apiErrorContent = document.getElementById("api-error-content");
-    const apiErrorMessage = document.getElementById("api-error-message");
-
-    if (apiContent) {
-        apiContent.classList.remove("hidden");
-        apiContent.classList.add("block");
-    }
-    if (apiErrorContent) {
-        apiErrorContent.classList.add("hidden");
-        apiErrorContent.classList.remove("block");
-    }
-    if (apiErrorMessage) {
-        apiErrorMessage.classList.add("hidden");
-    }
-}
 
 // Show update success message
 function showUpdateSuccess() {
@@ -154,7 +83,6 @@ function showUpdateError() {
 // Hide all message banners
 function hideAllMessages() {
     const messages = [
-        "api-error-message",
         "update-success-message",
         "update-error-message",
     ];
@@ -167,36 +95,7 @@ function hideAllMessages() {
     });
 }
 
-// Retry API call function
-function retryApiCall() {
-    if (apiCallInProgress) return;
 
-    apiCallInProgress = true;
-    const retryButton = document.querySelector(".retry-api-button");
-
-    if (retryButton) {
-        retryButton.textContent = "🔄 Retrying...";
-        retryButton.disabled = true;
-    }
-
-    // Simulate API call (replace with actual API call later)
-    setTimeout(() => {
-        // For demo purposes, randomly succeed or fail
-        const success = Math.random() > 0.3; // 70% success rate
-
-        if (success) {
-            showApiSuccess();
-        } else {
-            // Reset button state for another retry
-            if (retryButton) {
-                retryButton.textContent = "🔄 Retry API Call";
-                retryButton.disabled = false;
-            }
-        }
-
-        apiCallInProgress = false;
-    }, 2000);
-}
 
 // Toggle edit mode for observation data
 function toggleEditMode() {
@@ -258,17 +157,4 @@ function submitUpdate() {
     form.submit();
 }
 
-// Utility function to get CSRF token for Django forms
-function getCSRFToken() {
-    const csrfToken = document.querySelector("[name=csrfmiddlewaretoken]");
-    return csrfToken ? csrfToken.value : "";
-}
 
-// Export functions for potential external use
-window.ObservationDetail = {
-    showApiError,
-    showApiSuccess,
-    toggleEditMode,
-    submitUpdate,
-    retryApiCall,
-};
