@@ -473,4 +473,8 @@ This project uses the following third-party resources:
   - [Exo 2](https://fonts.google.com/specimen/Exo+2) — Copyright 2020 The Exo 2 Project Authors. Licensed under the [SIL Open Font License, Version 1.1](https://openfontlicense.org/).
 
 - **Images**
+
   - Images provided by [Pexels](https://www.pexels.com/) and used under the [Pexels License](https://www.pexels.com/license/).
+
+- **Research & Inspiration**
+  - [How to Keep an Astronomy Log Book](https://www.skyatnightmagazine.com/advice/skills/how-keep-astronomy-log-book) — Sky at Night Magazine. This article provided valuable insights for scoping and designing the astronomical observation logging models.
