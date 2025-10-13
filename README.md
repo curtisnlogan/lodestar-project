@@ -169,12 +169,29 @@ _Production-ready with live astronomical API integration and comprehensive data 
 
 ### Wireframes
 
-- [Home Page - Logged Out](https://share.balsamiq.com/c/7bNH8SRv4DGu45XFubGoEr.jpg)
-- [Home Page - Logged In](https://share.balsamiq.com/c/5W8FNdetQaXZaK1yHdnKoP.jpg)
-- [My Observations Page](https://share.balsamiq.com/c/e1tdS3XZPHJzkwwG5rTtyP.jpg)
-- [My Observations Page - Observation Form](https://share.balsamiq.com/c/wWf9BTFpRmpxfnmenumcJM.jpg)
-- [My Observations Page - Observation Details](https://share.balsamiq.com/c/6z2jMcSR4W3uyZqSnRwRZw.jpg)
-- [My Astronomy News](https://share.balsamiq.com/c/tPYprGczYJDAPKk2HX7RyM.jpg)
+#### Home Page - Logged Out
+
+![Home Page - Logged Out Wireframe](docs/images/Home%20Page%20-%20Logged%20Out.png)
+
+#### Home Page - Logged In
+
+![Home Page - Logged In Wireframe](docs/images/Home%20Page%20-%20Logged%20In.png)
+
+#### My Observations Page
+
+![My Observations Page Wireframe](docs/images/My%20Observations%20Page.png)
+
+#### My Observations Page - Observation Form
+
+![My Observations Page - Observation Form Wireframe](docs/images/My%20Observations%20Page%20-%20Observation%20Form.png)
+
+#### My Observations Page - Observation Details
+
+![My Observations Page - Observation Details Wireframe](docs/images/My%20Observations%20Page%20-%20Observation%20Details.png)
+
+#### My Astronomy News Page
+
+![My Astronomy News Page Wireframe](docs/images/My%20Astronomy%20News%20Page.png)
 
 ### Key Decisions and Plan Changes
 
